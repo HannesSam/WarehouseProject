@@ -18,12 +18,12 @@ namespace WarehouseProject
             this.Products.Add(newProduct);
         }
 
-        //public IEnumerable<Product> AllProducts()
+        //public List<Product> AllProducts()
         //{
 
         //}
 
-        //public IEnumerable<Product> ProductOutOfStock(Product product)
+        //public List<Product> ProductOutOfStock()
         //{
 
         //}
