@@ -6,4 +6,10 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties customers_1json__JsonSchema="http://json.schemastore.org/netlify.json" /></VisualStudio></ProjectExtensions>
+
 </Project>

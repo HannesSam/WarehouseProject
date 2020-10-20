@@ -6,11 +6,16 @@ namespace WarehouseProject
 {
     class Customer
     {
-        int Number { get; set; }
-        string Name { get; set; }
-        string Phone { get; set; }
-        string EMail { get; set; }
+        public int Number { get; set; }
+        public string Name { get; set; }
+        public string Phone { get; set; }
+        public string EMail { get; set; }
 
+        //En konstruktor utan parametrar behövs för JSON Deserialization 
+        public Customer()
+        {
+
+        }
         public Customer(int _number, string _name, string _phone, string _eMail)
         {
             this.Number = _number;

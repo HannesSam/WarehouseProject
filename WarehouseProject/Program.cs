@@ -14,6 +14,9 @@ namespace WarehouseProject
         [STAThread]
         static void Main()
         {
+
+            Warehouse warehouse = new Warehouse();
+            warehouse.StartWarehouse();
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
