@@ -6,14 +6,14 @@ namespace WarehouseProject
 {
     class Order
     {
-        int Number { get; set; }
-        Customer Customer { get; set; }
-        DateTime OrderDate { get; set; }
-        string DeliveryAdress { get; set; }
-        bool PaymentCompleted { get; set; }
-        bool PaymentRefunded { get; set; }
-        bool Dispatched { get; set; }
-        List<OrderLine> Items { get; set; }
+        public int Number { get; set; }
+        public Customer Customer { get; set; }
+        public DateTime OrderDate { get; set; }
+        public string DeliveryAdress { get; set; }
+        public bool PaymentCompleted { get; set; }
+        public bool PaymentRefunded { get; set; }
+        public bool Dispatched { get; set; }
+        public List<OrderLine> Items { get; set; }
 
         public Order(int _number, Customer _customer, DateTime _orderDate, string _deliveryAdress, bool _paymentCompleted, bool _paymentRefunded, bool _dispatched, List<OrderLine> _items)
         {
