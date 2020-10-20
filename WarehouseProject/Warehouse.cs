@@ -12,9 +12,6 @@ namespace WarehouseProject
         public void StartWarehouse()
         {
             _customerCatalogue = new CustomerCatalogue();
-            //customerCatalogue.AddTestData();
-            //customerCatalogue.WriteProductsToFile();
-            _customerCatalogue.ReadProductsFromFile();
         }
 
         //kör denna metod när applikationen stängs ner

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 
@@ -10,9 +11,17 @@ namespace WarehouseProject
     class CustomerCatalogue
     {
         string filename = "customers.json";
-        public List<Customer> Customers = new List<Customer>();
+        int currentID;
+        public List<Customer> Customers { get; private set; }
 
         //Read Customer list from json on startup
+        public CustomerCatalogue()
+        {
+            Customers = ReadProductsFromFile();
+
+            //Hittar det nuvarande största ID:t i listan över kunder och sparar det. 
+            currentID = Customers.Max(c => c.ID);
+        }
 
         public void AddTestData()
         {
@@ -31,7 +40,7 @@ namespace WarehouseProject
             File.WriteAllText(filename, contents);
         }
 
-        public void ReadProductsFromFile()
+        private List<Customer> ReadProductsFromFile()
         {
             if (File.Exists(filename))
             {
@@ -40,12 +49,30 @@ namespace WarehouseProject
             }
             else Customers = new List<Customer>();
 
-            Console.ReadLine();
+            return Customers;
         }
 
-        public void AddCustomer()
+        public void AddCustomer(string name, string phone, string email)
         {
+            try
+            {
+                currentID++;
+                Customer customer = new Customer(currentID, name, phone, email);
+                Customers.Add(customer);
+            }
+            catch (Exception ex)
+            {
+                //Här ska ett error returnereas till the gui
+            }
+        }
 
+        public void UpdateCustomer(int number)
+        {
+            Customer customer = Customers.Single(c => c.ID == number);
+            //Här ska customer uppdateras med alla nya värden
+            //Men först måste man implementera checkar i customer klassen som kollar att alla värden 
+            //Är giltiga. 
+            
         }
 
         //Add Customer

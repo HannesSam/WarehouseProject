@@ -6,7 +6,7 @@ namespace WarehouseProject
 {
     class Customer
     {
-        public int Number { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
         public string EMail { get; set; }
@@ -16,9 +16,9 @@ namespace WarehouseProject
         {
 
         }
-        public Customer(int _number, string _name, string _phone, string _eMail)
+        public Customer(int _id, string _name, string _phone, string _eMail)
         {
-            this.Number = _number;
+            this.ID = _id;
             this.Name = _name;
             this.Phone = _phone;
             this.EMail = _eMail;

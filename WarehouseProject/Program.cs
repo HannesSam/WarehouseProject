@@ -17,6 +17,7 @@ namespace WarehouseProject
 
             Warehouse warehouse = new Warehouse();
             warehouse.StartWarehouse();
+            warehouse.EndWarehouse();
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();

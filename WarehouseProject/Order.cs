@@ -15,6 +15,10 @@ namespace WarehouseProject
         public bool Dispatched { get; set; }
         public List<OrderLine> Items { get; set; }
 
+        public Order()
+        {
+
+        }
         public Order(int _number, Customer _customer, DateTime _orderDate, string _deliveryAdress, bool _paymentCompleted, bool _paymentRefunded, bool _dispatched, List<OrderLine> _items)
         {
             this.Number = _number;
