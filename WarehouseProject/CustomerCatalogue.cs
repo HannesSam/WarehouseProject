@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace WarehouseProject
 {
-    class CustomerCatalogue
+    public class CustomerCatalogue
     {
         string filename = "customers.json";
         public List<Customer> Customers = new List<Customer>();

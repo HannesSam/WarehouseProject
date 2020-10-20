@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WarehouseProject
 {
-    class Order
+    public class Order
     {
         public int Number { get; set; }
         public Customer Customer { get; set; }

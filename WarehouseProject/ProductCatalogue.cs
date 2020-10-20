@@ -4,11 +4,11 @@ using System.Text;
 
 namespace WarehouseProject
 {
-    class ProductCatalog
+    public class ProductCatalogue
     {
         private List<Product> Products { get; set; }
 
-        public ProductCatalog(List<Product> _products)
+        public ProductCatalogue(List<Product> _products)
         {
             this.Products = _products;
         }

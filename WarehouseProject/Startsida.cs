@@ -12,44 +12,52 @@ namespace WarehouseProject
 {
     public partial class Startsida : Form
     {
-        public Startsida()
+        public ProductCatalogue ProduktKatalog;
+        public CustomerCatalogue KundKatalog;
+        public OrderCatalogue OrderKatalog;
+        public Startsida(ProductCatalogue _productCatalogue, CustomerCatalogue _costumerCatalogue, OrderCatalogue _orderCatalogue)
         {
+            this.ProduktKatalog = _productCatalogue;
+            this.KundKatalog = _costumerCatalogue;
+            this.OrderKatalog = _orderCatalogue;
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Startsida_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void OrderManagement_Click(object sender, EventArgs e)
         {
-
+            var f = new Order_management(ProduktKatalog, KundKatalog, OrderKatalog);
+            Hide();
+            f.ShowDialog();
+            Close();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void ProductManagement_Click(object sender, EventArgs e)
         {
-
+            var f = new Product_management(ProduktKatalog, KundKatalog, OrderKatalog);
+            Hide();
+            f.ShowDialog();
+            Close();
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void CustomerManagement_Click(object sender, EventArgs e)
         {
-
+            var f = new Customer_management(ProduktKatalog, KundKatalog, OrderKatalog);
+            Hide();
+            f.ShowDialog();
+            Close();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void NewOrder_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+            var f = new Create_order(ProduktKatalog, KundKatalog, OrderKatalog);
+            Hide();
+            f.ShowDialog();
+            Close();
         }
     }
 }

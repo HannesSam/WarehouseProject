@@ -41,42 +41,47 @@
             // checkedListBox1
             // 
             this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(31, 134);
+            this.checkedListBox1.Location = new System.Drawing.Point(35, 179);
+            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(238, 184);
+            this.checkedListBox1.Size = new System.Drawing.Size(271, 224);
             this.checkedListBox1.TabIndex = 1;
             // 
             // checkedListBox2
             // 
             this.checkedListBox2.FormattingEnabled = true;
-            this.checkedListBox2.Location = new System.Drawing.Point(371, 134);
+            this.checkedListBox2.Location = new System.Drawing.Point(424, 179);
+            this.checkedListBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkedListBox2.Name = "checkedListBox2";
-            this.checkedListBox2.Size = new System.Drawing.Size(220, 184);
+            this.checkedListBox2.Size = new System.Drawing.Size(251, 224);
             this.checkedListBox2.TabIndex = 2;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(371, 78);
+            this.textBox1.Location = new System.Drawing.Point(424, 104);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
+            this.textBox1.Size = new System.Drawing.Size(114, 27);
             this.textBox1.TabIndex = 3;
             this.textBox1.Text = " Delivery adress";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(275, 212);
+            this.button1.Location = new System.Drawing.Point(314, 283);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 23);
+            this.button1.Size = new System.Drawing.Size(103, 31);
             this.button1.TabIndex = 4;
             this.button1.Text = "Add product";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(634, 263);
+            this.button2.Location = new System.Drawing.Point(725, 351);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(126, 55);
+            this.button2.Size = new System.Drawing.Size(144, 73);
             this.button2.TabIndex = 5;
             this.button2.Text = "Create Order";
             this.button2.UseVisualStyleBackColor = true;
@@ -84,24 +89,26 @@
             // Customer
             // 
             this.Customer.FormattingEnabled = true;
-            this.Customer.ItemHeight = 15;
-            this.Customer.Location = new System.Drawing.Point(371, 38);
+            this.Customer.ItemHeight = 20;
+            this.Customer.Location = new System.Drawing.Point(424, 51);
+            this.Customer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Customer.Name = "Customer";
-            this.Customer.Size = new System.Drawing.Size(100, 34);
+            this.Customer.Size = new System.Drawing.Size(114, 44);
             this.Customer.TabIndex = 6;
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(275, 183);
+            this.numericUpDown1.Location = new System.Drawing.Point(314, 244);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(90, 23);
+            this.numericUpDown1.Size = new System.Drawing.Size(103, 27);
             this.numericUpDown1.TabIndex = 7;
             // 
             // Create_order
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(914, 600);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.Customer);
             this.Controls.Add(this.button2);
@@ -109,8 +116,10 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.checkedListBox2);
             this.Controls.Add(this.checkedListBox1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Create_order";
             this.Text = "Create_order";
+            this.Load += new System.EventHandler(this.Create_order_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WarehouseProject
 {
-    class OrderCatalogue
+    public class OrderCatalogue
     {
         private List<Order> Orders;
 

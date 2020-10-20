@@ -10,8 +10,14 @@ namespace WarehouseProject
 {
     public partial class Order_management : Form
     {
-        public Order_management()
+        public ProductCatalogue ProduktKatalog;
+        public CustomerCatalogue KundKatalog;
+        public OrderCatalogue OrderKatalog;
+        public Order_management(ProductCatalogue _productCatalogue, CustomerCatalogue _costumerCatalogue, OrderCatalogue _orderCatalogue)
         {
+            this.ProduktKatalog = _productCatalogue;
+            this.KundKatalog = _costumerCatalogue;
+            this.OrderKatalog = _orderCatalogue;
             InitializeComponent();
         }
 
@@ -46,6 +52,11 @@ namespace WarehouseProject
         }
 
         private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Order_management_Load(object sender, EventArgs e)
         {
 
         }
