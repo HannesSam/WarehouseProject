@@ -31,7 +31,6 @@ namespace WarehouseProject
             File.WriteAllText(filename, contents);
         }
 
-
         public void ReadProductsFromFile()
         {
             if (File.Exists(filename))
@@ -42,6 +41,11 @@ namespace WarehouseProject
             else Customers = new List<Customer>();
 
             Console.ReadLine();
+        }
+
+        public void AddCustomer()
+        {
+
         }
 
         //Add Customer
