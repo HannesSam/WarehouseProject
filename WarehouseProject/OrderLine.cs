@@ -6,7 +6,13 @@ namespace WarehouseProject
 {
     class OrderLine
     {
-        Product Product { get; set; }
-        int Count { get; set; }
+        public Product Product { get; set; }
+        public int Count { get; set; }
+
+        public OrderLine(Product _product, int _count)
+        {
+            this.Product = _product;
+            this.Count = _count;
+        }
     }
 }
