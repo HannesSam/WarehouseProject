@@ -8,6 +8,8 @@ namespace WarehouseProject
 {
     class JsonHelper
     {
+        //Ska implementera denna men måste läsa på om generics först för att kunna passera in ett object som
+        //Defineras först vid runtime. /HANNNNESSS
         public void WriteProductsToFile(string filename, object obj)
         {
             string contents = JsonSerializer.Serialize(obj);

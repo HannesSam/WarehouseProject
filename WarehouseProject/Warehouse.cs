@@ -6,12 +6,21 @@ namespace WarehouseProject
 {
     class Warehouse
     {
+
+        CustomerCatalogue _customerCatalogue;
+
         public void StartWarehouse()
         {
-            CustomerCatalogue customerCatalogue = new CustomerCatalogue();
+            _customerCatalogue = new CustomerCatalogue();
             //customerCatalogue.AddTestData();
             //customerCatalogue.WriteProductsToFile();
-            customerCatalogue.ReadProductsFromFile();
+            _customerCatalogue.ReadProductsFromFile();
+        }
+
+        //kör denna metod när applikationen stängs ner
+        public void EndWarehouse()
+        {
+            _customerCatalogue.WriteProductsToFile();
         }
     }
 }
