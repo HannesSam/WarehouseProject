@@ -18,27 +18,27 @@ namespace WarehouseProject
             Orders.Add(order);
         }
 
-        //public IEnumerable<Order> GetDispatchedOrdersFrom(Customer person)
+        //public List<Order> GetDispatchedOrdersFrom()
         //{
             
         //}
 
-        //public IEnumerable<Order> GetActiveOrdersFrom(Customer person)
+        //public List<Order> GetActiveOrdersFrom()
         //{
 
         //}
 
-        //public IEnumerable<Order> DispatchReadyOrders()
+        //public List<Order> DispatchReadyOrders()
         //{
 
         //}
 
-        //public IEnumerable<Order> GetDispatchedOrders()
+        //public List<Order> GetDispatchedOrders()
         //{
 
         //}
 
-        //public IEnumerable<Order> GetPendingOrders()
+        //public List<Order> GetPendingOrders()
         //{
 
         //}
