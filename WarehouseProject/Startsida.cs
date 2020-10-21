@@ -59,5 +59,13 @@ namespace WarehouseProject
             f.ShowDialog();
             Close();
         }
+
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            ProduktKatalog.WriteProductsToFile();
+            KundKatalog.WriteProductsToFile();
+            OrderKatalog.WriteProductsToFile();
+            this.Close();
+        }
     }
 }

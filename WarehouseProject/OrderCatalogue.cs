@@ -31,6 +31,11 @@ namespace WarehouseProject
 
             return Orders;
         }
+        public void WriteProductsToFile()
+        {
+            string content = JsonSerializer.Serialize(Orders);
+            File.WriteAllText(filename, content);
+        }
 
         public void AddOrder(Order order)
         {
