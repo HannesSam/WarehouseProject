@@ -106,14 +106,14 @@
             // 
             this.firstAvailableTextBox.Location = new System.Drawing.Point(327, 287);
             this.firstAvailableTextBox.Name = "firstAvailableTextBox";
-            this.firstAvailableTextBox.Size = new System.Drawing.Size(100, 23);
+            this.firstAvailableTextBox.Size = new System.Drawing.Size(126, 23);
             this.firstAvailableTextBox.TabIndex = 4;
             // 
             // nextStockingTextBox
             // 
             this.nextStockingTextBox.Location = new System.Drawing.Point(327, 343);
             this.nextStockingTextBox.Name = "nextStockingTextBox";
-            this.nextStockingTextBox.Size = new System.Drawing.Size(100, 23);
+            this.nextStockingTextBox.Size = new System.Drawing.Size(126, 23);
             this.nextStockingTextBox.TabIndex = 4;
             // 
             // nameTextBox

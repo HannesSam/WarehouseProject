@@ -19,6 +19,8 @@ namespace WarehouseProject
             this.KundKatalog = _costumerCatalogue;
             this.OrderKatalog = _orderCatalogue;
             InitializeComponent();
+            UpdateList();
+            productListBox.SelectedIndexChanged += productListBox_SelectedIndexChanged;
         }
 
         private void Product_management_Load(object sender, EventArgs e)
@@ -38,7 +40,11 @@ namespace WarehouseProject
         private void ShowAllButton_Click(object sender, EventArgs e)
         {
             productListBox.Items.Clear();
-            productListBox.DataSource = ProduktKatalog.AllProducts();
+            foreach (var item in ProduktKatalog.AllProducts())
+            {
+                productListBox.Items.Add(item);
+            }
+            productListBox.DisplayMember = "Name";
         }
 
         //När man ändrar den valda produkten i listboxen så ändras värdena i textboxarna så att man kan se alla attribut hos produkten.
@@ -57,7 +63,11 @@ namespace WarehouseProject
         private void UpdateList()
         {
             productListBox.Items.Clear();
-            productListBox.DataSource = ProduktKatalog.AllProducts();
+            foreach (var item in ProduktKatalog.AllProducts())
+            {
+                productListBox.Items.Add(item);
+            }
+            productListBox.DisplayMember = "Name";
         }
         private void label2_Click(object sender, EventArgs e)
         {
@@ -68,7 +78,11 @@ namespace WarehouseProject
         private void ShowOutOfStockButton_Click(object sender, EventArgs e)
         {
             productListBox.Items.Clear();
-            productListBox.DataSource = ProduktKatalog.ProductsOutOfStock();
+            foreach (var item in ProduktKatalog.ProductsOutOfStock())
+            {
+                productListBox.Items.Add(item);
+            }
+            productListBox.DisplayMember = "Name";
         }
 
         private void codeTextBox_TextChanged(object sender, EventArgs e)
