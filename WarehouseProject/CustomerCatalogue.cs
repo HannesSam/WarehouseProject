@@ -74,7 +74,10 @@ namespace WarehouseProject
 
         }
 
-        //Add Customer
+        public List<Customer> AllCustomers()
+        {
+            return Customers;
+        }
         //Update Customer
 
     }

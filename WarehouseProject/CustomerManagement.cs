@@ -19,6 +19,8 @@ namespace WarehouseProject
             this.KundKatalog = _costumerCatalogue;
             this.OrderKatalog = _orderCatalogue;
             InitializeComponent();
+            UpdateList();
+            customerListBox.SelectedIndexChanged += CustomerListBoxChanged;
         }
 
         private void Customer_management_Load(object sender, EventArgs e)
@@ -32,6 +34,54 @@ namespace WarehouseProject
             Hide();
             f.ShowDialog();
             Close();
+        }
+
+        private void UpdateList()
+        {
+            customerListBox.Items.Clear();
+            foreach (var item in KundKatalog.AllCustomers())
+            {
+                customerListBox.Items.Add(item);
+            }
+            customerListBox.DisplayMember = "Name";
+        }
+        private void ShowAllButton_Click(object sender, EventArgs e)
+        {
+            customerListBox.Items.Clear();
+            foreach (var item in KundKatalog.AllCustomers())
+            {
+                customerListBox.Items.Add(item);
+            }
+            customerListBox.DisplayMember = "Name";
+        }
+        private void CustomerListBoxChanged(object sender, EventArgs e)
+        {
+            Customer cus = (Customer)customerListBox.SelectedItem;
+
+            nameTextBox.Text = cus.Name;
+            phoneTextBox.Text = cus.Phone;
+            emailTextBox.Text = cus.EMail;
+
+        }
+
+        private void AddCustomerButton_Click(object sender, EventArgs e)
+        {
+            string name = nameTextBox.Text;
+            string phone = phoneTextBox.Text;
+            string email = emailTextBox.Text;
+
+            KundKatalog.AddCustomer(name, phone, email);
+        }
+
+        private void UpdateInformationButton_Click(object sender, EventArgs e)
+        {
+            string name = nameTextBox.Text;
+            string phone = phoneTextBox.Text;
+            string email = emailTextBox.Text;
+
+            Customer cus = (Customer)customerListBox.SelectedItem;
+
+            // Och här ändras cuz
         }
     }
 }
