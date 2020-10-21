@@ -32,24 +32,25 @@ namespace WarehouseProject
             return Products;
         }
 
+        public List<Product> ProductsOutOfStock()
+        {
+            IEnumerable<Product> outOfStock = Products.Where(p => p.Stock == 0);
+            return outOfStock.ToList();
+        }
+
         public void AddProduct(Product newProduct)
         {
             this.Products.Add(newProduct);
         }
 
-        //public List<Product> AllProducts()
-        //{
-
-        //}
-
-        //public List<Product> ProductOutOfStock()
-        //{
-
-        //}
-
-        public DateTime NextRestocking(Product product)
+        public List<Product> AllProducts()
         {
-            return product.NextStocking;
+            return Products;
+        }
+
+        public DateTime NextRestocking()
+        {
+            return Products.Min(p => p.NextStocking);
         }
     }
         
