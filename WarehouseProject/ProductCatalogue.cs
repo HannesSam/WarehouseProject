@@ -20,6 +20,12 @@ namespace WarehouseProject
             //currentCode = Products.Max(b => b.Code);
         }
 
+        public void WriteProductsToFile()
+        {
+            string contents = JsonSerializer.Serialize(Products);
+            File.WriteAllText(filename, contents);
+        }
+
         private List<Product> ReadProductsFromFile()
         {
             if (File.Exists(filename))
