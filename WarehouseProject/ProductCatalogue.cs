@@ -38,11 +38,6 @@ namespace WarehouseProject
             return Products;
         }
 
-        public void WriteProductsToFile()
-        {
-            string content = JsonSerializer.Serialize(Products);
-            File.WriteAllText(filename, content);
-        }
         public List<Product> ProductsOutOfStock()
         {
             IEnumerable<Product> outOfStock = Products.Where(p => p.Stock == 0);
