@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WarehouseProject
 {
-    class OrderLine
+    public class OrderLine
     {
         public Product Product { get; set; }
         public int Count { get; set; }

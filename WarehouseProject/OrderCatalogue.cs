@@ -1,16 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
+using System.Text.Json;
+using System.Linq;
 
 namespace WarehouseProject
 {
-    class OrderCatalogue
+    public class OrderCatalogue
     {
         private List<Order> Orders;
+        private string filename;
+        public int Number;
 
-        public OrderCatalogue(List<Order> _orders)
+        public OrderCatalogue(string _filename)
         {
-            this.Orders = _orders;
+            this.filename = _filename;
+            Orders = ReadProductsFromFile();
+            //Number = Orders.Max(o => o.Number);
+        }
+
+        private List<Order> ReadProductsFromFile()
+        {
+            if (File.Exists(filename))
+            {
+                string fileContents = File.ReadAllText(filename);
+                Orders = JsonSerializer.Deserialize<List<Order>>(fileContents);
+            }
+            else Orders = new List<Order>();
+
+            return Orders;
         }
 
         public void AddOrder(Order order)

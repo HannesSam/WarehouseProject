@@ -4,14 +4,18 @@ using System.Text;
 
 namespace WarehouseProject
 {
-    class Warehouse
+    public class Warehouse
     {
 
-        public CustomerCatalogue CustomerCatalogue { get; set; }
+        public CustomerCatalogue _customerCatalogue;
+        public ProductCatalogue _productCatalogue;
+        public OrderCatalogue _orderCatalogue;
 
-        public void StartWarehouse()
+        public void StartWarehouse(string customerFileName, string productFileName, string orderFileName)
         {
-            CustomerCatalogue = new CustomerCatalogue();
+            _customerCatalogue = new CustomerCatalogue(customerFileName);
+            _productCatalogue = new ProductCatalogue(productFileName);
+            _orderCatalogue = new OrderCatalogue(orderFileName);
         }
 
         //kör denna metod när applikationen stängs ner
