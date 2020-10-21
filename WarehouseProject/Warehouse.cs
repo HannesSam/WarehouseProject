@@ -7,17 +7,17 @@ namespace WarehouseProject
     class Warehouse
     {
 
-        CustomerCatalogue _customerCatalogue;
+        public CustomerCatalogue CustomerCatalogue { get; set; }
 
         public void StartWarehouse()
         {
-            _customerCatalogue = new CustomerCatalogue();
+            CustomerCatalogue = new CustomerCatalogue();
         }
 
         //kör denna metod när applikationen stängs ner
         public void EndWarehouse()
         {
-            _customerCatalogue.WriteProductsToFile();
+            CustomerCatalogue.WriteProductsToFile();
         }
     }
 }

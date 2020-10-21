@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
 
 namespace WarehouseProject
@@ -72,7 +70,7 @@ namespace WarehouseProject
             //Här ska customer uppdateras med alla nya värden
             //Men först måste man implementera checkar i customer klassen som kollar att alla värden 
             //Är giltiga. 
-            
+
         }
 
         //Add Customer
