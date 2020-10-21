@@ -128,6 +128,7 @@ namespace WarehouseProject
             UpdateList();
         }
 
+
         private void ClosestRestockingButton_Click(object sender, EventArgs e)
         {
             closestRestockingTextBox.Text = ProduktKatalog.NextRestocking().ToString();

@@ -21,7 +21,7 @@ namespace WarehouseProject
         //kör denna metod när applikationen stängs ner
         public void EndWarehouse()
         {
-            CustomerCatalogue.WriteProductsToFile();
+            _customerCatalogue.WriteProductsToFile();
         }
     }
 }

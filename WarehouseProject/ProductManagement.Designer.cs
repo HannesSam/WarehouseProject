@@ -260,7 +260,6 @@
             this.Controls.Add(this.HomeButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.productListBox);
-            this.Name = "Product_management";
             this.Text = "Product_management";
             this.Load += new System.EventHandler(this.Product_management_Load);
             this.ResumeLayout(false);
