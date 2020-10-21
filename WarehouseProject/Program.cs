@@ -16,13 +16,15 @@ namespace WarehouseProject
         {
 
             Warehouse warehouse = new Warehouse();
-            warehouse.StartWarehouse();
+            warehouse.StartWarehouse("customers.json", "products.json", "orders.json");
             warehouse.EndWarehouse();
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Startsida());
+
+            //Lite jobbigt att skicka 3 kataloger till startsidan istället för ett warehouse, men det underlättar när man ska bläddra mellan sidor. 
+            Application.Run(new Startsida(warehouse._productCatalogue, warehouse._customerCatalogue, warehouse._orderCatalogue));
         }
     }
 }

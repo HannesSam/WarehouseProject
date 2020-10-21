@@ -33,5 +33,13 @@ namespace WarehouseProject
         {
 
         }
+
+        private void HomeButton_Click(object sender, EventArgs e)
+        {
+            var f = new Startsida(ProduktKatalog, KundKatalog, OrderKatalog);
+            Hide();
+            f.ShowDialog();
+            Close();
+        }
     }
 }

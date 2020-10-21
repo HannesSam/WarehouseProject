@@ -10,17 +10,18 @@ namespace WarehouseProject
 {
     public class CustomerCatalogue
     {
-        string filename = "customers.json";
-        int currentID;
-        public List<Customer> Customers { get; private set; }
+        private string Filename;
+        public int currentID;
+        private List<Customer> Customers { get; set; }
 
         //Read Customer list from json on startup
-        public CustomerCatalogue()
+        public CustomerCatalogue(string _filename)
         {
+            this.Filename = _filename;
             Customers = ReadProductsFromFile();
 
             //Hittar det nuvarande största ID:t i listan över kunder och sparar det. 
-            currentID = Customers.Max(c => c.ID);
+            //currentID = Customers.Max(c => c.ID);
         }
 
         public void AddTestData()
@@ -37,14 +38,14 @@ namespace WarehouseProject
         public void WriteProductsToFile()
         {
             string contents = JsonSerializer.Serialize(Customers);
-            File.WriteAllText(filename, contents);
+            File.WriteAllText(Filename, contents);
         }
 
         private List<Customer> ReadProductsFromFile()
         {
-            if (File.Exists(filename))
+            if (File.Exists(Filename))
             {
-                string fileContents = File.ReadAllText(filename);
+                string fileContents = File.ReadAllText(Filename);
                 Customers = JsonSerializer.Deserialize<List<Customer>>(fileContents);
             }
             else Customers = new List<Customer>();

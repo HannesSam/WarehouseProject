@@ -28,13 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.HomeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // HomeButton
+            // 
+            this.HomeButton.Location = new System.Drawing.Point(12, 12);
+            this.HomeButton.Name = "HomeButton";
+            this.HomeButton.Size = new System.Drawing.Size(75, 23);
+            this.HomeButton.TabIndex = 0;
+            this.HomeButton.Text = "Home";
+            this.HomeButton.UseVisualStyleBackColor = true;
+            this.HomeButton.Click += new System.EventHandler(this.HomeButton_Click);
             // 
             // Customer_management
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(700, 338);
+            this.Controls.Add(this.HomeButton);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Customer_management";
             this.Text = "Customer_management";
             this.Load += new System.EventHandler(this.Customer_management_Load);
@@ -43,5 +56,7 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Button HomeButton;
     }
 }

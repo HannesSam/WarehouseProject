@@ -21,44 +21,17 @@ namespace WarehouseProject
             InitializeComponent();
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Order_management_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void HomeButton_Click(object sender, EventArgs e)
+        {
+            var f = new Startsida(ProduktKatalog, KundKatalog, OrderKatalog);
+            Hide();
+            f.ShowDialog();
+            Close();
         }
     }
 }
