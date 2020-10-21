@@ -22,6 +22,8 @@ namespace WarehouseProject
         public void EndWarehouse()
         {
             _customerCatalogue.WriteProductsToFile();
+            _productCatalogue.WriteProductsToFile();
+            _orderCatalogue.WriteProductsToFile();
         }
     }
 }

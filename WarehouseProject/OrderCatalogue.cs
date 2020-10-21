@@ -20,6 +20,12 @@ namespace WarehouseProject
             //Number = Orders.Max(o => o.Number);
         }
 
+        public void WriteProductsToFile()
+        {
+            string contents = JsonSerializer.Serialize(Orders);
+            File.WriteAllText(filename, contents);
+        }
+
         private List<Order> ReadProductsFromFile()
         {
             if (File.Exists(filename))
