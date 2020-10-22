@@ -46,6 +46,7 @@
             this.checkedListBoxProducts.Name = "checkedListBoxProducts";
             this.checkedListBoxProducts.Size = new System.Drawing.Size(238, 166);
             this.checkedListBoxProducts.TabIndex = 1;
+            this.checkedListBoxProducts.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxProducts_SelectedIndexChanged);
             // 
             // checkedListBoxOrderLine
             // 
@@ -57,9 +58,9 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(371, 78);
+            this.textBox1.Location = new System.Drawing.Point(371, 93);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
+            this.textBox1.Size = new System.Drawing.Size(220, 23);
             this.textBox1.TabIndex = 3;
             this.textBox1.Text = " Delivery adress";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
@@ -72,10 +73,11 @@
             this.AddProductButton.TabIndex = 4;
             this.AddProductButton.Text = "Add product";
             this.AddProductButton.UseVisualStyleBackColor = true;
+            this.AddProductButton.Click += new System.EventHandler(this.AddProductButton_Click);
             // 
             // CreateOrderButton
             // 
-            this.CreateOrderButton.Location = new System.Drawing.Point(634, 263);
+            this.CreateOrderButton.Location = new System.Drawing.Point(632, 245);
             this.CreateOrderButton.Name = "CreateOrderButton";
             this.CreateOrderButton.Size = new System.Drawing.Size(126, 55);
             this.CreateOrderButton.TabIndex = 5;
@@ -86,9 +88,9 @@
             // 
             this.Customer.FormattingEnabled = true;
             this.Customer.ItemHeight = 15;
-            this.Customer.Location = new System.Drawing.Point(371, 38);
+            this.Customer.Location = new System.Drawing.Point(371, 23);
             this.Customer.Name = "Customer";
-            this.Customer.Size = new System.Drawing.Size(100, 34);
+            this.Customer.Size = new System.Drawing.Size(220, 64);
             this.Customer.TabIndex = 6;
             // 
             // textBoxQuantity
@@ -97,6 +99,7 @@
             this.textBoxQuantity.Name = "textBoxQuantity";
             this.textBoxQuantity.Size = new System.Drawing.Size(90, 23);
             this.textBoxQuantity.TabIndex = 7;
+            this.textBoxQuantity.ValueChanged += new System.EventHandler(this.textBoxQuantity_ValueChanged);
             // 
             // HomeButton
             // 
@@ -112,7 +115,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(787, 450);
             this.Controls.Add(this.HomeButton);
             this.Controls.Add(this.textBoxQuantity);
             this.Controls.Add(this.Customer);

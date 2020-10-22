@@ -59,6 +59,7 @@
             this.productListBox.Name = "productListBox";
             this.productListBox.Size = new System.Drawing.Size(258, 229);
             this.productListBox.TabIndex = 0;
+            this.productListBox.SelectedIndexChanged += new System.EventHandler(this.productListBox_SelectedIndexChanged_1);
             // 
             // label1
             // 
@@ -260,6 +261,7 @@
             this.Controls.Add(this.HomeButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.productListBox);
+          
             this.Text = "Product_management";
             this.Load += new System.EventHandler(this.Product_management_Load);
             this.ResumeLayout(false);

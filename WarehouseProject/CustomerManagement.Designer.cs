@@ -61,6 +61,7 @@
             this.customerListBox.Name = "customerListBox";
             this.customerListBox.Size = new System.Drawing.Size(291, 184);
             this.customerListBox.TabIndex = 1;
+            this.customerListBox.SelectedIndexChanged += new System.EventHandler(this.customerListBox_SelectedIndexChanged);
             // 
             // ShowAllButton
             // 

@@ -133,5 +133,10 @@ namespace WarehouseProject
         {
             closestRestockingTextBox.Text = ProduktKatalog.NextRestocking().ToString();
         }
+
+        private void productListBox_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
