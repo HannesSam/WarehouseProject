@@ -13,14 +13,29 @@ namespace WarehouseProject
         private int currentID;
         public List<Customer> Customers {get; set; }
 
+        public delegate void UpdateCustomerList();
+
+        public event UpdateCustomerList OnCustomerChange;
+
+
         //Read Customer list from json on startup
         public CustomerCatalogue(string _filename)
         {
             this.Filename = _filename;
             Customers = ReadProductsFromFile();
+        }
 
-            //Hittar det nuvarande största ID:t i listan över kunder och sparar det. 
-            currentID = Customers.Max(c => c.ID);
+        public void SetID()
+        {
+            if (Customers.Count == 0)
+            {
+                currentID = 0;
+            }
+            else
+            {
+                //Hittar det nuvarande största ID:t i listan över kunder och sparar det. 
+                currentID = Customers.Max(c => c.ID);
+            }
         }
 
         public void AddTestData()
@@ -59,6 +74,9 @@ namespace WarehouseProject
                 currentID++;
                 Customer customer = new Customer(currentID, name, phone, email);
                 Customers.Add(customer);
+
+                //Kollar att delegaten inte är null kör annars eventet
+                OnCustomerChange?.Invoke();
             }
             catch (Exception ex)
             {
@@ -70,9 +88,19 @@ namespace WarehouseProject
         {
             Customer customer = Customers.Single(c => c.ID == id);
             //Här ska customer uppdateras med alla nya värde
-            customer.Name = name;
+            try
+            {
+                customer.Name = name;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Name can not be empty");
+            }
             customer.Phone = phone;
             customer.EMail = email;
+
+            //Kollar att delegaten inte är null kör annars eventet
+            OnCustomerChange?.Invoke();
         }
     }
 }
