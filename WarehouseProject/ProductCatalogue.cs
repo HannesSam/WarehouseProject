@@ -17,9 +17,21 @@ namespace WarehouseProject
         {
             this.filename = _filename;
             Products = ReadProductsFromFile();
-            //currentCode = Products.Max(b => b.Code);
+            SetCount();
         }
 
+        public void SetCount()
+        {
+
+            if (Products.Count == 0)
+            {
+                currentCode = 0;
+            }
+            else
+            {
+                currentCode = Products.Max(b => b.Code);
+            }
+        }
         public void WriteProductsToFile()
         {
             string contents = JsonSerializer.Serialize(Products);
@@ -44,8 +56,11 @@ namespace WarehouseProject
             return outOfStock.ToList();
         }
 
-        public void AddProduct(Product newProduct)
+        public void AddProduct(string name, double price, int stock, DateTime firstavailable, DateTime nextStock)
         {
+            currentCode++;
+            int code = currentCode;
+            Product newProduct = new Product(code, name, price, stock, firstavailable, nextStock);
             this.Products.Add(newProduct);
         }
 
@@ -57,6 +72,21 @@ namespace WarehouseProject
         public DateTime NextRestocking()
         {
             return Products.Min(p => p.NextStocking);
+        }
+
+        public void UpdateInformation(int code, string name, double price, int stock, DateTime firstavailable, DateTime nextStock)
+        {
+            for (int i = 0; i < Products.Count; i++)
+            {
+                if (Products[i].Code==code)
+                {
+                    Products[i].Name = name;
+                    Products[i].Price = price;
+                    Products[i].Stock = stock;
+                    Products[i].FirstAvailable = firstavailable;
+                    Products[i].NextStocking = nextStock;
+                }
+            }
         }
     }
         
