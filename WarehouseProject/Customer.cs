@@ -6,18 +6,18 @@ namespace WarehouseProject
 {
     public class Customer
     {
-        private readonly int _id;
+        private int _id;
         private string _name;
         private string _phone;
         private string _email;
 
-        public int ID { get { return _id; } }
+        public int ID { get { return _id; } set { _id = value; } }
         public string Name
         {
             get { return _name; }
             set
             {
-                if (string.IsNullOrEmpty(value)) { throw new Exception(" Name cannot be null "); }
+                if (string.IsNullOrEmpty(value)) { throw new Exception("Name cannot be null"); }
                 else { _name = value; } 
             }
         }
