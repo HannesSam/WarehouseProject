@@ -10,7 +10,14 @@ namespace WarehouseProject
 {
     public partial class Customer_management : Form
     {
-        public ProductCatalogue ProduktKatalog;
+//        listStrings.OnItemAdded += HandleOnElementAdded ;
+//}
+//    private void HandleOnElementAdded(int itemIndex, string item)
+//    {
+//        LSTItems.Items.Insert(itemIndex, item);
+//    }
+
+    public ProductCatalogue ProduktKatalog;
         public CustomerCatalogue KundKatalog;
         public OrderCatalogue OrderKatalog;
         public Customer_management(ProductCatalogue _productCatalogue, CustomerCatalogue _costumerCatalogue, OrderCatalogue _orderCatalogue)
@@ -21,6 +28,8 @@ namespace WarehouseProject
             InitializeComponent();
             UpdateList();
             customerListBox.SelectedIndexChanged += CustomerListBoxChanged;
+
+            KundKatalog.OnCustomerChange += UpdateList;
         }
 
         private void Customer_management_Load(object sender, EventArgs e)
@@ -39,7 +48,7 @@ namespace WarehouseProject
         private void UpdateList()
         {
             customerListBox.Items.Clear();
-            foreach (var item in KundKatalog.AllCustomers())
+            foreach (var item in KundKatalog.Customers)
             {
                 customerListBox.Items.Add(item);
             }
@@ -48,7 +57,7 @@ namespace WarehouseProject
         private void ShowAllButton_Click(object sender, EventArgs e)
         {
             customerListBox.Items.Clear();
-            foreach (var item in KundKatalog.AllCustomers())
+            foreach (var item in KundKatalog.Customers)
             {
                 customerListBox.Items.Add(item);
             }
@@ -75,13 +84,19 @@ namespace WarehouseProject
 
         private void UpdateInformationButton_Click(object sender, EventArgs e)
         {
+            Customer cus = (Customer)customerListBox.SelectedItem;
             string name = nameTextBox.Text;
             string phone = phoneTextBox.Text;
             string email = emailTextBox.Text;
 
-            Customer cus = (Customer)customerListBox.SelectedItem;
-
-            // Och här ändras cuz
+            try
+            {
+                KundKatalog.UpdateCustomer(cus.ID, name, phone, email);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            } 
         }
     }
 }
