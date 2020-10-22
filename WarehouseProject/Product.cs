@@ -21,7 +21,7 @@ namespace WarehouseProject
             get { return _code; }
             set 
             { if (value < 0)
-                    throw new Exception("Code cannot be negative.");
+                    throw new IntOrDoubleNegativeException("Code cannot be negative.");
               else
               {
                     _code = value;
@@ -34,7 +34,7 @@ namespace WarehouseProject
             set 
             {   if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new Exception("Name cannot be null or empty.");
+                    throw new StringEmptyOrNullException("Name cannot be null or empty.");
                 }
                 else
                 {
@@ -45,7 +45,7 @@ namespace WarehouseProject
         public double Price
         {
             get { return _price; }
-            set { if (value < 0) throw new Exception("Price cannot be negative."); else _price = value; }
+            set { if (value < 0) throw new IntOrDoubleNegativeException("Price cannot be negative."); else _price = value; }
         }
         public int Stock
         {
@@ -53,7 +53,7 @@ namespace WarehouseProject
             set
             {
                 if (value < 0)
-                    throw new Exception("Stock cannot be negative.");
+                    throw new IntOrDoubleNegativeException("Stock cannot be negative.");
                 else
                 {
                     _stock = value;
@@ -63,12 +63,12 @@ namespace WarehouseProject
         public DateTime FirstAvailable
         {
             get { return _firstAvailable; }
-            set { if (value < DateTime.Now) throw new Exception("Date must be in the future"); else _firstAvailable = value; }
+            set { if (value < DateTime.Now) throw new DateNotInFutureException("Date must be in the future"); else _firstAvailable = value; }
         }
         public DateTime NextStocking
         {
             get { return _nextStocking; }
-            set { if (value < DateTime.Now) throw new Exception("Date must be in the future"); else _nextStocking = value; }
+            set { if (value < DateTime.Now) throw new DateNotInFutureException("Date must be in the future"); else _nextStocking = value; }
         }
         public Product(int _code, string _name, double _price, int _stock, DateTime _firstAvailable, DateTime _nextStocking)
         {

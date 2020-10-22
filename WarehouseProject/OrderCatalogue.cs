@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using System.Text.Json;
 using System.Linq;
+using System.Diagnostics.PerformanceData;
 
 namespace WarehouseProject
 {
@@ -17,9 +18,20 @@ namespace WarehouseProject
         {
             this.filename = _filename;
             Orders = ReadProductsFromFile();
-            //Number = Orders.Max(o => o.Number);
+            SetCount();
         }
 
+        public void SetCount()
+        {
+            if (Orders.Count==0)
+            {
+                Number = 0;
+            }
+            else
+            {
+                Number = Orders.Max(o => o.Number);
+            }
+        }
         public void WriteProductsToFile()
         {
             string contents = JsonSerializer.Serialize(Orders);
@@ -38,9 +50,11 @@ namespace WarehouseProject
             return Orders;
         }
 
-        public void AddOrder(Order order)
+        public void AddOrder(Customer kund, string adress, List<OrderLine> orders)
         {
-            Orders.Add(order);
+            Number++;
+            Order newOrder = new Order(Number, kund, DateTime.Now, adress, false, false, false, orders);
+            Orders.Add(newOrder);
         }
 
         //public List<Order> GetDispatchedOrdersFrom()

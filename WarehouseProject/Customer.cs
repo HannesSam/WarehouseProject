@@ -17,7 +17,7 @@ namespace WarehouseProject
             get { return _name; }
             set
             {
-                if (string.IsNullOrEmpty(value)) { throw new Exception("Name cannot be null"); }
+                if (string.IsNullOrEmpty(value)) { throw new StringEmptyOrNullException("Name cannot be null"); }
                 else { _name = value; } 
             }
         }
@@ -26,7 +26,7 @@ namespace WarehouseProject
             get { return _phone; }
             set
             {
-                if (!string.IsNullOrEmpty(value)) { _phone = value; }
+                if (!string.IsNullOrEmpty(value)) { throw new StringEmptyOrNullException("Phone cannot be null"); } else { _phone = value; }
             }
         }
         public string EMail
@@ -34,7 +34,7 @@ namespace WarehouseProject
             get { return _email; }
             set
             {
-                if (!string.IsNullOrEmpty(value)) { _email = value; }
+                if (!string.IsNullOrEmpty(value)) { throw new StringEmptyOrNullException("EMail cannot be null"); } else { _email = value; }
             }
         }
 
