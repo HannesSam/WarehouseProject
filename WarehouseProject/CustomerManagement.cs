@@ -98,5 +98,10 @@ namespace WarehouseProject
                 MessageBox.Show(ex.Message);
             } 
         }
+
+        private void customerListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

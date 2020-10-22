@@ -6,14 +6,73 @@ namespace WarehouseProject
 {
     public class Order
     {
-        public int Number { get; set; }
-        public Customer Customer { get; set; }
-        public DateTime OrderDate { get; set; }
-        public string DeliveryAdress { get; set; }
-        public bool PaymentCompleted { get; set; }
-        public bool PaymentRefunded { get; set; }
-        public bool Dispatched { get; set; }
-        public List<OrderLine> Items { get; set; }
+        private int _number;
+        private Customer _customer;
+        private DateTime _orderDate;
+        private string _deliveryAdress;
+        private bool _paymentCompleted;
+        private bool _paymentRefunded;
+        private bool _dispatched;
+        private List<OrderLine> _items;
+         
+        public int Number
+        {
+            get { return _number; }
+            set
+            {
+                if (value < 0)
+                    throw new IntOrDoubleNegativeException("Number cannot be negative.");
+                else
+                {
+                    _number = value;
+                }
+            }
+        }
+        public Customer Customer
+        {
+            get { return _customer; }
+            set { _customer = value; }
+        }
+        public DateTime OrderDate
+        {
+            get { return _orderDate; }
+            set { _orderDate = value; }
+        }
+        public string DeliveryAdress
+        {
+            get { return _deliveryAdress; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new StringEmptyOrNullException("Delivery Adress cannot be empty or null.");
+                }
+                else
+                {
+                    _deliveryAdress = value;
+                }
+            }
+        }
+        public bool PaymentCompleted
+        {
+            get { return _paymentCompleted; }
+            set { _paymentCompleted = value; }
+        }
+        public bool PaymentRefunded
+        {
+            get { return _paymentRefunded; }
+            set { _paymentRefunded = value; }
+        }
+        public bool Dispatched
+        {
+            get { return _dispatched; }
+            set { _dispatched = value; }
+        }
+        public List<OrderLine> Items
+        {
+            get { return _items; }
+            set { _items = value; }
+        }
 
         public Order()
         {

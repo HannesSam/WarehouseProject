@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq.Expressions;
 using System.Text;
 using System.Windows.Forms;
 
@@ -44,14 +45,12 @@ namespace WarehouseProject
             {
                 productListBox.Items.Add(item);
             }
-            productListBox.DisplayMember = "Name";
         }
 
         //När man ändrar den valda produkten i listboxen så ändras värdena i textboxarna så att man kan se alla attribut hos produkten.
         private void productListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             Product pro = (Product) productListBox.SelectedItem;
-            codeTextBox.Text = pro.Code.ToString();
             nameTextBox.Text = pro.Name;
             priceTextBox.Text = pro.Price.ToString();
             stockTextBox.Text = pro.Stock.ToString();
@@ -67,7 +66,6 @@ namespace WarehouseProject
             {
                 productListBox.Items.Add(item);
             }
-            productListBox.DisplayMember = "Name";
         }
         private void label2_Click(object sender, EventArgs e)
         {
@@ -82,7 +80,6 @@ namespace WarehouseProject
             {
                 productListBox.Items.Add(item);
             }
-            productListBox.DisplayMember = "Name";
         }
 
         private void codeTextBox_TextChanged(object sender, EventArgs e)
@@ -93,38 +90,122 @@ namespace WarehouseProject
         //Lägger till en ny produkt utifrån informationen i TextBoxarna. 
         private void AddProductButton_Click(object sender, EventArgs e)
         {
-            int code = int.Parse(codeTextBox.Text);
             string name = nameTextBox.Text;
-            double price = double.Parse(priceTextBox.Text);
-            int stock = int.Parse(stockTextBox.Text);
-            DateTime firstavailable = DateTime.Parse(firstAvailableTextBox.Text);
-            DateTime nextstock = DateTime.Parse(nextStockingTextBox.Text);
+            try
+            {
+                double price = double.Parse(priceTextBox.Text);
+                try
+                {
+                    int stock = int.Parse(stockTextBox.Text);
+                    try
+                    {
+                        DateTime firstAvailable = DateTime.Parse(firstAvailableTextBox.Text);
+                        try
+                        {
+                            DateTime nextStock = DateTime.Parse(nextStockingTextBox.Text);
+                            try
+                            {
+                                ProduktKatalog.AddProduct(name, price, stock, firstAvailable, nextStock);
+                            }
+                            catch (IntOrDoubleNegativeException ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                            catch (DateNotInFutureException ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                            catch (StringEmptyOrNullException ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Next stock date must be in a date format (ex: June 4, 2021)");
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("First available date must be in a date format (ex: June 4, 2021)");
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Stock must be a number");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Price must be a number");
+            }
 
-            Product newProduct = new Product(code, name, price, stock, firstavailable, nextstock);
-            ProduktKatalog.AddProduct(newProduct);
+
             UpdateList();
         }
 
         //Updaterar den produkten som är vald i listboxen utifrån informationen i textboxarna.
         private void UpdateProductButton_Click(object sender, EventArgs e)
         {
-            //Ska code kunna ändras?
-            int code = int.Parse(codeTextBox.Text);
-            string name = nameTextBox.Text;
-            double price = double.Parse(priceTextBox.Text);
-            int stock = int.Parse(stockTextBox.Text);
-            DateTime firstavailable = DateTime.Parse(firstAvailableTextBox.Text);
-            DateTime nextstock = DateTime.Parse(nextStockingTextBox.Text);
 
-            //Detta bör ske i ProductCatalogue / i Product klassen.
             Product pro = (Product)productListBox.SelectedItem;
-            pro.Code = code;
-            pro.Name = name;
-            pro.Price = price;
-            pro.Stock = stock;
-            pro.FirstAvailable = firstavailable;
-            pro.NextStocking = nextstock;
-
+            if (pro == null)
+            {
+                MessageBox.Show("Please select a product to be updated.");
+            }
+            else
+            {
+                int code = pro.Code;
+                string name = nameTextBox.Text;
+                try
+                {
+                    double price = double.Parse(priceTextBox.Text);
+                    try
+                    {
+                        int stock = int.Parse(stockTextBox.Text);
+                        try
+                        {
+                            DateTime firstAvailable = DateTime.Parse(firstAvailableTextBox.Text);
+                            try
+                            {
+                                DateTime nextStock = DateTime.Parse(nextStockingTextBox.Text);
+                                try
+                                {
+                                    ProduktKatalog.UpdateInformation(code, name, price, stock, firstAvailable, nextStock);
+                                }
+                                catch (IntOrDoubleNegativeException ex)
+                                {
+                                    MessageBox.Show(ex.Message);
+                                }
+                                catch (DateNotInFutureException ex)
+                                {
+                                    MessageBox.Show(ex.Message);
+                                }
+                                catch (StringEmptyOrNullException ex)
+                                {
+                                    MessageBox.Show(ex.Message);
+                                }
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Next stock date must be in a date format (ex: June 4, 2021)");
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("First available date must be in a date format (ex: June 4, 2021)");
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Stock must be a number");
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Price must be a number");
+                }
+            }
             UpdateList();
         }
 
@@ -132,6 +213,11 @@ namespace WarehouseProject
         private void ClosestRestockingButton_Click(object sender, EventArgs e)
         {
             closestRestockingTextBox.Text = ProduktKatalog.NextRestocking().ToString();
+        }
+
+        private void productListBox_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

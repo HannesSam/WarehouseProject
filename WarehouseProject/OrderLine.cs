@@ -14,5 +14,10 @@ namespace WarehouseProject
             this.Product = _product;
             this.Count = _count;
         }
+
+        public override string ToString()
+        {
+            return Product.Name + " Quantity : " + Count;
+        }
     }
 }

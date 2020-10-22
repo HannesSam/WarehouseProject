@@ -23,11 +23,19 @@ namespace WarehouseProject
         {
             this.Filename = _filename;
             Customers = ReadProductsFromFile();
-            //Customers = new List<Customer>();
-            //AddTestData();
+        }
 
-            //Hittar det nuvarande största ID:t i listan över kunder och sparar det. 
-            currentID = Customers.Max(c => c.ID);
+        public void SetID()
+        {
+            if (Customers.Count == 0)
+            {
+                currentID = 0;
+            }
+            else
+            {
+                //Hittar det nuvarande största ID:t i listan över kunder och sparar det. 
+                currentID = Customers.Max(c => c.ID);
+            }
         }
 
         public void AddTestData()
@@ -87,6 +95,10 @@ namespace WarehouseProject
 
             //Kollar att delegaten inte är null kör annars eventet
             OnCustomerChange?.Invoke();
+        }
+        public List<Customer> AllCustomers()
+        {
+            return Customers;
         }
     }
 }
