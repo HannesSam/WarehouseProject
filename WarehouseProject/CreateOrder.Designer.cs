@@ -30,12 +30,13 @@
         {
             this.checkedListBoxProducts = new System.Windows.Forms.CheckedListBox();
             this.checkedListBoxOrderLine = new System.Windows.Forms.CheckedListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxdelivery = new System.Windows.Forms.TextBox();
             this.AddProductButton = new System.Windows.Forms.Button();
             this.CreateOrderButton = new System.Windows.Forms.Button();
             this.Customer = new System.Windows.Forms.ListBox();
             this.textBoxQuantity = new System.Windows.Forms.NumericUpDown();
             this.HomeButton = new System.Windows.Forms.Button();
+            this.ButtonRemove = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxQuantity)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,14 +57,14 @@
             this.checkedListBoxOrderLine.Size = new System.Drawing.Size(220, 166);
             this.checkedListBoxOrderLine.TabIndex = 2;
             // 
-            // textBox1
+            // textBoxdelivery
             // 
-            this.textBox1.Location = new System.Drawing.Point(371, 93);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(220, 23);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.Text = " Delivery adress";
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            this.textBoxdelivery.Location = new System.Drawing.Point(371, 93);
+            this.textBoxdelivery.Name = "textBoxdelivery";
+            this.textBoxdelivery.Size = new System.Drawing.Size(220, 23);
+            this.textBoxdelivery.TabIndex = 3;
+            this.textBoxdelivery.Text = " Delivery adress";
+            this.textBoxdelivery.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
             // 
             // AddProductButton
             // 
@@ -83,6 +84,7 @@
             this.CreateOrderButton.TabIndex = 5;
             this.CreateOrderButton.Text = "Create Order";
             this.CreateOrderButton.UseVisualStyleBackColor = true;
+            this.CreateOrderButton.Click += new System.EventHandler(this.CreateOrderButton_Click);
             // 
             // Customer
             // 
@@ -92,6 +94,7 @@
             this.Customer.Name = "Customer";
             this.Customer.Size = new System.Drawing.Size(220, 64);
             this.Customer.TabIndex = 6;
+            this.Customer.SelectedIndexChanged += new System.EventHandler(this.Customer_SelectedIndexChanged);
             // 
             // textBoxQuantity
             // 
@@ -111,17 +114,28 @@
             this.HomeButton.UseVisualStyleBackColor = true;
             this.HomeButton.Click += new System.EventHandler(this.HomeButton_Click);
             // 
+            // ButtonRemove
+            // 
+            this.ButtonRemove.Location = new System.Drawing.Point(275, 245);
+            this.ButtonRemove.Name = "ButtonRemove";
+            this.ButtonRemove.Size = new System.Drawing.Size(90, 23);
+            this.ButtonRemove.TabIndex = 9;
+            this.ButtonRemove.Text = "Remove product";
+            this.ButtonRemove.UseVisualStyleBackColor = true;
+            this.ButtonRemove.Click += new System.EventHandler(this.ButtonRemove_Click);
+            // 
             // Create_order
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(787, 450);
+            this.Controls.Add(this.ButtonRemove);
             this.Controls.Add(this.HomeButton);
             this.Controls.Add(this.textBoxQuantity);
             this.Controls.Add(this.Customer);
             this.Controls.Add(this.CreateOrderButton);
             this.Controls.Add(this.AddProductButton);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxdelivery);
             this.Controls.Add(this.checkedListBoxOrderLine);
             this.Controls.Add(this.checkedListBoxProducts);
             this.Name = "Create_order";
@@ -136,11 +150,12 @@
         #endregion
         private System.Windows.Forms.CheckedListBox checkedListBoxProducts;
         private System.Windows.Forms.CheckedListBox checkedListBoxOrderLine;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxdelivery;
         private System.Windows.Forms.Button AddProductButton;
         private System.Windows.Forms.Button CreateOrderButton;
         private System.Windows.Forms.ListBox Customer;
         private System.Windows.Forms.NumericUpDown textBoxQuantity;
         private System.Windows.Forms.Button HomeButton;
+        private System.Windows.Forms.Button ButtonRemove;
     }
 }

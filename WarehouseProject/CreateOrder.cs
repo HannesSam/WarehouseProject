@@ -27,11 +27,19 @@ namespace WarehouseProject
         private void UpdateList()
         {
             checkedListBoxProducts.Items.Clear();
+            Customer.Items.Clear();
+
+            foreach (var item in KundKatalog.AllCustomers())
+            {
+                Customer.Items.Add(item);
+            }
+             Customer.DisplayMember = "Name";
+
             foreach (var item in ProduktKatalog.AllProducts())
             {
                 checkedListBoxProducts.Items.Add(item);
             }
-            checkedListBoxProducts.DisplayMember = "Name";
+            checkedListBoxProducts.DisplayMember = "Name" + " " +  "Stock";
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -41,7 +49,7 @@ namespace WarehouseProject
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
-
+          
         }
 
         private void Create_order_Load(object sender, EventArgs e)
@@ -67,14 +75,12 @@ namespace WarehouseProject
             decimal decimalcount = textBoxQuantity.Value;
             int count = Convert.ToInt32(decimalcount);
 
-            foreach (string item in checkedListBoxProducts.CheckedItems.OfType<string>().ToList())
+            foreach (OrderLine item in checkedListBoxProducts.CheckedItems.OfType<OrderLine>().ToList())
             {
               
                    
-                checkedListBoxOrderLine.Items.Add(item + " " + "(" + count +")");
+                checkedListBoxOrderLine.Items.Add(item.Name + " " + "(" + count +")");
                    
-
-                
             }
 
 
@@ -83,6 +89,39 @@ namespace WarehouseProject
         private void textBoxQuantity_ValueChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void ButtonRemove_Click(object sender, EventArgs e)
+        {
+
+
+            for (int i = checkedListBoxOrderLine.Items.Count - 1; i >= 0; i--)
+            {
+                
+                if (checkedListBoxOrderLine.GetItemChecked(i))
+                {
+                    checkedListBoxOrderLine.Items.Remove(checkedListBoxOrderLine.Items[i]);
+                }
+            }
+        }
+
+        private void Customer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CreateOrderButton_Click(object sender, EventArgs e)
+        {
+            Customer customerreference = (Customer)Customer.SelectedItem;
+            string adress = textBoxdelivery.SelectedText;
+            List<OrderLine> produktlista = new List<OrderLine>();
+        
+                foreach (object item in checkedListBoxOrderLine.Items)
+                 {
+                checkedListBoxOrderLine.Items.Add(produktlista);
+                 }
+            
+            OrderKatalog.AddOrder(customerreference,adress,produktlista);
         }
     }
 }

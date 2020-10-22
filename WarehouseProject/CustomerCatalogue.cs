@@ -102,5 +102,9 @@ namespace WarehouseProject
             //Kollar att delegaten inte är null kör annars eventet
             OnCustomerChange?.Invoke();
         }
+        public List<Customer> AllCustomers()
+        {
+            return Customers;
+        }
     }
 }
