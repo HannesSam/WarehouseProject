@@ -13,6 +13,11 @@ namespace WarehouseProject
         private int currentID;
         public List<Customer> Customers {get; set; }
 
+        public delegate void UpdateCustomerList();
+
+        public event UpdateCustomerList OnCustomerChange;
+
+
         //Read Customer list from json on startup
         public CustomerCatalogue(string _filename)
         {
@@ -59,6 +64,9 @@ namespace WarehouseProject
                 currentID++;
                 Customer customer = new Customer(currentID, name, phone, email);
                 Customers.Add(customer);
+
+                //Kollar att delegaten inte är null kör annars eventet
+                OnCustomerChange?.Invoke();
             }
             catch (Exception ex)
             {
@@ -73,6 +81,9 @@ namespace WarehouseProject
             customer.Name = name;
             customer.Phone = phone;
             customer.EMail = email;
+
+            //Kollar att delegaten inte är null kör annars eventet
+            OnCustomerChange?.Invoke();
         }
     }
 }
