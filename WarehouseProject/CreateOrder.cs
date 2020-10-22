@@ -15,12 +15,14 @@ namespace WarehouseProject
         public ProductCatalogue ProduktKatalog;
         public CustomerCatalogue KundKatalog;
         public OrderCatalogue OrderKatalog;
+        public List<OrderLine> ProduktLista;
         public Create_order(ProductCatalogue _productCatalogue, CustomerCatalogue _costumerCatalogue, OrderCatalogue _orderCatalogue)
         {
             this.ProduktKatalog = _productCatalogue;
             this.KundKatalog = _costumerCatalogue;
             this.OrderKatalog = _orderCatalogue;
 
+            ProduktLista = new List<OrderLine>();
             InitializeComponent();
             UpdateList();
         }
@@ -75,17 +77,50 @@ namespace WarehouseProject
             decimal decimalcount = textBoxQuantity.Value;
             int count = Convert.ToInt32(decimalcount);
 
-            foreach (OrderLine item in checkedListBoxProducts.CheckedItems.OfType<OrderLine>().ToList())
+            foreach (var item in checkedListBoxProducts.CheckedItems.OfType<Product>().ToList())
             {
-              
-                   
-                checkedListBoxOrderLine.Items.Add(item.Name + " " + "(" + count +")");
-                   
+                if (Contains(item))
+                {
+                    foreach (var order in checkedListBoxOrderLine.Items.OfType<OrderLine>().ToList())
+                    {
+                        if (order.Product.Name == item.Name)
+                        {
+                            order.Count += count;
+                            UpdateSelectedList();
+                        }
+                    }
+                }
+                else
+                {
+                    OrderLine vara = new OrderLine(item, count);
+                    checkedListBoxOrderLine.Items.Add(vara);
+                }
             }
-
 
         }
 
+        private void UpdateSelectedList()
+        {
+            List<OrderLine> update = checkedListBoxOrderLine.Items.OfType<OrderLine>().ToList();
+
+            checkedListBoxOrderLine.Items.Clear();
+            foreach (var item in update)
+            {
+                checkedListBoxOrderLine.Items.Add(item);
+            }
+
+        }
+        private bool Contains(Product vara)
+        {
+            foreach (var item in checkedListBoxOrderLine.Items.OfType<OrderLine>().ToList())
+            {
+                if (item.Product.Name == vara.Name)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         private void textBoxQuantity_ValueChanged(object sender, EventArgs e)
         {
             

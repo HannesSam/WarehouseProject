@@ -70,7 +70,8 @@ namespace WarehouseProject
         }
         public List<OrderLine> Items
         {
-            get { }
+            get { return _items; }
+            set { _items = value; }
         }
 
         public Order()
