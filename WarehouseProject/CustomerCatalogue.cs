@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -9,8 +10,8 @@ namespace WarehouseProject
     public class CustomerCatalogue
     {
         private string Filename;
-        public int currentID;
-        private List<Customer> Customers { get; set; }
+        private int currentID;
+        public List<Customer> Customers {get; set; }
 
         //Read Customer list from json on startup
         public CustomerCatalogue(string _filename)
@@ -19,7 +20,7 @@ namespace WarehouseProject
             Customers = ReadProductsFromFile();
 
             //Hittar det nuvarande största ID:t i listan över kunder och sparar det. 
-            //currentID = Customers.Max(c => c.ID);
+            currentID = Customers.Max(c => c.ID);
         }
 
         public void AddTestData()
@@ -65,20 +66,13 @@ namespace WarehouseProject
             }
         }
 
-        public void UpdateCustomer(int number)
+        public void UpdateCustomer(int id, string name, string phone, string email)
         {
-            Customer customer = Customers.Single(c => c.ID == number);
-            //Här ska customer uppdateras med alla nya värden
-            //Men först måste man implementera checkar i customer klassen som kollar att alla värden 
-            //Är giltiga. 
-
+            Customer customer = Customers.Single(c => c.ID == id);
+            //Här ska customer uppdateras med alla nya värde
+            customer.Name = name;
+            customer.Phone = phone;
+            customer.EMail = email;
         }
-
-        public List<Customer> AllCustomers()
-        {
-            return Customers;
-        }
-        //Update Customer
-
     }
 }

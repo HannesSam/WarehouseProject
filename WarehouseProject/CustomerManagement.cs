@@ -39,7 +39,7 @@ namespace WarehouseProject
         private void UpdateList()
         {
             customerListBox.Items.Clear();
-            foreach (var item in KundKatalog.AllCustomers())
+            foreach (var item in KundKatalog.Customers)
             {
                 customerListBox.Items.Add(item);
             }
@@ -48,7 +48,7 @@ namespace WarehouseProject
         private void ShowAllButton_Click(object sender, EventArgs e)
         {
             customerListBox.Items.Clear();
-            foreach (var item in KundKatalog.AllCustomers())
+            foreach (var item in KundKatalog.Customers)
             {
                 customerListBox.Items.Add(item);
             }
@@ -75,13 +75,12 @@ namespace WarehouseProject
 
         private void UpdateInformationButton_Click(object sender, EventArgs e)
         {
+            Customer cus = (Customer)customerListBox.SelectedItem;
             string name = nameTextBox.Text;
             string phone = phoneTextBox.Text;
             string email = emailTextBox.Text;
 
-            Customer cus = (Customer)customerListBox.SelectedItem;
-
-            // Och här ändras cuz
+            KundKatalog.UpdateCustomer(cus.ID, name, phone, email);
         }
     }
 }
