@@ -11,7 +11,7 @@ namespace WarehouseProject
     {
         private string Filename;
         private int currentID;
-        public List<Customer> Customers {get; set; }
+        public List<Customer> Customers { get; set; }
 
         public delegate void UpdateCustomerList();
 
@@ -80,14 +80,8 @@ namespace WarehouseProject
         {
             Customer customer = Customers.Single(c => c.ID == id);
             //Här ska customer uppdateras med alla nya värde
-            try
-            {
-                customer.Name = name;
-            }
-            catch (Exception)
-            {
-                throw new Exception("Name can not be empty");
-            }
+
+            customer.Name = name;
             customer.Phone = phone;
             customer.EMail = email;
 
