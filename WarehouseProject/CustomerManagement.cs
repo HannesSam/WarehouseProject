@@ -89,7 +89,14 @@ namespace WarehouseProject
             string phone = phoneTextBox.Text;
             string email = emailTextBox.Text;
 
-            KundKatalog.UpdateCustomer(cus.ID, name, phone, email);
+            try
+            {
+                KundKatalog.UpdateCustomer(cus.ID, name, phone, email);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            } 
         }
     }
 }

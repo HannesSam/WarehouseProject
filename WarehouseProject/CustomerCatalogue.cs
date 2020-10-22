@@ -23,6 +23,8 @@ namespace WarehouseProject
         {
             this.Filename = _filename;
             Customers = ReadProductsFromFile();
+            //Customers = new List<Customer>();
+            //AddTestData();
 
             //Hittar det nuvarande största ID:t i listan över kunder och sparar det. 
             currentID = Customers.Max(c => c.ID);
@@ -78,7 +80,14 @@ namespace WarehouseProject
         {
             Customer customer = Customers.Single(c => c.ID == id);
             //Här ska customer uppdateras med alla nya värde
-            customer.Name = name;
+            try
+            {
+                customer.Name = name;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Name can not be empty");
+            }
             customer.Phone = phone;
             customer.EMail = email;
 

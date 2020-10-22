@@ -17,7 +17,8 @@ namespace WarehouseProject
             get { return _name; }
             set
             {
-                if (!string.IsNullOrEmpty(value)) { _name = value; }
+                if (string.IsNullOrEmpty(value)) { throw new Exception(" Name cannot be null "); }
+                else { _name = value; } 
             }
         }
         public string Phone
