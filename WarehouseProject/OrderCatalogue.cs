@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using System.Text.Json;
 using System.Linq;
+using System.Diagnostics.PerformanceData;
 
 namespace WarehouseProject
 {
@@ -17,9 +18,20 @@ namespace WarehouseProject
         {
             this.filename = _filename;
             Orders = ReadProductsFromFile();
-            //Number = Orders.Max(o => o.Number);
+            SetCount();
         }
 
+        public void SetCount()
+        {
+            if (Orders.Count==0)
+            {
+                Number = 0;
+            }
+            else
+            {
+                Number = Orders.Max(o => o.Number);
+            }
+        }
         public void WriteProductsToFile()
         {
             string contents = JsonSerializer.Serialize(Orders);
@@ -38,34 +50,50 @@ namespace WarehouseProject
             return Orders;
         }
 
-        public void AddOrder(Order order)
+        public void AddOrder(Customer kund, string adress, List<OrderLine> orders)
         {
-            Orders.Add(order);
+            Number++;
+            Order newOrder = new Order(Number, kund, DateTime.Now, adress, false, false, false, orders);
+            Orders.Add(newOrder);
         }
 
-        //public List<Order> GetDispatchedOrdersFrom()
+        public List<Order> GetDispatchedOrdersFrom(Customer c)
+        {
+            IEnumerable<Order> dispatchedOrders = Orders.Where(o => o.Dispatched == true && o.Customer == c);
+            return dispatchedOrders.ToList();
+        }
+
+        public List<Order> GetActiveOrdersFrom(Customer c)
+        {
+            IEnumerable<Order> pendingOrders = Orders.Where(o => o.Dispatched == false && o.Customer == c);
+            return pendingOrders.ToList();
+        }
+
+        //public List<Order> DispatchReadyOrders(ProductCatalogue pc)
         //{
-            
+        //    List<Order> dispatchingOrders = new List<Order>();
+        //    IEnumerable<Order> readyOrders = Orders.Where(o => o.Dispatched == false && o.PaymentCompleted == true); 
+
+        //    //IEnumerable<Order> readyOrders2 = Orders.Where(o => o.Items.Where(i=> i.Product.Stock > i.Count));
+        //    //foreach(Order o in readyOrders)
+        //    //{
+        //    //    if(o.Items.Count < )
+        //    //    o.Dispatched = true;
+        //    //    dispatchingOrders.Add(o);
+        //    //}
+        //    //return dispatchingOrders;
         //}
 
-        //public List<Order> GetActiveOrdersFrom()
-        //{
+        public List<Order> GetDispatchedOrders()
+        {
+            IEnumerable<Order> dispatchedOrders = Orders.Where(o => o.Dispatched == true);
+            return dispatchedOrders.ToList();
+        }
 
-        //}
-
-        //public List<Order> DispatchReadyOrders()
-        //{
-
-        //}
-
-        //public List<Order> GetDispatchedOrders()
-        //{
-
-        //}
-
-        //public List<Order> GetPendingOrders()
-        //{
-
-        //}
+        public List<Order> GetPendingOrders()
+        {
+            IEnumerable<Order> pendingOrders = Orders.Where(o => o.Dispatched == false);
+            return pendingOrders.ToList();
+        }
     }
 }

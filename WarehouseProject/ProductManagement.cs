@@ -91,61 +91,121 @@ namespace WarehouseProject
         private void AddProductButton_Click(object sender, EventArgs e)
         {
             string name = nameTextBox.Text;
-            double price;
-            int stock;
-            DateTime firstAvailable;
-            DateTime nextStock;
             try
             {
-                price = double.Parse(priceTextBox.Text);
+                double price = double.Parse(priceTextBox.Text);
                 try
                 {
-                    stock = int.Parse(stockTextBox.Text);
+                    int stock = int.Parse(stockTextBox.Text);
                     try
                     {
-                        firstAvailable = DateTime.Parse(firstAvailableTextBox.Text);
+                        DateTime firstAvailable = DateTime.Parse(firstAvailableTextBox.Text);
                         try
                         {
-                            nextStock = DateTime.Parse(nextStockingTextBox.Text);
-                             ProduktKatalog.AddProduct(name, price, stock, firstAvailable, nextStock);
+                            DateTime nextStock = DateTime.Parse(nextStockingTextBox.Text);
+                            try
+                            {
+                                ProduktKatalog.AddProduct(name, price, stock, firstAvailable, nextStock);
+                            }
+                            catch (IntOrDoubleNegativeException ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                            catch (DateNotInFutureException ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                            catch (StringEmptyOrNullException ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
-                            MessageBox.Show("Next stocking date must be a date. (example: June 4, 2021)");
+                            MessageBox.Show("Next stock date must be in a date format (ex: June 4, 2021)");
                         }
                     }
-                    catch
+                    catch (Exception)
                     {
-                        MessageBox.Show("First available date must be a date. (example: June 4, 2021) ");
+                        MessageBox.Show("First available date must be in a date format (ex: June 4, 2021)");
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    MessageBox.Show("Stock must be a number.");
+                    MessageBox.Show("Stock must be a number");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Price must be a number.");
+                MessageBox.Show("Price must be a number");
             }
+
+
             UpdateList();
         }
 
         //Updaterar den produkten som är vald i listboxen utifrån informationen i textboxarna.
         private void UpdateProductButton_Click(object sender, EventArgs e)
         {
-            string name = nameTextBox.Text;
-            double price = double.Parse(priceTextBox.Text);
-            int stock = int.Parse(stockTextBox.Text);
-            DateTime firstavailable = DateTime.Parse(firstAvailableTextBox.Text);
-            DateTime nextstock = DateTime.Parse(nextStockingTextBox.Text);
 
-            //Detta bör ske i ProductCatalogue / i Product klassen.
             Product pro = (Product)productListBox.SelectedItem;
-            int code = pro.Code;
-
-            ProduktKatalog.UpdateInformation(code, name, price, stock, firstavailable, nextstock);
-
+            if (pro == null)
+            {
+                MessageBox.Show("Please select a product to be updated.");
+            }
+            else
+            {
+                int code = pro.Code;
+                string name = nameTextBox.Text;
+                try
+                {
+                    double price = double.Parse(priceTextBox.Text);
+                    try
+                    {
+                        int stock = int.Parse(stockTextBox.Text);
+                        try
+                        {
+                            DateTime firstAvailable = DateTime.Parse(firstAvailableTextBox.Text);
+                            try
+                            {
+                                DateTime nextStock = DateTime.Parse(nextStockingTextBox.Text);
+                                try
+                                {
+                                    ProduktKatalog.UpdateInformation(code, name, price, stock, firstAvailable, nextStock);
+                                }
+                                catch (IntOrDoubleNegativeException ex)
+                                {
+                                    MessageBox.Show(ex.Message);
+                                }
+                                catch (DateNotInFutureException ex)
+                                {
+                                    MessageBox.Show(ex.Message);
+                                }
+                                catch (StringEmptyOrNullException ex)
+                                {
+                                    MessageBox.Show(ex.Message);
+                                }
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Next stock date must be in a date format (ex: June 4, 2021)");
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("First available date must be in a date format (ex: June 4, 2021)");
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Stock must be a number");
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Price must be a number");
+                }
+            }
             UpdateList();
         }
 
