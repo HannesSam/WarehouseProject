@@ -43,7 +43,10 @@ namespace WarehouseProject
                 listBoxOfOrders.Items.Add(item);
             }
         }
+        private void listBoxOfOrders_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+        }
         private void listBoxOfOrders_DoubleClick(object sender, EventArgs e)
         {
 
@@ -54,9 +57,9 @@ namespace WarehouseProject
             }
             else
             {
-                string payment = order.PaymentCompleted ? "Paid" : "Not Paid";
-                string refunded = order.PaymentRefunded ? "Refunded" : "Not Refunded";
-                string dispatched = order.Dispatched ? "Dispatched" : "Not Dispatched";
+                string payment = order.PaymentCompleted ? "Yes" : "No";
+                string refunded = order.PaymentRefunded ? "Yes" : "No";
+                string dispatched = order.Dispatched ? "Yes" : "No";
                 string adress = order.DeliveryAdress;
                 string number = order.Number.ToString();
                 string customer = order.Customer.Name;
@@ -67,28 +70,9 @@ namespace WarehouseProject
                     items += "Product: " + order.Items[i].Product + " Quantity : " + order.Items[i].Count + "\n";
                 }
 
-                MessageBox.Show(number + " " + "Customer : " + customer + " Adress: " + adress + " " + payment + " " + refunded + " " + dispatched + "\n" + items);
+                MessageBox.Show( "Ordernumber : " + number + "\n" + "Customer : " + customer + "\nAdress: " + adress + "\n" + "Paid : " + payment + "\nRefunded : " + refunded + "\nDispatched : " + dispatched + "\n" + items);
             }
         }
-    }
-}
-
-        private void listBoxOfOrders_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void UpdateList()
-        {
-            listBoxOfOrders.Items.Clear();
-            
-
-            foreach (var item in OrderKatalog.)
-            {
-                Customer.Items.Add(item);
-            }
-            Customer.DisplayMember = "Name";
-        }
-
     }
 }
 

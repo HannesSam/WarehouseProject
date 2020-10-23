@@ -20,6 +20,10 @@ namespace WarehouseProject
 
         public List<Order> Orders { get { return _orders; } set { _orders = value; } }
 
+        public OrderCatalogue()
+        {
+
+        }
         public OrderCatalogue(string _filename, CustomerCatalogue customerCatalogue, ProductCatalogue productCatalogue)
         {
             this.filename = _filename;
@@ -31,7 +35,7 @@ namespace WarehouseProject
 
         public void SetCount()
         {
-            if (_orders.Count==0)
+            if (_orders.Count == 0)
             {
                 Number = 0;
             }
@@ -58,7 +62,8 @@ namespace WarehouseProject
             foreach (Order order in Orders)
             {
                 var custID = order.Customer.ID;
-                order.Customer = customerCatalogue.Customers.Single(c => c.ID == custID);
+                //order.Customer = customerCatalogue.Customers.Single(c => c.ID == custID);
+            }
 
             return Orders;
         }
