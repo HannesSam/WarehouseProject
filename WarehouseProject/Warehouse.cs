@@ -15,7 +15,7 @@ namespace WarehouseProject
         {
             _customerCatalogue = new CustomerCatalogue(customerFileName);
             _productCatalogue = new ProductCatalogue(productFileName);
-            _orderCatalogue = new OrderCatalogue(orderFileName);
+            _orderCatalogue = new OrderCatalogue(orderFileName, _customerCatalogue, _productCatalogue);
         }
 
         //kör denna metod när applikationen stängs ner

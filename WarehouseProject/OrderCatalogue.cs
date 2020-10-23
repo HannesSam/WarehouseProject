@@ -13,17 +13,19 @@ namespace WarehouseProject
         private List<Order> _orders;
         private string filename;
         public int Number;
+        DateTime dateToCompare = DateTime.Now - new TimeSpan(24 * 30, 0, 0);
 
-        public List<Order> Orders
-        {
-            get { return _orders; }
-            set { _orders = value; }
-        }
+        private CustomerCatalogue customerCatalogue;
+        private ProductCatalogue productCatalogue;
 
-        public OrderCatalogue(string _filename)
+        public List<Order> Orders { get { return _orders; } set { _orders = value; } }
+
+        public OrderCatalogue(string _filename, CustomerCatalogue customerCatalogue, ProductCatalogue productCatalogue)
         {
             this.filename = _filename;
             _orders = ReadProductsFromFile();
+            this.customerCatalogue = customerCatalogue;
+            this.productCatalogue = productCatalogue;
             SetCount();
         }
 
@@ -53,8 +55,12 @@ namespace WarehouseProject
             }
             else _orders = new List<Order>();
 
+            foreach (Order order in Orders)
+            {
+                var custID = order.Customer.ID;
+                order.Customer = customerCatalogue.Customers.Single(c => c.ID == custID);
 
-            return _orders;
+            return Orders;
         }
 
         public void AddOrder(Customer kund, string adress, List<OrderLine> orders)
@@ -66,13 +72,13 @@ namespace WarehouseProject
 
         public List<Order> GetDispatchedOrdersFrom(Customer c)
         {
-            IEnumerable<Order> dispatchedOrders = _orders.Where(o => o.Dispatched == true && o.Customer == c);
+            IEnumerable<Order> dispatchedOrders = Orders.Where(o => o.Dispatched == true && o.Customer == c);
             return dispatchedOrders.ToList();
         }
 
         public List<Order> GetActiveOrdersFrom(Customer c)
         {
-            IEnumerable<Order> pendingOrders = _orders.Where(o => o.Dispatched == false && o.Customer == c);
+            IEnumerable<Order> pendingOrders = Orders.Where(o => o.Dispatched == false && o.Customer == c);
             return pendingOrders.ToList();
         }
 

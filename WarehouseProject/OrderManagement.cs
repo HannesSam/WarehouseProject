@@ -72,3 +72,23 @@ namespace WarehouseProject
         }
     }
 }
+
+        private void listBoxOfOrders_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void UpdateList()
+        {
+            listBoxOfOrders.Items.Clear();
+            
+
+            foreach (var item in OrderKatalog.)
+            {
+                Customer.Items.Add(item);
+            }
+            Customer.DisplayMember = "Name";
+        }
+
+    }
+}
+
