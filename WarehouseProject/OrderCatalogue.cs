@@ -16,14 +16,16 @@ namespace WarehouseProject
         DateTime dateToCompare = DateTime.Now - new TimeSpan(24 * 30, 0, 0);
 
         private CustomerCatalogue customerCatalogue;
+        private ProductCatalogue productCatalogue;
 
         public List<Order> Orders { get { return _orders; } set { _orders = value; } }
 
-        public OrderCatalogue(string _filename, CustomerCatalogue customerCatalogue)
+        public OrderCatalogue(string _filename, CustomerCatalogue customerCatalogue, ProductCatalogue productCatalogue)
         {
             this.filename = _filename;
             _orders = ReadProductsFromFile();
             this.customerCatalogue = customerCatalogue;
+            this.productCatalogue = productCatalogue;
             SetCount();
         }
 
@@ -55,8 +57,14 @@ namespace WarehouseProject
 
             foreach (Order order in Orders)
             {
-                var cust = order.Customer.ID;
-                //order.Customer = customerCatalogue.Customers
+                var custID = order.Customer.ID;
+                order.Customer = customerCatalogue.Customers.Single(c => c.ID == custID);
+
+                foreach (OrderLine orderLine in order.Items)
+                {
+                    var prodID = orderLine.Product.Code;
+                    orderLine.Product = productCatalogue.ProductsProp.Single(p => p.Code == prodID);
+                }
             }
             return Orders;
         }
