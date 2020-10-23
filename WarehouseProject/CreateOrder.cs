@@ -25,6 +25,7 @@ namespace WarehouseProject
             ProduktLista = new List<OrderLine>();
             InitializeComponent();
             UpdateList();
+            
         }
         private void UpdateList()
         {
@@ -42,6 +43,13 @@ namespace WarehouseProject
                 checkedListBoxProducts.Items.Add(item);
             }
             checkedListBoxProducts.DisplayMember = "Name" + " " +  "Stock";
+        }
+        private void checkedlist()
+        {
+                for (int i = 0; i < checkedListBoxOrderLine.Items.Count; i++)
+                {
+                    checkedListBoxOrderLine.SetItemChecked(i, true);
+                }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -96,7 +104,7 @@ namespace WarehouseProject
                     checkedListBoxOrderLine.Items.Add(vara);
                 }
             }
-
+            checkedlist();
         }
 
         private void UpdateSelectedList()
@@ -129,7 +137,6 @@ namespace WarehouseProject
         private void ButtonRemove_Click(object sender, EventArgs e)
         {
 
-
             for (int i = checkedListBoxOrderLine.Items.Count - 1; i >= 0; i--)
             {
                 
@@ -148,13 +155,14 @@ namespace WarehouseProject
         private void CreateOrderButton_Click(object sender, EventArgs e)
         {
             Customer customerreference = (Customer)Customer.SelectedItem;
-            string adress = textBoxdelivery.SelectedText;
+            string adress = textBoxdelivery.Text;
+
             List<OrderLine> produktlista = new List<OrderLine>();
-        
-                foreach (object item in checkedListBoxOrderLine.Items)
-                 {
-                checkedListBoxOrderLine.Items.Add(produktlista);
-                 }
+
+            foreach (OrderLine item in checkedListBoxOrderLine.Items)
+            {
+                produktlista.Add(item);
+            }
             
             OrderKatalog.AddOrder(customerreference,adress,produktlista);
         }
