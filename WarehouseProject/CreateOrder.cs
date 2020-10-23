@@ -151,11 +151,10 @@ namespace WarehouseProject
 
             List<OrderLine> produktlista = new List<OrderLine>();
 
-            for (int i = 0; i < checkedListBoxOrderLine.Items.Count; i++)
-        
-                 {
-                checkedListBoxOrderLine.Items.Add(produktlista);
-                 }
+            foreach (OrderLine item in checkedListBoxOrderLine.Items)
+            {
+                produktlista.Add(item);
+            }
             
             OrderKatalog.AddOrder(customerreference,adress,produktlista);
         }
