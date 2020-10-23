@@ -50,7 +50,7 @@ namespace WarehouseProject
         //När man ändrar den valda produkten i listboxen så ändras värdena i textboxarna så att man kan se alla attribut hos produkten.
         private void productListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Product pro = (Product) productListBox.SelectedItem;
+            Product pro = (Product)productListBox.SelectedItem;
             nameTextBox.Text = pro.Name;
             priceTextBox.Text = pro.Price.ToString();
             stockTextBox.Text = pro.Stock.ToString();

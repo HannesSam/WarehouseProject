@@ -129,7 +129,6 @@ namespace WarehouseProject
         private void ButtonRemove_Click(object sender, EventArgs e)
         {
 
-
             for (int i = checkedListBoxOrderLine.Items.Count - 1; i >= 0; i--)
             {
                 
@@ -148,7 +147,8 @@ namespace WarehouseProject
         private void CreateOrderButton_Click(object sender, EventArgs e)
         {
             Customer customerreference = (Customer)Customer.SelectedItem;
-            string adress = textBoxdelivery.SelectedText;
+            string adress = textBoxdelivery.Text;
+
             List<OrderLine> produktlista = new List<OrderLine>();
 
             for (int i = 0; i < checkedListBoxOrderLine.Items.Count; i++)
