@@ -147,9 +147,9 @@ namespace WarehouseProject
         private void CreateOrderButton_Click(object sender, EventArgs e)
         {
             Customer customerreference = (Customer)Customer.SelectedItem;
-            string adress = textBoxdelivery.SelectedText;
+            string adress = textBoxdelivery.Text;
+
             List<OrderLine> produktlista = new List<OrderLine>();
-        
                 foreach (object item in checkedListBoxOrderLine.Items)
                  {
                 checkedListBoxOrderLine.Items.Add(produktlista);
