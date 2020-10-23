@@ -87,11 +87,20 @@ namespace WarehouseProject
             return pendingOrders.ToList();
         }
 
-        public List<Order> DispatchReadyOrders()
+        public void DispatchReadyOrders()
         {
             IEnumerable<Order> readyOrders = _orders.Where(o => o.Dispatched == false && o.PaymentCompleted == true && o.Items.All(i => i.Product.Stock >= i.Count));
-
-            return readyOrders.ToList();
+            List<Order> orderlist = readyOrders.ToList();
+            foreach (var item in Orders)
+            {
+                foreach (var item1 in orderlist)
+                {
+                    if (item == item1)
+                    {
+                        item.Dispatched = true;
+                    }
+                }
+            }
         }
 
         public List<Order> GetDispatchedOrders()
