@@ -51,11 +51,18 @@ namespace WarehouseProject
         private void productListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             Product pro = (Product)productListBox.SelectedItem;
-            nameTextBox.Text = pro.Name;
-            priceTextBox.Text = pro.Price.ToString();
-            stockTextBox.Text = pro.Stock.ToString();
-            firstAvailableTextBox.Text = pro.FirstAvailable.ToString();
-            nextStockingTextBox.Text = pro.NextStocking.ToString();
+            if (pro == null)
+            {
+                MessageBox.Show("Please choose a product");
+            }
+            else
+            {
+                nameTextBox.Text = pro.Name;
+                priceTextBox.Text = pro.Price.ToString();
+                stockTextBox.Text = pro.Stock.ToString();
+                firstAvailableTextBox.Text = pro.FirstAvailable.ToString();
+                nextStockingTextBox.Text = pro.NextStocking.ToString();
+            }
         }
 
         //updaterar Listboxen

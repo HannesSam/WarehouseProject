@@ -16,31 +16,37 @@ namespace WarehouseProject
         DateTime dateToCompare = DateTime.Now - new TimeSpan(24 * 30, 0, 0);
 
         private CustomerCatalogue customerCatalogue;
+        private ProductCatalogue productCatalogue;
 
         public List<Order> Orders { get { return _orders; } set { _orders = value; } }
 
-        public OrderCatalogue(string _filename, CustomerCatalogue customerCatalogue)
+        public OrderCatalogue()
+        {
+
+        }
+        public OrderCatalogue(string _filename, CustomerCatalogue customerCatalogue, ProductCatalogue productCatalogue)
         {
             this.filename = _filename;
             _orders = ReadProductsFromFile();
             this.customerCatalogue = customerCatalogue;
+            this.productCatalogue = productCatalogue;
             SetCount();
         }
 
         public void SetCount()
         {
-            if (Orders.Count==0)
+            if (_orders.Count == 0)
             {
                 Number = 0;
             }
             else
             {
-                Number = Orders.Max(o => o.Number);
+                Number = _orders.Max(o => o.Number);
             }
         }
         public void WriteProductsToFile()
         {
-            string contents = JsonSerializer.Serialize(Orders);
+            string contents = JsonSerializer.Serialize(_orders);
             File.WriteAllText(filename, contents);
         }
 
@@ -49,53 +55,54 @@ namespace WarehouseProject
             if (File.Exists(filename))
             {
                 string fileContents = File.ReadAllText(filename);
-                Orders = JsonSerializer.Deserialize<List<Order>>(fileContents);
+                _orders = JsonSerializer.Deserialize<List<Order>>(fileContents);
             }
-            else Orders = new List<Order>();
+            else _orders = new List<Order>();
 
             foreach (Order order in Orders)
             {
-                var cust = order.Customer.ID;
-                //order.Customer = customerCatalogue.Customers
+                var custID = order.Customer.ID;
+                //order.Customer = customerCatalogue.Customers.Single(c => c.ID == custID);
             }
+
             return Orders;
         }
 
         public void AddOrder(Customer kund, string adress, List<OrderLine> orders)
         {
             Number++;
-            Order newOrder = new Order(Number, kund, DateTime.Now, adress, false, false, false, orders);
-            Orders.Add(newOrder);
+            Order newOrder = new Order(Number, kund, DateTime.Now, adress, true, false, false, orders);
+            _orders.Add(newOrder);
         }
 
         public List<Order> GetDispatchedOrdersFrom(Customer c)
         {
-            IEnumerable<Order> dispatchedOrders = Orders.Where(o => o.Dispatched == true && o.Customer == c && o.OrderDate < dateToCompare);
+            IEnumerable<Order> dispatchedOrders = Orders.Where(o => o.Dispatched == true && o.Customer == c);
             return dispatchedOrders.ToList();
         }
 
         public List<Order> GetActiveOrdersFrom(Customer c)
         {
-            IEnumerable<Order> pendingOrders = Orders.Where(o => o.Customer == c && (o.Dispatched == false || o.OrderDate > dateToCompare));
+            IEnumerable<Order> pendingOrders = Orders.Where(o => o.Dispatched == false && o.Customer == c);
             return pendingOrders.ToList();
         }
 
         public List<Order> DispatchReadyOrders(ProductCatalogue pc)
         {
-            IEnumerable<Order> readyOrders = Orders.Where(o => o.Dispatched == false && o.PaymentCompleted == true && o.Items.All(i => i.Product.Stock >= i.Count));
+            IEnumerable<Order> readyOrders = _orders.Where(o => o.Dispatched == false && o.PaymentCompleted == true && o.Items.All(i => i.Product.Stock >= i.Count));
 
             return readyOrders.ToList();
         }
 
         public List<Order> GetDispatchedOrders()
         {
-            IEnumerable<Order> dispatchedOrders = Orders.Where(o => o.Dispatched == true);
+            IEnumerable<Order> dispatchedOrders = _orders.Where(o => o.Dispatched == true);
             return dispatchedOrders.ToList();
         }
 
         public List<Order> GetPendingOrders()
         {
-            IEnumerable<Order> pendingOrders = Orders.Where(o => o.Dispatched == false);
+            IEnumerable<Order> pendingOrders = _orders.Where(o => o.Dispatched == false);
             return pendingOrders.ToList();
         }
     }

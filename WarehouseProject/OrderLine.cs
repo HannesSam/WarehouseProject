@@ -23,6 +23,10 @@ namespace WarehouseProject
             }
         }
 
+        public OrderLine()
+        {
+
+        }
         public OrderLine(Product _product, int _count)
         {
             this.Product = _product;

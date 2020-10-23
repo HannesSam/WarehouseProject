@@ -13,6 +13,10 @@ namespace WarehouseProject
         private string filename;
         public int currentCode;
 
+        //denna borde döpas om till Products och resten av variablerna bör följa konventionen med små bokstäver
+        //Om man inte är en prop!!
+        public List<Product> ProductsProp { get { return Products; } set { Products = value; } }
+
         public ProductCatalogue(string _filename)
         {
             this.filename = _filename;

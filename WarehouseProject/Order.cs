@@ -90,5 +90,9 @@ namespace WarehouseProject
             this.Items = _items;
         }
 
+        public override string ToString()
+        {
+            return "Ordernumber : " + Number.ToString() + " Customer : " + Customer.Name;
+        }
     }
 }
