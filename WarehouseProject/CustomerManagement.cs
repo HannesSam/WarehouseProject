@@ -103,5 +103,10 @@ namespace WarehouseProject
         {
 
         }
+
+        private void ArchivedButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -89,5 +89,9 @@ namespace WarehouseProject
             this.Dispatched = _dispatched;
         }
 
+        public override string ToString()
+        {
+            return "Ordernumber : " + Number.ToString() + " Customer : " + Customer.Name;
+        }
     }
 }
