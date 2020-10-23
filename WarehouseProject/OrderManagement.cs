@@ -10,6 +10,7 @@ namespace WarehouseProject
 {
     public partial class Order_management : Form
     {
+        //kommentar
         public ProductCatalogue ProduktKatalog;
         public CustomerCatalogue KundKatalog;
         public OrderCatalogue OrderKatalog;
