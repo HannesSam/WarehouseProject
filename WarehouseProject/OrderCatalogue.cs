@@ -10,15 +10,20 @@ namespace WarehouseProject
 {
     public class OrderCatalogue
     {
-        private List<Order> Orders;
+        private List<Order> _orders;
         private string filename;
         public int Number;
-        DateTime dateToCompare = DateTime.Now - new TimeSpan(24*30, 0, 0);
+        DateTime dateToCompare = DateTime.Now - new TimeSpan(24 * 30, 0, 0);
 
-        public OrderCatalogue(string _filename)
+        private CustomerCatalogue customerCatalogue;
+
+        public List<Order> Orders { get { return _orders; } set { _orders = value; } }
+
+        public OrderCatalogue(string _filename, CustomerCatalogue customerCatalogue)
         {
             this.filename = _filename;
-            Orders = ReadProductsFromFile();
+            _orders = ReadProductsFromFile();
+            this.customerCatalogue = customerCatalogue;
             SetCount();
         }
 
@@ -48,7 +53,11 @@ namespace WarehouseProject
             }
             else Orders = new List<Order>();
 
-
+            foreach (Order order in Orders)
+            {
+                var cust = order.Customer.ID;
+                //order.Customer = customerCatalogue.Customers
+            }
             return Orders;
         }
 
