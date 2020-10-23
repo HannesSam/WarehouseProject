@@ -13,6 +13,7 @@ namespace WarehouseProject
         private List<Order> Orders;
         private string filename;
         public int Number;
+        DateTime dateToCompare = DateTime.Now - new TimeSpan(24*30, 0, 0);
 
         public OrderCatalogue(string _filename)
         {
@@ -59,13 +60,13 @@ namespace WarehouseProject
 
         public List<Order> GetDispatchedOrdersFrom(Customer c)
         {
-            IEnumerable<Order> dispatchedOrders = Orders.Where(o => o.Dispatched == true && o.Customer == c);
+            IEnumerable<Order> dispatchedOrders = Orders.Where(o => o.Dispatched == true && o.Customer == c && o.OrderDate < dateToCompare);
             return dispatchedOrders.ToList();
         }
 
         public List<Order> GetActiveOrdersFrom(Customer c)
         {
-            IEnumerable<Order> pendingOrders = Orders.Where(o => o.Dispatched == false && o.Customer == c);
+            IEnumerable<Order> pendingOrders = Orders.Where(o => o.Customer == c && (o.Dispatched == false || o.OrderDate > dateToCompare));
             return pendingOrders.ToList();
         }
 
