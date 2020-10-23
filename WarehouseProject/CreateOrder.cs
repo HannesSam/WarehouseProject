@@ -31,7 +31,7 @@ namespace WarehouseProject
             checkedListBoxProducts.Items.Clear();
             Customer.Items.Clear();
 
-            foreach (var item in KundKatalog.AllCustomers())
+            foreach (var item in KundKatalog.Customers)
             {
                 Customer.Items.Add(item);
             }
@@ -150,8 +150,9 @@ namespace WarehouseProject
             Customer customerreference = (Customer)Customer.SelectedItem;
             string adress = textBoxdelivery.SelectedText;
             List<OrderLine> produktlista = new List<OrderLine>();
+
+            for (int i = 0; i < checkedListBoxOrderLine.Items.Count; i++)
         
-                foreach (object item in checkedListBoxOrderLine.Items)
                  {
                 checkedListBoxOrderLine.Items.Add(produktlista);
                  }
