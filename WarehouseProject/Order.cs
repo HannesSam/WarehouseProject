@@ -87,6 +87,7 @@ namespace WarehouseProject
             this.PaymentCompleted = _paymentCompleted;
             this.PaymentRefunded = _paymentRefunded;
             this.Dispatched = _dispatched;
+            this.Items = _items;
         }
 
     }
