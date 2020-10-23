@@ -31,7 +31,7 @@ namespace WarehouseProject
             checkedListBoxProducts.Items.Clear();
             Customer.Items.Clear();
 
-            foreach (var item in KundKatalog.AllCustomers())
+            foreach (var item in KundKatalog.Customers)
             {
                 Customer.Items.Add(item);
             }
@@ -128,7 +128,6 @@ namespace WarehouseProject
 
         private void ButtonRemove_Click(object sender, EventArgs e)
         {
-
 
             for (int i = checkedListBoxOrderLine.Items.Count - 1; i >= 0; i--)
             {

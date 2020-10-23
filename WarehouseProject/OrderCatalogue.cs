@@ -69,20 +69,12 @@ namespace WarehouseProject
             return pendingOrders.ToList();
         }
 
-        //public List<Order> DispatchReadyOrders(ProductCatalogue pc)
-        //{
-        //    List<Order> dispatchingOrders = new List<Order>();
-        //    IEnumerable<Order> readyOrders = Orders.Where(o => o.Dispatched == false && o.PaymentCompleted == true); 
+        public List<Order> DispatchReadyOrders(ProductCatalogue pc)
+        {
+            IEnumerable<Order> readyOrders = Orders.Where(o => o.Dispatched == false && o.PaymentCompleted == true && o.Items.All(i => i.Product.Stock >= i.Count));
 
-        //    //IEnumerable<Order> readyOrders2 = Orders.Where(o => o.Items.Where(i=> i.Product.Stock > i.Count));
-        //    //foreach(Order o in readyOrders)
-        //    //{
-        //    //    if(o.Items.Count < )
-        //    //    o.Dispatched = true;
-        //    //    dispatchingOrders.Add(o);
-        //    //}
-        //    //return dispatchingOrders;
-        //}
+            return readyOrders.ToList();
+        }
 
         public List<Order> GetDispatchedOrders()
         {
