@@ -166,5 +166,10 @@ namespace WarehouseProject
             
             OrderKatalog.AddOrder(customerreference,adress,produktlista);
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
