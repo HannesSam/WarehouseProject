@@ -19,7 +19,10 @@ namespace WarehouseProject
             this.KundKatalog = _costumerCatalogue;
             this.OrderKatalog = _orderCatalogue;
             InitializeComponent();
-
+            foreach (var item in KundKatalog.Customers)
+            {
+                customerListBox.Items.Add(item);
+            }
         }
 
         private void Order_management_Load(object sender, EventArgs e)
@@ -72,6 +75,29 @@ namespace WarehouseProject
 
                 MessageBox.Show( "Ordernumber : " + number + "\n" + "Customer : " + customer + "\nAdress: " + adress + "\n" + "Paid : " + payment + "\nRefunded : " + refunded + "\nDispatched : " + dispatched + "\n" + items);
             }
+        }
+
+        private void ShowDispatchedOrdersButton_Click(object sender, EventArgs e)
+        {
+            listBoxOfOrders.Items.Clear();
+            foreach (var item in OrderKatalog.GetDispatchedOrders())
+            {
+                listBoxOfOrders.Items.Add(item);
+            }
+        }
+
+        private void ShowPendingOrdersButton_Click(object sender, EventArgs e)
+        {
+            listBoxOfOrders.Items.Clear();
+            foreach (var item in OrderKatalog.GetPendingOrders())
+            {
+                listBoxOfOrders.Items.Add(item);
+            }
+        }
+
+        private void ProcessPendingOrdersButton_Click(object sender, EventArgs e)
+        {
+            OrderKatalog.DispatchReadyOrders();
         }
     }
 }

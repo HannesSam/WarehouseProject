@@ -50,5 +50,10 @@ namespace WarehouseProject
             _phone = phone;
             _email = eMail;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

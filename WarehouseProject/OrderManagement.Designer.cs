@@ -59,6 +59,7 @@
             this.ShowDispatchedOrdersButton.TabIndex = 0;
             this.ShowDispatchedOrdersButton.Text = "Show dispatched orders";
             this.ShowDispatchedOrdersButton.UseVisualStyleBackColor = true;
+            this.ShowDispatchedOrdersButton.Click += new System.EventHandler(this.ShowDispatchedOrdersButton_Click);
             // 
             // ShowPendingOrdersButton
             // 
@@ -69,6 +70,7 @@
             this.ShowPendingOrdersButton.TabIndex = 0;
             this.ShowPendingOrdersButton.Text = "Show pending orders";
             this.ShowPendingOrdersButton.UseVisualStyleBackColor = true;
+            this.ShowPendingOrdersButton.Click += new System.EventHandler(this.ShowPendingOrdersButton_Click);
             // 
             // listBoxOfOrders
             // 
@@ -91,6 +93,7 @@
             this.ProcessPendingOrdersButton.TabIndex = 0;
             this.ProcessPendingOrdersButton.Text = "Process pending orders";
             this.ProcessPendingOrdersButton.UseVisualStyleBackColor = true;
+            this.ProcessPendingOrdersButton.Click += new System.EventHandler(this.ProcessPendingOrdersButton_Click);
             // 
             // HomeButton
             // 
