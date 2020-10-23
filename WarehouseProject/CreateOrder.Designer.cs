@@ -37,6 +37,8 @@
             this.textBoxQuantity = new System.Windows.Forms.NumericUpDown();
             this.HomeButton = new System.Windows.Forms.Button();
             this.ButtonRemove = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxQuantity)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,7 +65,6 @@
             this.textBoxdelivery.Name = "textBoxdelivery";
             this.textBoxdelivery.Size = new System.Drawing.Size(220, 23);
             this.textBoxdelivery.TabIndex = 3;
-            this.textBoxdelivery.Text = " Delivery adress";
             this.textBoxdelivery.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
             // 
             // AddProductButton
@@ -102,6 +103,11 @@
             this.textBoxQuantity.Name = "textBoxQuantity";
             this.textBoxQuantity.Size = new System.Drawing.Size(90, 23);
             this.textBoxQuantity.TabIndex = 7;
+            this.textBoxQuantity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.textBoxQuantity.ValueChanged += new System.EventHandler(this.textBoxQuantity_ValueChanged);
             // 
             // HomeButton
@@ -124,11 +130,32 @@
             this.ButtonRemove.UseVisualStyleBackColor = true;
             this.ButtonRemove.Click += new System.EventHandler(this.ButtonRemove_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(278, 101);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(87, 15);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Delivery Adress";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(265, 72);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 15);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Choose customer";
+            // 
             // Create_order
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(787, 450);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.ButtonRemove);
             this.Controls.Add(this.HomeButton);
             this.Controls.Add(this.textBoxQuantity);
@@ -157,5 +184,7 @@
         private System.Windows.Forms.NumericUpDown textBoxQuantity;
         private System.Windows.Forms.Button HomeButton;
         private System.Windows.Forms.Button ButtonRemove;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

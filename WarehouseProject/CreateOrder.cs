@@ -25,6 +25,7 @@ namespace WarehouseProject
             ProduktLista = new List<OrderLine>();
             InitializeComponent();
             UpdateList();
+            
         }
         private void UpdateList()
         {
@@ -42,6 +43,13 @@ namespace WarehouseProject
                 checkedListBoxProducts.Items.Add(item);
             }
             checkedListBoxProducts.DisplayMember = "Name" + " " +  "Stock";
+        }
+        private void checkedlist()
+        {
+                for (int i = 0; i < checkedListBoxOrderLine.Items.Count; i++)
+                {
+                    checkedListBoxOrderLine.SetItemChecked(i, true);
+                }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -75,28 +83,36 @@ namespace WarehouseProject
         private void AddProductButton_Click(object sender, EventArgs e)
         {
             decimal decimalcount = textBoxQuantity.Value;
-            int count = Convert.ToInt32(decimalcount);
-
-            foreach (var item in checkedListBoxProducts.CheckedItems.OfType<Product>().ToList())
+            if (decimalcount <= 0)
             {
-                if (Contains(item))
-                {
-                    foreach (var order in checkedListBoxOrderLine.Items.OfType<OrderLine>().ToList())
-                    {
-                        if (order.Product.Name == item.Name)
-                        {
-                            order.Count += count;
-                            UpdateSelectedList();
-                        }
-                    }
-                }
-                else
-                {
-                    OrderLine vara = new OrderLine(item, count);
-                    checkedListBoxOrderLine.Items.Add(vara);
-                }
+                MessageBox.Show("Please select a quantity higher than 0");
             }
 
+            else
+            {
+                int count = Convert.ToInt32(decimalcount);
+
+                foreach (var item in checkedListBoxProducts.CheckedItems.OfType<Product>().ToList())
+                {
+                    if (Contains(item))
+                    {
+                        foreach (var order in checkedListBoxOrderLine.Items.OfType<OrderLine>().ToList())
+                        {
+                            if (order.Product.Name == item.Name)
+                            {
+                                order.Count += count;
+                                UpdateSelectedList();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        OrderLine vara = new OrderLine(item, count);
+                        checkedListBoxOrderLine.Items.Add(vara);
+                    }
+                }
+            }
+            checkedlist();
         }
 
         private void UpdateSelectedList()
@@ -147,17 +163,40 @@ namespace WarehouseProject
         private void CreateOrderButton_Click(object sender, EventArgs e)
         {
             Customer customerreference = (Customer)Customer.SelectedItem;
-            string adress = textBoxdelivery.Text;
+            if (customerreference == null)
+            {
+                MessageBox.Show("Please select a customer.");
+            }
+            if (checkedListBoxOrderLine.Items.Count == 0)
+            {
+                MessageBox.Show("No products selected.");
+            }
+            else
+            {
+                string adress = textBoxdelivery.Text;
 
-            List<OrderLine> produktlista = new List<OrderLine>();
+                List<OrderLine> produktlista = new List<OrderLine>();
 
-            for (int i = 0; i < checkedListBoxOrderLine.Items.Count; i++)
-        
-                 {
-                checkedListBoxOrderLine.Items.Add(produktlista);
-                 }
-            
-            OrderKatalog.AddOrder(customerreference,adress,produktlista);
+                foreach (OrderLine item in checkedListBoxOrderLine.Items)
+                {
+                    produktlista.Add(item);
+                }
+                try
+                {
+                    OrderKatalog.AddOrder(customerreference, adress, produktlista);
+                    MessageBox.Show("Order placed successfully!");
+                }
+                catch (StringEmptyOrNullException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
