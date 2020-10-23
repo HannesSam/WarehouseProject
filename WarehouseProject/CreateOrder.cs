@@ -75,25 +75,33 @@ namespace WarehouseProject
         private void AddProductButton_Click(object sender, EventArgs e)
         {
             decimal decimalcount = textBoxQuantity.Value;
-            int count = Convert.ToInt32(decimalcount);
-
-            foreach (var item in checkedListBoxProducts.CheckedItems.OfType<Product>().ToList())
+            if (decimalcount <= 0)
             {
-                if (Contains(item))
+                MessageBox.Show("Please select a quantity higher than 0");
+            }
+
+            else
+            {
+                int count = Convert.ToInt32(decimalcount);
+
+                foreach (var item in checkedListBoxProducts.CheckedItems.OfType<Product>().ToList())
                 {
-                    foreach (var order in checkedListBoxOrderLine.Items.OfType<OrderLine>().ToList())
+                    if (Contains(item))
                     {
-                        if (order.Product.Name == item.Name)
+                        foreach (var order in checkedListBoxOrderLine.Items.OfType<OrderLine>().ToList())
                         {
-                            order.Count += count;
-                            UpdateSelectedList();
+                            if (order.Product.Name == item.Name)
+                            {
+                                order.Count += count;
+                                UpdateSelectedList();
+                            }
                         }
                     }
-                }
-                else
-                {
-                    OrderLine vara = new OrderLine(item, count);
-                    checkedListBoxOrderLine.Items.Add(vara);
+                    else
+                    {
+                        OrderLine vara = new OrderLine(item, count);
+                        checkedListBoxOrderLine.Items.Add(vara);
+                    }
                 }
             }
 
@@ -147,16 +155,35 @@ namespace WarehouseProject
         private void CreateOrderButton_Click(object sender, EventArgs e)
         {
             Customer customerreference = (Customer)Customer.SelectedItem;
-            string adress = textBoxdelivery.Text;
-
-            List<OrderLine> produktlista = new List<OrderLine>();
-
-            foreach (OrderLine item in checkedListBoxOrderLine.Items)
+            if (customerreference == null)
             {
-                produktlista.Add(item);
+                MessageBox.Show("Please select a customer.");
             }
-            
-            OrderKatalog.AddOrder(customerreference,adress,produktlista);
+            if (checkedListBoxOrderLine.Items.Count == 0)
+            {
+                MessageBox.Show("No products selected.");
+            }
+            else
+            {
+                string adress = textBoxdelivery.Text;
+
+                List<OrderLine> produktlista = new List<OrderLine>();
+
+                foreach (OrderLine item in checkedListBoxOrderLine.Items)
+                {
+                    produktlista.Add(item);
+                }
+                try
+                {
+                    OrderKatalog.AddOrder(customerreference, adress, produktlista);
+                    MessageBox.Show("Order placed successfully!");
+                }
+                catch (StringEmptyOrNullException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
         }
     }
 }
