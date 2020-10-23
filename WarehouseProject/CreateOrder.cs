@@ -25,6 +25,7 @@ namespace WarehouseProject
             ProduktLista = new List<OrderLine>();
             InitializeComponent();
             UpdateList();
+            
         }
         private void UpdateList()
         {
@@ -42,6 +43,13 @@ namespace WarehouseProject
                 checkedListBoxProducts.Items.Add(item);
             }
             checkedListBoxProducts.DisplayMember = "Name" + " " +  "Stock";
+        }
+        private void checkedlist()
+        {
+                for (int i = 0; i < checkedListBoxOrderLine.Items.Count; i++)
+                {
+                    checkedListBoxOrderLine.SetItemChecked(i, true);
+                }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -96,7 +104,7 @@ namespace WarehouseProject
                     checkedListBoxOrderLine.Items.Add(vara);
                 }
             }
-
+            checkedlist();
         }
 
         private void UpdateSelectedList()
