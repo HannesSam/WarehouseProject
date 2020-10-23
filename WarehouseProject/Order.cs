@@ -14,7 +14,7 @@ namespace WarehouseProject
         private bool _paymentRefunded;
         private bool _dispatched;
         private List<OrderLine> _items;
-         
+
         public int Number
         {
             get { return _number; }

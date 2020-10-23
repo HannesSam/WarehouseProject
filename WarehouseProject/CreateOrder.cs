@@ -31,7 +31,7 @@ namespace WarehouseProject
             checkedListBoxProducts.Items.Clear();
             Customer.Items.Clear();
 
-            foreach (var item in KundKatalog.AllCustomers())
+            foreach (var item in KundKatalog.Customers)
             {
                 Customer.Items.Add(item);
             }
