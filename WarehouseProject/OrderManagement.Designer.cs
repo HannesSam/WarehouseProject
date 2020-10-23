@@ -81,6 +81,7 @@
             this.listBoxOfOrders.Name = "listBoxOfOrders";
             this.listBoxOfOrders.Size = new System.Drawing.Size(250, 199);
             this.listBoxOfOrders.TabIndex = 1;
+            this.listBoxOfOrders.SelectedIndexChanged += new System.EventHandler(this.listBoxOfOrders_SelectedIndexChanged);
             // 
             // ProcessPendingOrdersButton
             // 
