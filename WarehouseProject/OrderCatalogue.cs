@@ -106,13 +106,38 @@ namespace WarehouseProject
             return pendingOrders.ToList();
         }
 
+
+        //Den här metoden tar 
         public void DispatchReadyOrders()
         {
             IEnumerable<Order> readyOrders = _orders.Where(o => o.Dispatched == false && o.PaymentCompleted == true && o.Items.All(i => i.Product.Stock >= i.Count));
             List<Order> orderlist = readyOrders.ToList();
+            orderlist.Sort((o1, o2) => o1.OrderDate.CompareTo(o2.OrderDate));
+
+            List<Order> finalList = new List<Order>();
+            int availableProducts = 0;
+            int orderedProducts = 0;
+            foreach (var order in orderlist)
+            {
+                availableProducts = 0;
+                orderedProducts = 0;
+                foreach (var orderline in order.Items)
+                {
+                    orderedProducts++;
+                    if (orderline.Product.Stock >= orderline.Count)
+                    {
+                        availableProducts++;
+                    }
+                }
+                if (orderedProducts == availableProducts)
+                {
+                    UpdateStock(order);
+                    finalList.Add(order);
+                }
+            }
             foreach (var item in Orders)
             {
-                foreach (var item1 in orderlist)
+                foreach (var item1 in finalList)
                 {
                     if (item == item1)
                     {
@@ -122,6 +147,19 @@ namespace WarehouseProject
             }
         }
 
+        public void UpdateStock (Order o )
+        {
+            foreach (var item in o.Items)
+            {
+                foreach (var item1 in productCatalogue.ProductsProp)
+                {
+                    if (item.Product == item1)
+                    {
+                        item1.Stock -= item.Count;
+                    }
+                }
+            }
+        }
         public List<Order> GetDispatchedOrders()
         {
             IEnumerable<Order> dispatchedOrders = _orders.Where(o => o.Dispatched == true);
