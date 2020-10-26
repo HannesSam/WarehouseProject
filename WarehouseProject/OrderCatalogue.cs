@@ -62,7 +62,13 @@ namespace WarehouseProject
             foreach (Order order in Orders)
             {
                 var custID = order.Customer.ID;
-                //order.Customer = customerCatalogue.Customers.Single(c => c.ID == custID);
+                order.Customer = customerCatalogue.Customers.Single(c => c.ID == custID);
+
+                foreach (OrderLine orderLine in order.Items)
+                {
+                    var prodID = orderLine.Product.Code;
+                    orderLine.Product = productCatalogue.ProductsProp.Single(p => p.Code == prodID);
+                }
             }
 
             return Orders;
