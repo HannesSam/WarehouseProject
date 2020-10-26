@@ -20,9 +20,16 @@ namespace WarehouseProject
             this.KundKatalog = _costumerCatalogue;
             this.OrderKatalog = _orderCatalogue;
             InitializeComponent();
-
+            UpdateCustomerList();
         }
 
+        private void UpdateCustomerList()
+        {
+            foreach (var item in KundKatalog.Customers)
+            {
+                customerListBox.Items.Add(item);
+            }
+        }
         private void Order_management_Load(object sender, EventArgs e)
         {
 
@@ -98,6 +105,38 @@ namespace WarehouseProject
             OrderKatalog.DispatchReadyOrders();
         }
 
+        private void ShowArchivedButton_Click(object sender, EventArgs e)
+        {
+            Customer kund = (Customer)customerListBox.SelectedItem;
+            List<Order> archivedOrders = OrderKatalog.GetDispatchedOrdersFrom(kund);
+            listBoxOfOrders.Items.Clear();
+            foreach (var item in archivedOrders)
+            {
+                listBoxOfOrders.Items.Add(item);
+            }
+        }
+
+        private void ShowActiveButton_Click(object sender, EventArgs e)
+        {
+            Customer kund = (Customer)customerListBox.SelectedItem;
+            if (kund == null)
+            {
+                MessageBox.Show("Please select a customer.");
+            }
+            else if (!OrderKatalog.HasOrder(kund))
+            {
+                MessageBox.Show("This customer has never placed any orders.");
+            }
+            else
+            {
+                List<Order> activeOrders = OrderKatalog.GetActiveOrdersFrom(kund);
+                listBoxOfOrders.Items.Clear();
+                foreach (var item in activeOrders)
+                {
+                    listBoxOfOrders.Items.Add(item);
+                }
+            }
+        }
     }
 }
 
