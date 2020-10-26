@@ -27,9 +27,9 @@ namespace WarehouseProject
         public OrderCatalogue(string _filename, CustomerCatalogue customerCatalogue, ProductCatalogue productCatalogue)
         {
             this.filename = _filename;
-            _orders = ReadProductsFromFile();
             this.customerCatalogue = customerCatalogue;
             this.productCatalogue = productCatalogue;
+            _orders = ReadProductsFromFile();
             SetCount();
         }
 
