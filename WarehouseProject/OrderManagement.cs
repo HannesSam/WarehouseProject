@@ -65,11 +65,37 @@ namespace WarehouseProject
                 string number = order.Number.ToString();
                 string customer = order.Customer.Name;
 
-            foreach (var item in OrderKatalog.)
-            {
-                Customer.Items.Add(item);
+                string items = "";
+                for (int i = 0; i < order.Items.Count; i++)
+                {
+                    items += "Product: " + order.Items[i].Product + " Quantity : " + order.Items[i].Count + "\n";
+                }
+
+                MessageBox.Show("Ordernumber : " + number + "\n" + "Customer : " + customer + "\nAdress: " + adress + "\n" + "Paid : " + payment + "\nRefunded : " + refunded + "\nDispatched : " + dispatched + "\n" + items);
             }
-            Customer.DisplayMember = "Name";
+        }
+
+        private void ShowDispatchedOrdersButton_Click(object sender, EventArgs e)
+        {
+            listBoxOfOrders.Items.Clear();
+            foreach (var item in OrderKatalog.GetDispatchedOrders())
+            {
+                listBoxOfOrders.Items.Add(item);
+            }
+        }
+
+        private void ShowPendingOrdersButton_Click(object sender, EventArgs e)
+        {
+            listBoxOfOrders.Items.Clear();
+            foreach (var item in OrderKatalog.GetPendingOrders())
+            {
+                listBoxOfOrders.Items.Add(item);
+            }
+        }
+
+        private void ProcessPendingOrdersButton_Click(object sender, EventArgs e)
+        {
+            OrderKatalog.DispatchReadyOrders();
         }
 
     }

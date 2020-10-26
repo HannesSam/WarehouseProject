@@ -102,7 +102,7 @@ namespace WarehouseProject
                 }
             }
         }
-        //hej
+
         public List<Order> GetDispatchedOrders()
         {
             IEnumerable<Order> dispatchedOrders = _orders.Where(o => o.Dispatched == true);
