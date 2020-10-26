@@ -81,6 +81,19 @@ namespace WarehouseProject
             return dispatchedOrders.ToList();
         }
 
+        //returns true if the customer has ever placed any orders.
+        public bool HasOrder (Customer c)
+        {
+            foreach (var item in Orders)
+            {
+                if (item.Customer == c)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public List<Order> GetActiveOrdersFrom(Customer c)
         {
             IEnumerable<Order> pendingOrders = Orders.Where(o => o.Dispatched == false && o.Customer == c);
