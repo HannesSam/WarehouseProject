@@ -30,8 +30,9 @@ namespace WarehouseProject
             this.filename = _filename;
             this.customerCatalogue = customerCatalogue;
             this.productCatalogue = productCatalogue;
-            _orders = ReadProductsFromFile();
+            _orders = ReadProductsFromFile(filename);
             SetCount();
+            WatchNewOrders();
         }
 
         public void SetCount()
@@ -51,16 +52,16 @@ namespace WarehouseProject
             File.WriteAllText(filename, contents);
         }
 
-        private List<Order> ReadProductsFromFile()
+        private List<Order> ReadProductsFromFile(string filename)
         {
+            List<Order> tempOrderList = new List<Order>();
             if (File.Exists(filename))
             {
                 string fileContents = File.ReadAllText(filename);
-                _orders = JsonSerializer.Deserialize<List<Order>>(fileContents);
+                tempOrderList = JsonSerializer.Deserialize<List<Order>>(fileContents);
             }
-            else _orders = new List<Order>();
 
-            foreach (Order order in Orders)
+            foreach (Order order in tempOrderList)
             {
                 var custID = order.Customer.ID;
                 order.Customer = customerCatalogue.Customers.Single(c => c.ID == custID);
@@ -72,13 +73,13 @@ namespace WarehouseProject
                 }
             }
 
-            return Orders;
+            return tempOrderList;
         }
 
         private void WatchNewOrders()
         {
-            FileSystemWatcher fsw = new FileSystemWatcher("./ neworders ",
-           "*. json ");
+            FileSystemWatcher fsw = new FileSystemWatcher("./neworders",
+           "*.json");
             //fsw.SynchronizingObject = this ;
             fsw.Created += Fsw_Created;
             fsw.EnableRaisingEvents = true;
@@ -87,7 +88,7 @@ namespace WarehouseProject
         private void Fsw_Created(object sender, FileSystemEventArgs e)
         {
             Thread.Sleep(500);
-            string json = File.ReadAllText(e.FullPath);
+            _orders.AddRange(ReadProductsFromFile(e.FullPath));
             File.Delete(e.FullPath);
         }
 
