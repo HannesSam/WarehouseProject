@@ -37,7 +37,6 @@
             this.customerListBox = new System.Windows.Forms.ListBox();
             this.ShowActiveButton = new System.Windows.Forms.Button();
             this.ShowArchivedButton = new System.Windows.Forms.Button();
-            this.Orderstatustext = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -131,13 +130,6 @@
             this.ShowArchivedButton.UseVisualStyleBackColor = true;
             this.ShowArchivedButton.Click += new System.EventHandler(this.ShowArchivedButton_Click);
             // 
-            // Orderstatustext
-            // 
-            this.Orderstatustext.Location = new System.Drawing.Point(0, 0);
-            this.Orderstatustext.Name = "Orderstatustext";
-            this.Orderstatustext.Size = new System.Drawing.Size(100, 23);
-            this.Orderstatustext.TabIndex = 0;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -154,7 +146,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.Orderstatustext);
             this.Controls.Add(this.ShowArchivedButton);
             this.Controls.Add(this.ShowActiveButton);
             this.Controls.Add(this.customerListBox);
@@ -182,7 +173,6 @@
         private System.Windows.Forms.ListBox customerListBox;
         private System.Windows.Forms.Button ShowActiveButton;
         private System.Windows.Forms.Button ShowArchivedButton;
-        private System.Windows.Forms.Label Orderstatustext;
         private System.Windows.Forms.Label label1;
     }
 }
