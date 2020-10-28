@@ -28,6 +28,9 @@ namespace WarehouseProject
             showall();
 
         }
+        /// <summary>
+        /// Visar alla ordrar i listboxoforders
+        /// </summary>
         private void showall()
         {
             listBoxOfOrders.Items.Clear();
