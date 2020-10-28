@@ -20,10 +20,10 @@ namespace WarehouseProject
 
         public List<Order> Orders { get { return _orders; } set { _orders = value; } }
 
-        public OrderCatalogue()
-        {
+        public delegate void UpdateOrderList();
 
-        }
+        public event UpdateOrderList OnOrderChange;
+
         public OrderCatalogue(string _filename, CustomerCatalogue customerCatalogue, ProductCatalogue productCatalogue)
         {
             this.filename = _filename;
@@ -79,6 +79,8 @@ namespace WarehouseProject
             Number++;
             Order newOrder = new Order(Number, kund, DateTime.Now, adress, true, false, false, orders);
             _orders.Add(newOrder);
+
+            OnOrderChange?.Invoke();
         }
 
         public List<Order> GetDispatchedOrdersFrom(Customer c)
@@ -145,6 +147,7 @@ namespace WarehouseProject
                     }
                 }
             }
+
         }
 
         public void UpdateStock (Order o )

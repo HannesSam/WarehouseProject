@@ -17,6 +17,10 @@ namespace WarehouseProject
         //Om man inte är en prop!!
         public List<Product> ProductsProp { get { return Products; } set { Products = value; } }
 
+        public delegate void UpdateProductList();
+
+        public event UpdateProductList OnProductChange;
+
         public ProductCatalogue(string _filename)
         {
             this.filename = _filename;
@@ -66,6 +70,7 @@ namespace WarehouseProject
             int code = currentCode;
             Product newProduct = new Product(code, name, price, stock, firstavailable, nextStock);
             this.Products.Add(newProduct);
+            OnProductChange?.Invoke();
         }
 
         public List<Product> AllProducts()
@@ -89,6 +94,7 @@ namespace WarehouseProject
                     Products[i].Stock = stock;
                     Products[i].FirstAvailable = firstavailable;
                     Products[i].NextStocking = nextStock;
+                    OnProductChange?.Invoke();
                 }
             }
         }
