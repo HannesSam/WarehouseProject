@@ -181,9 +181,7 @@ namespace WarehouseProject
         //Den här metoden tar 
         public void DispatchReadyOrders()
         {
-            IEnumerable<Order> readyOrders = _orders.Where(o => o.Dispatched == false && o.PaymentCompleted == true && o.Items.All(i => i.Product.Stock >= i.Count));
-            List<Order> orderlist = readyOrders.ToList();
-            orderlist.Sort((o1, o2) => o1.OrderDate.CompareTo(o2.OrderDate));
+            List<Order> orderlist = _orders.Where(o => o.Dispatched == false && o.PaymentCompleted == true && o.Items.All(i => i.Product.Stock >= i.Count)).ToList();            orderlist.Sort((o1, o2) => o1.OrderDate.CompareTo(o2.OrderDate));
 
             List<Order> finalList = new List<Order>();
             int availableProducts = 0;
