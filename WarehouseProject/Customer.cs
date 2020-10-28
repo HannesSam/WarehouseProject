@@ -17,7 +17,7 @@ namespace WarehouseProject
             get { return _name; }
             set
             {
-                if (string.IsNullOrEmpty(value)) { throw new StringEmptyOrNullException("Name cannot be null"); }
+                if (string.IsNullOrWhiteSpace(value)) { throw new StringEmptyOrNullException("Name cannot be null"); }
                 else { _name = value; } 
             }
         }
@@ -26,7 +26,7 @@ namespace WarehouseProject
             get { return _phone; }
             set
             {
-                if (string.IsNullOrEmpty(value)) { throw new StringEmptyOrNullException("Phone cannot be null"); } else { _phone = value; }
+                if (string.IsNullOrWhiteSpace(value)) { throw new StringEmptyOrNullException("Phone cannot be null"); } else { _phone = value; }
             }
         }
         public string EMail
@@ -34,7 +34,7 @@ namespace WarehouseProject
             get { return _email; }
             set
             {
-                if (string.IsNullOrEmpty(value)) { throw new StringEmptyOrNullException("EMail cannot be null"); } else { _email = value; }
+                if (string.IsNullOrWhiteSpace(value)) { throw new StringEmptyOrNullException("EMail cannot be null"); } else { _email = value; }
             }
         }
 
@@ -45,10 +45,10 @@ namespace WarehouseProject
         }
         public Customer(int id, string name, string phone, string eMail)
         {
-            _id = id;
-            _name = name;
-            _phone = phone;
-            _email = eMail;
+            ID = id;
+            Name = name;
+            Phone = phone;
+            EMail = eMail;
         }
 
         public override string ToString()

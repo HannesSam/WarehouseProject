@@ -76,9 +76,41 @@ namespace WarehouseProject
 
         public void AddOrder(Customer kund, string adress, List<OrderLine> orders)
         {
-            Number++;
-            Order newOrder = new Order(Number, kund, DateTime.Now, adress, true, false, false, orders);
-            _orders.Add(newOrder);
+            if (CheckProductsExists(orders))
+            {
+                Number++;
+                Order newOrder = new Order(Number, kund, DateTime.Now, adress, true, false, false, orders);
+                _orders.Add(newOrder);
+            }
+            else
+            {
+                throw new ProductNotInCatalogueException("Product does not exist in the catalogue");
+            }
+
+        }
+
+        private bool CheckProductsExists(List<OrderLine> orders)
+        {
+            foreach (var item in orders)
+            {
+                if (!ProductContains(productCatalogue.ProductsProp, item.Product))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool ProductContains(List<Product> plist, Product p)
+        {
+            foreach (var item in plist)
+            {
+                if (item == p)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public List<Order> GetDispatchedOrdersFrom(Customer c)

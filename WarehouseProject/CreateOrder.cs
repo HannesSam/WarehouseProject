@@ -52,32 +52,12 @@ namespace WarehouseProject
                 }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
-          
-        }
-
-        private void Create_order_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void HomeButton_Click(object sender, EventArgs e)
         {
             var f = new Startsida(ProduktKatalog, KundKatalog, OrderKatalog);
             Hide();
             f.ShowDialog();
             Close();
-        }
-
-        private void checkedListBoxProducts_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           
         }
 
         private void AddProductButton_Click(object sender, EventArgs e)
@@ -137,11 +117,6 @@ namespace WarehouseProject
             }
             return false;
         }
-        private void textBoxQuantity_ValueChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void ButtonRemove_Click(object sender, EventArgs e)
         {
 
@@ -153,11 +128,6 @@ namespace WarehouseProject
                     checkedListBoxOrderLine.Items.Remove(checkedListBoxOrderLine.Items[i]);
                 }
             }
-        }
-
-        private void Customer_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void CreateOrderButton_Click(object sender, EventArgs e)
@@ -186,16 +156,15 @@ namespace WarehouseProject
                     OrderKatalog.AddOrder(customerreference, adress, produktlista);
                     MessageBox.Show("Order placed successfully!");
                 }
+                catch(ProductNotInCatalogueException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 catch (StringEmptyOrNullException ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
             }
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
 
         }
     }

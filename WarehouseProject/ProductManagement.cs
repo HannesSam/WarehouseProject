@@ -9,6 +9,9 @@ using System.Windows.Forms;
 
 namespace WarehouseProject
 {
+    /// <summary>
+    /// Denna klass tillåter användaren att se alla produkter, lägga till nya produkter och ändra information i produkter. 
+    /// </summary>
     public partial class Product_management : Form
     {
         public ProductCatalogue ProduktKatalog;
@@ -24,11 +27,9 @@ namespace WarehouseProject
             productListBox.SelectedIndexChanged += productListBox_SelectedIndexChanged;
         }
 
-        private void Product_management_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Denna knapp tar användaren tillbaka till startsidan.
+        /// </summary>
         private void HomeButton_Click(object sender, EventArgs e)
         {
             var f = new Startsida(ProduktKatalog, KundKatalog, OrderKatalog);
@@ -37,7 +38,9 @@ namespace WarehouseProject
             Close();
         }
 
-        //Visar alla produkter från ProduktKatalogen till productListBox.
+        /// <summary>
+        /// Visar alla produkter i ProduktKatalogen i productListBox.
+        /// </summary>
         private void ShowAllButton_Click(object sender, EventArgs e)
         {
             productListBox.Items.Clear();
@@ -46,8 +49,9 @@ namespace WarehouseProject
                 productListBox.Items.Add(item);
             }
         }
-
-        //När man ändrar den valda produkten i listboxen så ändras värdena i textboxarna så att man kan se alla attribut hos produkten.
+        /// <summary>
+        /// Alla egenskaper hos den valda produkten visas för användaren i textboxarna.
+        /// </summary>
         private void productListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             Product pro = (Product)productListBox.SelectedItem;
@@ -64,8 +68,9 @@ namespace WarehouseProject
                 nextStockingTextBox.Text = pro.NextStocking.ToString();
             }
         }
-
-        //updaterar Listboxen
+        /// <summary>
+        /// UpdateList refreshar alla produkter från produktkatalogen i listboxen.
+        /// </summary>
         private void UpdateList()
         {
             productListBox.Items.Clear();
@@ -74,12 +79,9 @@ namespace WarehouseProject
                 productListBox.Items.Add(item);
             }
         }
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //Ger productListbox alla produkter där Stock = 0.
+        /// <summary>
+        /// Alla produkter där Stock = 0 visas i productlistbox.
+        /// </summary>
         private void ShowOutOfStockButton_Click(object sender, EventArgs e)
         {
             productListBox.Items.Clear();
@@ -88,13 +90,11 @@ namespace WarehouseProject
                 productListBox.Items.Add(item);
             }
         }
-
-        private void codeTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        //Lägger till en ny produkt utifrån informationen i TextBoxarna. 
+        /// <summary>
+        /// Lägger till en ny produkt i produktkatalogen utifrån informationen i TextBoxarna. 
+        /// Om textboxarna är tomma eller null eller om användaren har angett en sträng till 
+        /// en textbox som ska innehålla en int så fångas felet med exceptions.
+        /// </summary>
         private void AddProductButton_Click(object sender, EventArgs e)
         {
             string name = nameTextBox.Text;
@@ -150,8 +150,11 @@ namespace WarehouseProject
 
             UpdateList();
         }
-
-        //Updaterar den produkten som är vald i listboxen utifrån informationen i textboxarna.
+        /// <summary>
+        /// Uppdaterar den produkten från katalogen som är vald i listboxen utifrån informationen i textboxarna.
+        /// Om textboxarna är tomma eller null eller om användaren har angett en sträng till 
+        /// en textbox som ska innehålla en int så fångas felet med exceptions.
+        /// </summary>
         private void UpdateProductButton_Click(object sender, EventArgs e)
         {
 
@@ -217,14 +220,12 @@ namespace WarehouseProject
         }
 
 
+        /// <summary>
+        /// Anger den närmsta stocking datumet till closestRestockingTextBox.
+        /// </summary>
         private void ClosestRestockingButton_Click(object sender, EventArgs e)
         {
             closestRestockingTextBox.Text = ProduktKatalog.NextRestocking().ToString();
-        }
-
-        private void productListBox_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
         }
     }
 }

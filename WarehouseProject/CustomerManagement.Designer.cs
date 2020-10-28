@@ -61,7 +61,6 @@
             this.customerListBox.Name = "customerListBox";
             this.customerListBox.Size = new System.Drawing.Size(332, 244);
             this.customerListBox.TabIndex = 1;
-            this.customerListBox.SelectedIndexChanged += new System.EventHandler(this.customerListBox_SelectedIndexChanged);
             // 
             // ShowAllButton
             // 
@@ -165,7 +164,6 @@
             this.Controls.Add(this.HomeButton);
             this.Name = "Customer_management";
             this.Text = "Customer_management";
-            this.Load += new System.EventHandler(this.Customer_management_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

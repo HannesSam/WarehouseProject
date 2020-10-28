@@ -77,7 +77,6 @@
             this.listBoxOfOrders.Name = "listBoxOfOrders";
             this.listBoxOfOrders.Size = new System.Drawing.Size(250, 139);
             this.listBoxOfOrders.TabIndex = 1;
-            this.listBoxOfOrders.SelectedIndexChanged += new System.EventHandler(this.listBoxOfOrders_SelectedIndexChanged);
             this.listBoxOfOrders.DoubleClick += new System.EventHandler(this.listBoxOfOrders_DoubleClick);
             // 
             // ProcessPendingOrdersButton
@@ -145,7 +144,6 @@
             this.Controls.Add(this.ShowAllOrdersButton);
             this.Name = "Order_management";
             this.Text = "Order_management";
-            this.Load += new System.EventHandler(this.Order_management_Load);
             this.ResumeLayout(false);
 
         }

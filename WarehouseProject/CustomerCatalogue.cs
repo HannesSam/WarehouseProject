@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Windows.Forms;
 
 namespace WarehouseProject
 {
@@ -70,26 +71,22 @@ namespace WarehouseProject
 
         public void AddCustomer(string name, string phone, string email)
         {
-            try
-            {
-                currentID++;
-                Customer customer = new Customer(currentID, name, phone, email);
-                Customers.Add(customer);
+            currentID++;
+            Customer customer = new Customer();
+            customer.ID = currentID;
+            customer.Name = name;
+            customer.Phone = phone;
+            customer.EMail = email;
+            Customers.Add(customer);
 
-                //Kollar att delegaten inte är null kör annars eventet
-                OnCustomerChange?.Invoke();
-            }
-            catch (Exception ex)
-            {
-                //Här ska ett error returnereas till the gui
-            }
+            //Kollar att delegaten inte är null kör annars eventet
+            OnCustomerChange?.Invoke();
         }
 
         public void UpdateCustomer(int id, string name, string phone, string email)
         {
             Customer customer = Customers.Single(c => c.ID == id);
             //Här ska customer uppdateras med alla nya värde
-
             customer.Name = name;
             customer.Phone = phone;
             customer.EMail = email;

@@ -8,16 +8,13 @@ using System.Windows.Forms;
 
 namespace WarehouseProject
 {
+    /// <summary>
+    /// Den här klassen tillåter användaren att se alla kunder, lägga till kunder och ändra kundinformation.
+    /// </summary>
     public partial class Customer_management : Form
     {
-//        listStrings.OnItemAdded += HandleOnElementAdded ;
-//}
-//    private void HandleOnElementAdded(int itemIndex, string item)
-//    {
-//        LSTItems.Items.Insert(itemIndex, item);
-//    }
 
-    public ProductCatalogue ProduktKatalog;
+        public ProductCatalogue ProduktKatalog;
         public CustomerCatalogue KundKatalog;
         public OrderCatalogue OrderKatalog;
         public Customer_management(ProductCatalogue _productCatalogue, CustomerCatalogue _costumerCatalogue, OrderCatalogue _orderCatalogue)
@@ -32,11 +29,9 @@ namespace WarehouseProject
             KundKatalog.OnCustomerChange += UpdateList;
         }
 
-        private void Customer_management_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Metoden tillåter användaren att återgå till startsidan.
+        /// </summary>
         private void HomeButton_Click(object sender, EventArgs e)
         {
             var f = new Startsida(ProduktKatalog, KundKatalog, OrderKatalog);
@@ -45,6 +40,9 @@ namespace WarehouseProject
             Close();
         }
 
+        /// <summary>
+        /// Uppdaterar customerListbox så att den innehåller alla kunder från kundkatalogen.
+        /// </summary>
         private void UpdateList()
         {
             customerListBox.Items.Clear();
@@ -54,6 +52,10 @@ namespace WarehouseProject
             }
             customerListBox.DisplayMember = "Name";
         }
+
+        /// <summary>
+        /// Visar alla kunder från kundkatalogen i customerListBox.
+        /// </summary>
         private void ShowAllButton_Click(object sender, EventArgs e)
         {
             customerListBox.Items.Clear();
@@ -63,6 +65,10 @@ namespace WarehouseProject
             }
             customerListBox.DisplayMember = "Name";
         }
+
+        /// <summary>
+        /// När användaren väljer en annan kund i listboxen så tilldelas textboxarna kundens egenskaper.
+        /// </summary>
         private void CustomerListBoxChanged(object sender, EventArgs e)
         {
             Customer cus = (Customer)customerListBox.SelectedItem;
@@ -73,40 +79,46 @@ namespace WarehouseProject
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void AddCustomerButton_Click(object sender, EventArgs e)
         {
             string name = nameTextBox.Text;
             string phone = phoneTextBox.Text;
             string email = emailTextBox.Text;
-
-            KundKatalog.AddCustomer(name, phone, email);
+            try
+            {
+                KundKatalog.AddCustomer(name, phone, email);
+            }
+            catch (StringEmptyOrNullException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void UpdateInformationButton_Click(object sender, EventArgs e)
         {
             Customer cus = (Customer)customerListBox.SelectedItem;
-            string name = nameTextBox.Text;
-            string phone = phoneTextBox.Text;
-            string email = emailTextBox.Text;
-
-            try
+            if (cus == null)
             {
-                KundKatalog.UpdateCustomer(cus.ID, name, phone, email);
+                MessageBox.Show("Please select a customer to update");
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
-            } 
-        }
+                string name = nameTextBox.Text;
+                string phone = phoneTextBox.Text;
+                string email = emailTextBox.Text;
 
-        private void customerListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ArchivedButton_Click(object sender, EventArgs e)
-        {
-
+                try
+                {
+                    KundKatalog.UpdateCustomer(cus.ID, name, phone, email);
+                }
+                catch (StringEmptyOrNullException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
     }
 }
