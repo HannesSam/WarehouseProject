@@ -27,10 +27,10 @@ namespace WarehouseProject
         {
 
         }
-        public OrderLine(Product _product, int _count)
+        public OrderLine(Product product, int count)
         {
-            this.Product = _product;
-            this.Count = _count;
+            _product = product;
+            _count = count;
         }
 
         public override string ToString()
