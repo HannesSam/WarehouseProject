@@ -82,8 +82,6 @@ namespace WarehouseProject
             }
         }
 
-        }
-
         private void ShowArchivedButton_Click(object sender, EventArgs e)
         {
             Customer kund = (Customer)customerListBox.SelectedItem;

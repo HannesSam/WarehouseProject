@@ -5,6 +5,7 @@ using System.IO;
 using System.Text.Json;
 using System.Linq;
 using System.Diagnostics.PerformanceData;
+using System.Threading;
 
 namespace WarehouseProject
 {
@@ -72,6 +73,22 @@ namespace WarehouseProject
             }
 
             return Orders;
+        }
+
+        private void WatchNewOrders()
+        {
+            FileSystemWatcher fsw = new FileSystemWatcher("./ neworders ",
+           "*. json ");
+            //fsw.SynchronizingObject = this ;
+            fsw.Created += Fsw_Created;
+            fsw.EnableRaisingEvents = true;
+        }
+
+        private void Fsw_Created(object sender, FileSystemEventArgs e)
+        {
+            Thread.Sleep(500);
+            string json = File.ReadAllText(e.FullPath);
+            File.Delete(e.FullPath);
         }
 
         public void AddOrder(Customer kund, string adress, List<OrderLine> orders)
