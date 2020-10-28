@@ -63,7 +63,7 @@ namespace WarehouseProject
         public DateTime FirstAvailable
         {
             get { return _firstAvailable; }
-            set { if (value < DateTime.Now) throw new DateNotInFutureException("Date must be in the future"); else _firstAvailable = value; }
+            set { _firstAvailable = value; }
         }
         public DateTime NextStocking
         {
