@@ -167,7 +167,7 @@ namespace WarehouseProject
             {
                 MessageBox.Show("Please select a customer.");
             }
-            if (checkedListBoxOrderLine.Items.Count == 0)
+            else if (checkedListBoxOrderLine.Items.Count == 0)
             {
                 MessageBox.Show("No products selected.");
             }

@@ -10,6 +10,7 @@ namespace WarehouseProject
 {
     public partial class Order_management : Form
     {
+        //kommentar
         public ProductCatalogue ProduktKatalog;
         public CustomerCatalogue KundKatalog;
         public OrderCatalogue OrderKatalog;
@@ -19,9 +20,16 @@ namespace WarehouseProject
             this.KundKatalog = _costumerCatalogue;
             this.OrderKatalog = _orderCatalogue;
             InitializeComponent();
-
+            UpdateCustomerList();
         }
 
+        private void UpdateCustomerList()
+        {
+            foreach (var item in KundKatalog.Customers)
+            {
+                customerListBox.Items.Add(item);
+            }
+        }
         private void Order_management_Load(object sender, EventArgs e)
         {
 
@@ -64,9 +72,49 @@ namespace WarehouseProject
                 string number = order.Number.ToString();
                 string customer = order.Customer.Name;
 
-               
-            }
+                string items = "";
+                for (int i = 0; i < order.Items.Count; i++)
+                {
+                    items += "Product: " + order.Items[i].Product + " Quantity : " + order.Items[i].Count + "\n";
+                }
 
+                MessageBox.Show("Ordernumber : " + number + "\n" + "Customer : " + customer + "\nAdress: " + adress + "\n" + "Paid : " + payment + "\nRefunded : " + refunded + "\nDispatched : " + dispatched + "\n" + items);
+            }
+        }
+
+        }
+
+        private void ShowArchivedButton_Click(object sender, EventArgs e)
+        {
+            Customer kund = (Customer)customerListBox.SelectedItem;
+            List<Order> archivedOrders = OrderKatalog.GetDispatchedOrdersFrom(kund);
+            listBoxOfOrders.Items.Clear();
+            foreach (var item in archivedOrders)
+            {
+                listBoxOfOrders.Items.Add(item);
+            }
+        }
+
+        private void ShowActiveButton_Click(object sender, EventArgs e)
+        {
+            Customer kund = (Customer)customerListBox.SelectedItem;
+            if (kund == null)
+            {
+                MessageBox.Show("Please select a customer.");
+            }
+            else if (!OrderKatalog.HasOrder(kund))
+            {
+                MessageBox.Show("This customer has never placed any orders.");
+            }
+            else
+            {
+                List<Order> activeOrders = OrderKatalog.GetActiveOrdersFrom(kund);
+                listBoxOfOrders.Items.Clear();
+                foreach (var item in activeOrders)
+                {
+                    listBoxOfOrders.Items.Add(item);
+                }
+            }
         }
     }
 }
