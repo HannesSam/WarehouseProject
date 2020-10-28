@@ -8,7 +8,7 @@ using System.Text.Json;
 namespace WarehouseProject
 {
     /// <summary>
-    /// Denna class innehåller en katalog med kunder. Denna är ständigt uppdaterad och innehåller alla funktioner som 
+    /// Denna klass innehåller en katalog med kunder. Denna är ständigt uppdaterad och innehåller alla funktioner som 
     /// läser från och lägger till kunder till databasen. 
     /// </summary>
     public class CustomerCatalogue
