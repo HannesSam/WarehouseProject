@@ -82,13 +82,14 @@ namespace WarehouseProject
             }
         }
 
-        }
+        
 
         private void ShowArchivedButton_Click(object sender, EventArgs e)
         {
             Customer kund = (Customer)customerListBox.SelectedItem;
             List<Order> archivedOrders = OrderKatalog.GetDispatchedOrdersFrom(kund);
             listBoxOfOrders.Items.Clear();
+
             foreach (var item in archivedOrders)
             {
                 listBoxOfOrders.Items.Add(item);
