@@ -117,8 +117,8 @@ namespace WarehouseProject
         {
             if (CheckProductsExists(orders))
             {
-                Number++;
-                Order newOrder = new Order(Number, kund, DateTime.Now, adress, true, false, false, orders);
+                _number++;
+                Order newOrder = new Order(_number, kund, DateTime.Now, adress, true, false, false, orders);
                 _orders.Add(newOrder);
             }
             else
@@ -132,7 +132,7 @@ namespace WarehouseProject
         {
             foreach (var item in orders)
             {
-                if (!ProductContains(productCatalogue.ProductsProp, item.Product))
+                if (!ProductContains(_productCatalogue.Products, item.Product))
                 {
                     return false;
                 }

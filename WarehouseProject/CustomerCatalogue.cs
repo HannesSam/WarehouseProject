@@ -82,9 +82,9 @@ namespace WarehouseProject
         /// </summary>
         public void AddCustomer(string name, string phone, string email)
         {
-            currentID++;
+            _currentID++;
             Customer customer = new Customer();
-            customer.ID = currentID;
+            customer.ID = _currentID;
             customer.Name = name;
             customer.Phone = phone;
             customer.EMail = email;
