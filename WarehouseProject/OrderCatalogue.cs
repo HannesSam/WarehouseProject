@@ -100,7 +100,7 @@ namespace WarehouseProject
 
         public List<Order> GetDispatchedOrdersFrom(Customer c)
         {
-            IEnumerable<Order> dispatchedOrders = Orders.Where(o => o.Dispatched == true && o.Customer == c);
+            IEnumerable<Order> dispatchedOrders = Orders.Where(o => o.Dispatched == true && o.Customer == c && o.OrderDate < dateToCompare);
             return dispatchedOrders.ToList();
         }
 
@@ -119,7 +119,7 @@ namespace WarehouseProject
 
         public List<Order> GetActiveOrdersFrom(Customer c)
         {
-            IEnumerable<Order> pendingOrders = Orders.Where(o => o.Dispatched == false && o.Customer == c);
+            IEnumerable<Order> pendingOrders = Orders.Where(o => o.Customer == c && (o.Dispatched == false || o.OrderDate > dateToCompare));
             return pendingOrders.ToList();
         }
 

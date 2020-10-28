@@ -82,17 +82,41 @@ namespace WarehouseProject
             }
         }
 
+        private void ProcessPendingOrdersButton_Click(object sender, EventArgs e)
+        {
+            OrderKatalog.DispatchReadyOrders();
+        }
+
+        private void ShowDispatchedOrdersButton_Click(object sender, EventArgs e)
+        {
+            listBoxOfOrders.Items.Clear();
+            foreach (var item in OrderKatalog.GetDispatchedOrders())
+            {
+                listBoxOfOrders.Items.Add(item);
+            }
+        }
+
+        private void ShowPendingOrdersButton_Click(object sender, EventArgs e)
+        {
+            listBoxOfOrders.Items.Clear();
+            foreach (var item in OrderKatalog.GetPendingOrders())
+            {
+                listBoxOfOrders.Items.Add(item);
+            }
+        }
         private void ShowArchivedButton_Click(object sender, EventArgs e)
         {
             Customer kund = (Customer)customerListBox.SelectedItem;
             List<Order> archivedOrders = OrderKatalog.GetDispatchedOrdersFrom(kund);
             listBoxOfOrders.Items.Clear();
+
             foreach (var item in archivedOrders)
             {
                 listBoxOfOrders.Items.Add(item);
             }
         }
 
+        
         private void ShowActiveButton_Click(object sender, EventArgs e)
         {
             Customer kund = (Customer)customerListBox.SelectedItem;
