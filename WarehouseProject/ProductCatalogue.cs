@@ -9,17 +9,17 @@ namespace WarehouseProject
 {
     public class ProductCatalogue
     {
-        private List<Product> Products;
-        private string filename;
-        public int currentCode;
+        private List<Product> _products;
+        private string _filename;
+        public int _currentCode;
 
         //denna borde döpas om till Products och resten av variablerna bör följa konventionen med små bokstäver
         //Om man inte är en prop!!
-        public List<Product> ProductsProp { get { return Products; } set { Products = value; } }
+        public List<Product> Products { get { return _products; } set { _products = value; } }
 
-        public ProductCatalogue(string _filename)
+        public ProductCatalogue(string filename)
         {
-            this.filename = _filename;
+            _filename = filename;
             Products = ReadProductsFromFile();
             SetCount();
         }
@@ -29,24 +29,24 @@ namespace WarehouseProject
 
             if (Products.Count == 0)
             {
-                currentCode = 0;
+                _currentCode = 0;
             }
             else
             {
-                currentCode = Products.Max(b => b.Code);
+                _currentCode = Products.Max(b => b.Code);
             }
         }
         public void WriteProductsToFile()
         {
             string contents = JsonSerializer.Serialize(Products);
-            File.WriteAllText(filename, contents);
+            File.WriteAllText(_filename, contents);
         }
 
         private List<Product> ReadProductsFromFile()
         {
-            if (File.Exists(filename))
+            if (File.Exists(_filename))
             {
-                string fileContents = File.ReadAllText(filename);
+                string fileContents = File.ReadAllText(_filename);
                 Products = JsonSerializer.Deserialize<List<Product>>(fileContents);
             }
             else Products = new List<Product>();
@@ -62,8 +62,8 @@ namespace WarehouseProject
 
         public void AddProduct(string name, double price, int stock, DateTime firstavailable, DateTime nextStock)
         {
-            currentCode++;
-            int code = currentCode;
+            _currentCode++;
+            int code = _currentCode;
             Product newProduct = new Product(code, name, price, stock, firstavailable, nextStock);
             this.Products.Add(newProduct);
         }
