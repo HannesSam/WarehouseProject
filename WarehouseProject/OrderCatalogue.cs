@@ -9,15 +9,19 @@ using System.Threading;
 
 namespace WarehouseProject
 {
+    /// <summary>
+    /// Denna klass innehåller en katalog med ordrar. Denna är ständigt uppdaterad och innehåller alla funktioner som 
+    /// läser från och lägger till ordrar till databasen. 
+    /// </summary>
     public class OrderCatalogue
     {
         private List<Order> _orders;
-        private string filename;
-        public int Number;
-        DateTime dateToCompare = DateTime.Now - new TimeSpan(24 * 30, 0, 0);
+        private readonly string _filename;
+        public int _number;
+        readonly DateTime _dateToCompare = DateTime.Now - new TimeSpan(24 * 30, 0, 0);
 
-        private CustomerCatalogue customerCatalogue;
-        private ProductCatalogue productCatalogue;
+        private CustomerCatalogue _customerCatalogue;
+        private ProductCatalogue _productCatalogue;
 
         public List<Order> Orders { get { return _orders; } set { _orders = value; } }
 
@@ -25,11 +29,11 @@ namespace WarehouseProject
         {
 
         }
-        public OrderCatalogue(string _filename, CustomerCatalogue customerCatalogue, ProductCatalogue productCatalogue)
+        public OrderCatalogue(string filename, CustomerCatalogue customerCatalogue, ProductCatalogue productCatalogue)
         {
-            this.filename = _filename;
-            this.customerCatalogue = customerCatalogue;
-            this.productCatalogue = productCatalogue;
+            _filename = filename;
+            _customerCatalogue = customerCatalogue;
+            _productCatalogue = productCatalogue;
             _orders = ReadProductsFromFile(filename);
             SetCount();
             WatchNewOrders();
@@ -39,17 +43,17 @@ namespace WarehouseProject
         {
             if (_orders.Count == 0)
             {
-                Number = 0;
+                _number = 0;
             }
             else
             {
-                Number = _orders.Max(o => o.Number);
+                _number = _orders.Max(o => o.Number);
             }
         }
         public void WriteProductsToFile()
         {
             string contents = JsonSerializer.Serialize(_orders);
-            File.WriteAllText(filename, contents);
+            File.WriteAllText(_filename, contents);
         }
 
         private List<Order> ReadProductsFromFile(string filename)
@@ -64,12 +68,12 @@ namespace WarehouseProject
             foreach (Order order in tempOrderList)
             {
                 var custID = order.Customer.ID;
-                order.Customer = customerCatalogue.Customers.Single(c => c.ID == custID);
+                order.Customer = _customerCatalogue.Customers.Single(c => c.ID == custID);
 
                 foreach (OrderLine orderLine in order.Items)
                 {
                     var prodID = orderLine.Product.Code;
-                    orderLine.Product = productCatalogue.ProductsProp.Single(p => p.Code == prodID);
+                    orderLine.Product = _productCatalogue.ProductsProp.Single(p => p.Code == prodID);
                 }
             }
 
@@ -80,7 +84,6 @@ namespace WarehouseProject
         {
             FileSystemWatcher fsw = new FileSystemWatcher("./neworders",
            "*.json");
-            //fsw.SynchronizingObject = this ;
             fsw.Created += Fsw_Created;
             fsw.EnableRaisingEvents = true;
         }
@@ -94,14 +97,14 @@ namespace WarehouseProject
 
         public void AddOrder(Customer kund, string adress, List<OrderLine> orders)
         {
-            Number++;
-            Order newOrder = new Order(Number, kund, DateTime.Now, adress, true, false, false, orders);
+            _number++;
+            Order newOrder = new Order(_number, kund, DateTime.Now, adress, true, false, false, orders);
             _orders.Add(newOrder);
         }
 
         public List<Order> GetDispatchedOrdersFrom(Customer c)
         {
-            IEnumerable<Order> dispatchedOrders = Orders.Where(o => o.Dispatched == true && o.Customer == c && o.OrderDate < dateToCompare);
+            IEnumerable<Order> dispatchedOrders = Orders.Where(o => o.Dispatched == true && o.Customer == c && o.OrderDate < _dateToCompare);
             return dispatchedOrders.ToList();
         }
 
@@ -120,7 +123,7 @@ namespace WarehouseProject
 
         public List<Order> GetActiveOrdersFrom(Customer c)
         {
-            IEnumerable<Order> pendingOrders = Orders.Where(o => o.Customer == c && (o.Dispatched == false || o.OrderDate > dateToCompare));
+            IEnumerable<Order> pendingOrders = Orders.Where(o => o.Customer == c && (o.Dispatched == false || o.OrderDate > _dateToCompare));
             return pendingOrders.ToList();
         }
 
@@ -169,7 +172,7 @@ namespace WarehouseProject
         {
             foreach (var item in o.Items)
             {
-                foreach (var item1 in productCatalogue.ProductsProp)
+                foreach (var item1 in _productCatalogue.ProductsProp)
                 {
                     if (item.Product == item1)
                     {

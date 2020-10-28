@@ -17,7 +17,7 @@ namespace WarehouseProject
         /// <value> ID är den unika siffra som varje kund har </value>
         public int ID { get { return _id; } set { _id = value; } }
 
-        /// <value> Namn är kundens namn </value>
+        /// <value> Name är kundens namn </value>
         public string Name
         {
             get { return _name; }
@@ -61,6 +61,14 @@ namespace WarehouseProject
             _name = name;
             _phone = phone;
             _email = eMail;
+        }
+
+        /// <summary>
+        /// Returnerar ett korrekt formaterat namn för en kund
+        /// </summary>
+        public override string ToString()
+        {
+            return _id + ": " + _name;
         }
     }
 }
