@@ -19,7 +19,7 @@ namespace WarehouseProject
         private List<Customer> _customers;
 
         /// <value>
-        /// Customers returnerar den senaste databasen med kunder.
+        /// Customers innehåller den senaste databasen med kunder.
         /// </value>
         public List<Customer> Customers { get { return _customers; } set { _customers = value; } }
 

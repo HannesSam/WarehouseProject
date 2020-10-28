@@ -23,22 +23,25 @@ namespace WarehouseProject
         private CustomerCatalogue _customerCatalogue;
         private ProductCatalogue _productCatalogue;
 
+
+        /// <value>
+        /// Orders innehåller den senaste databasen med kunder.
+        /// </value>
         public List<Order> Orders { get { return _orders; } set { _orders = value; } }
 
-        public OrderCatalogue()
-        {
-
-        }
         public OrderCatalogue(string filename, CustomerCatalogue customerCatalogue, ProductCatalogue productCatalogue)
         {
             _filename = filename;
             _customerCatalogue = customerCatalogue;
             _productCatalogue = productCatalogue;
-            _orders = ReadProductsFromFile(filename);
+            _orders = ReadOrdersFromFile(filename);
             SetCount();
             WatchNewOrders();
         }
 
+        /// <summary>
+        /// SetCount letar upp den största ID:t i den nuvarande listan av orders.
+        /// </summary>
         public void SetCount()
         {
             if (_orders.Count == 0)
@@ -50,13 +53,22 @@ namespace WarehouseProject
                 _number = _orders.Max(o => o.Number);
             }
         }
-        public void WriteProductsToFile()
+
+        /// <summary>
+        /// Sparar ner det nuvarande innehållet i listan med ordrar till en databas vilket är en JSON fil. 
+        /// </summary>
+        public void WriteOrdersToFile()
         {
             string contents = JsonSerializer.Serialize(_orders);
             File.WriteAllText(_filename, contents);
         }
 
-        private List<Order> ReadProductsFromFile(string filename)
+        /// <summary>
+        /// Läser från databasen och lägger in alla ordrar i listan om databasen existerar. Den kopplar sedan 
+        /// alla Customer och OrderList objekt till de andra katalogerna. 
+        /// </summary>
+        /// <returns> Returnerar en lista med ordrar. </returns>
+        private List<Order> ReadOrdersFromFile(string filename)
         {
             List<Order> tempOrderList = new List<Order>();
             if (File.Exists(filename))
@@ -73,13 +85,16 @@ namespace WarehouseProject
                 foreach (OrderLine orderLine in order.Items)
                 {
                     var prodID = orderLine.Product.Code;
-                    orderLine.Product = _productCatalogue.ProductsProp.Single(p => p.Code == prodID);
+                    orderLine.Product = _productCatalogue.Products.Single(p => p.Code == prodID);
                 }
             }
 
             return tempOrderList;
         }
 
+        /// <summary>
+        /// Lägger en listener på mappen neworders som kör ett event varje gång en ny json fil läggs till i mappen.
+        /// </summary>
         private void WatchNewOrders()
         {
             FileSystemWatcher fsw = new FileSystemWatcher("./neworders",
@@ -88,10 +103,13 @@ namespace WarehouseProject
             fsw.EnableRaisingEvents = true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void Fsw_Created(object sender, FileSystemEventArgs e)
         {
             Thread.Sleep(500);
-            _orders.AddRange(ReadProductsFromFile(e.FullPath));
+            _orders.AddRange(ReadOrdersFromFile(e.FullPath));
             File.Delete(e.FullPath);
         }
 
@@ -204,7 +222,7 @@ namespace WarehouseProject
         {
             foreach (var item in o.Items)
             {
-                foreach (var item1 in _productCatalogue.ProductsProp)
+                foreach (var item1 in _productCatalogue.Products)
                 {
                     if (item.Product == item1)
                     {

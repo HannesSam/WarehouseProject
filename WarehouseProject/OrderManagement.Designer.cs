@@ -38,6 +38,7 @@
             this.ShowActiveButton = new System.Windows.Forms.Button();
             this.ShowArchivedButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ShowAllOrdersButton
@@ -82,7 +83,7 @@
             // 
             // ProcessPendingOrdersButton
             // 
-            this.ProcessPendingOrdersButton.Location = new System.Drawing.Point(140, 254);
+            this.ProcessPendingOrdersButton.Location = new System.Drawing.Point(358, 168);
             this.ProcessPendingOrdersButton.Name = "ProcessPendingOrdersButton";
             this.ProcessPendingOrdersButton.Size = new System.Drawing.Size(142, 23);
             this.ProcessPendingOrdersButton.TabIndex = 0;
@@ -139,11 +140,21 @@
             this.label1.Text = "label1";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(267, 80);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 15);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Dispatched?";
+            // 
             // Order_management
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ShowArchivedButton);
             this.Controls.Add(this.ShowActiveButton);
@@ -172,5 +183,6 @@
         private System.Windows.Forms.Button ShowActiveButton;
         private System.Windows.Forms.Button ShowArchivedButton;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

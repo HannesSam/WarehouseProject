@@ -70,14 +70,14 @@ namespace WarehouseProject
             get { return _nextStocking; }
             set { if (value < DateTime.Now) throw new DateNotInFutureException("Date must be in the future"); else _nextStocking = value; }
         }
-        public Product(int _code, string _name, double _price, int _stock, DateTime _firstAvailable, DateTime _nextStocking)
+        public Product(int code, string name, double price, int stock, DateTime firstAvailable, DateTime nextStocking)
         {
-            this.Code = _code;
-            this.Name = _name;
-            this.Price = _price;
-            this.Stock = _stock;
-            this.FirstAvailable = _firstAvailable;
-            this.NextStocking = _nextStocking;
+            _code = code;
+            _name = name;
+            _price = price;
+            _stock = stock;
+            _firstAvailable = firstAvailable;
+            _nextStocking = nextStocking;
         }
 
         public override string ToString()
