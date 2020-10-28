@@ -80,7 +80,9 @@ namespace WarehouseProject
         }
 
         /// <summary>
-        /// 
+        /// När denna knapp klickas på så används informationen som finns i textboxarna 
+        /// till att göra en ny kund som läggs in i kundkatalogen. Om textboxarna innehåller
+        /// en tom sträng så fångas ett stringemptyornullexception.
         /// </summary>
         private void AddCustomerButton_Click(object sender, EventArgs e)
         {
@@ -97,6 +99,11 @@ namespace WarehouseProject
             }
         }
 
+        /// <summary>
+        /// Egenskaperna hos den valda kunden uppdateras till det som användaren har 
+        /// skrivit in i textboxarna. Om ingen kund är vald så uppdateras inte informationen. 
+        /// Om det är fel format på informationen så fångas ett StringEmptyOrNullException.
+        /// </summary>
         private void UpdateInformationButton_Click(object sender, EventArgs e)
         {
             Customer cus = (Customer)customerListBox.SelectedItem;

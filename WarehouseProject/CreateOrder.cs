@@ -8,6 +8,10 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace WarehouseProject
+
+    /// <summary>
+    /// I denna klass kan användaren skapa nya ordrar
+    /// </summary>
 {
     public partial class Create_order : Form
     {
@@ -27,6 +31,10 @@ namespace WarehouseProject
             UpdateList();
             
         }
+
+        /// <summary>
+        /// Updaterar våra listboxes med senaste produktlistan samt senaste kundlistan
+        /// </summary>
         private void UpdateList()
         {
             checkedListBoxProducts.Items.Clear();
@@ -44,6 +52,9 @@ namespace WarehouseProject
             }
             checkedListBoxProducts.DisplayMember = "Name" + " " +  "Stock";
         }
+        /// <summary>
+        /// Tickar i alla boxes i checkedListBoxOrderLine
+        /// </summary>
         private void checkedlist()
         {
                 for (int i = 0; i < checkedListBoxOrderLine.Items.Count; i++)
@@ -51,7 +62,9 @@ namespace WarehouseProject
                     checkedListBoxOrderLine.SetItemChecked(i, true);
                 }
         }
-
+        /// <summary>
+        /// Homeknapp, tar en tillbaka till startsida
+        /// </summary>
         private void HomeButton_Click(object sender, EventArgs e)
         {
             var f = new Startsida(ProduktKatalog, KundKatalog, OrderKatalog);
@@ -59,7 +72,9 @@ namespace WarehouseProject
             f.ShowDialog();
             Close();
         }
-
+        /// <summary>
+        /// Lägger till produkter till en ny orderlista
+        /// </summary>
         private void AddProductButton_Click(object sender, EventArgs e)
         {
             decimal decimalcount = textBoxQuantity.Value;
@@ -94,7 +109,9 @@ namespace WarehouseProject
             }
             checkedlist();
         }
-
+        /// <summary>
+        /// Uppdaterar listbox 
+        /// </summary>
         private void UpdateSelectedList()
         {
             List<OrderLine> update = checkedListBoxOrderLine.Items.OfType<OrderLine>().ToList();
@@ -106,6 +123,9 @@ namespace WarehouseProject
             }
 
         }
+        /// <summary>
+        /// KOllar om en produkt finns i en lista
+        /// </summary>
         private bool Contains(Product vara)
         {
             foreach (var item in checkedListBoxOrderLine.Items.OfType<OrderLine>().ToList())
@@ -117,6 +137,10 @@ namespace WarehouseProject
             }
             return false;
         }
+
+        /// <summary>
+        /// Tar bort dom icheckade objekten från checkedlistboxorderline
+        /// </summary>
         private void ButtonRemove_Click(object sender, EventArgs e)
         {
 
@@ -129,7 +153,9 @@ namespace WarehouseProject
                 }
             }
         }
-
+        /// <summary>
+        /// Skapar ny order
+        /// </summary>
         private void CreateOrderButton_Click(object sender, EventArgs e)
         {
             Customer customerreference = (Customer)Customer.SelectedItem;
