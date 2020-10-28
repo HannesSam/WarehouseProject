@@ -4,6 +4,9 @@ using System.Text;
 
 namespace WarehouseProject
 {
+    /// <summary>
+    /// Customer klassen innehåller all information som systemet behöver för en kund.
+    /// </summary>
     public class Customer
     {
         private int _id;
@@ -11,7 +14,10 @@ namespace WarehouseProject
         private string _phone;
         private string _email;
 
+        /// <value> ID är den unika siffra som varje kund har </value>
         public int ID { get { return _id; } set { _id = value; } }
+
+        /// <value> Name är kundens namn </value>
         public string Name
         {
             get { return _name; }
@@ -21,6 +27,8 @@ namespace WarehouseProject
                 else { _name = value; } 
             }
         }
+
+        /// <value> Phone är kundens telefonnummer </value>
         public string Phone
         {
             get { return _phone; }
@@ -29,6 +37,8 @@ namespace WarehouseProject
                 if (string.IsNullOrWhiteSpace(value)) { throw new StringEmptyOrNullException("Phone cannot be null"); } else { _phone = value; }
             }
         }
+
+        /// <value> EMail är kundens mail </value>
         public string EMail
         {
             get { return _email; }
@@ -38,7 +48,9 @@ namespace WarehouseProject
             }
         }
 
-        //En konstruktor utan parametrar behövs för JSON Deserialization 
+        /// <summary>
+        /// En konstruktor utan parametrar för att JSON Deserilazation ska funka.
+        /// </summary>
         public Customer()
         {
 
@@ -51,9 +63,12 @@ namespace WarehouseProject
             EMail = eMail;
         }
 
+        /// <summary>
+        /// Returnerar ett korrekt formaterat namn för en kund
+        /// </summary>
         public override string ToString()
         {
-            return Name;
+            return _id + ": " + _name;
         }
     }
 }

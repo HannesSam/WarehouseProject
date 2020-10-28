@@ -37,6 +37,7 @@
             this.customerListBox = new System.Windows.Forms.ListBox();
             this.ShowActiveButton = new System.Windows.Forms.Button();
             this.ShowArchivedButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ShowAllOrdersButton
@@ -128,11 +129,22 @@
             this.ShowArchivedButton.UseVisualStyleBackColor = true;
             this.ShowArchivedButton.Click += new System.EventHandler(this.ShowArchivedButton_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(92, 80);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 15);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "label1";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // Order_management
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.ShowArchivedButton);
             this.Controls.Add(this.ShowActiveButton);
             this.Controls.Add(this.customerListBox);
@@ -145,6 +157,7 @@
             this.Name = "Order_management";
             this.Text = "Order_management";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -158,5 +171,6 @@
         private System.Windows.Forms.ListBox customerListBox;
         private System.Windows.Forms.Button ShowActiveButton;
         private System.Windows.Forms.Button ShowArchivedButton;
+        private System.Windows.Forms.Label label1;
     }
 }

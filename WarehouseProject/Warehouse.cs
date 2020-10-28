@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Text.Json;
+using System.Threading;
 
 namespace WarehouseProject
 {
@@ -21,7 +24,7 @@ namespace WarehouseProject
         //kör denna metod när applikationen stängs ner
         public void EndWarehouse()
         {
-            _customerCatalogue.WriteProductsToFile();
+            _customerCatalogue.WriteCustomersToFile();
             _productCatalogue.WriteProductsToFile();
             _orderCatalogue.WriteProductsToFile();
         }
