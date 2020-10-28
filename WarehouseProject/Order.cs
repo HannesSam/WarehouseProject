@@ -119,7 +119,8 @@ namespace WarehouseProject
         /// </summary>
         public override string ToString()
         {
-            return "Ordernumber : " + Number.ToString() + " Customer : " + Customer.Name;
+            string dispatched = Dispatched ? "Yes" : "No";
+            return "Ordernumber : " + Number.ToString() + " Customer : " + Customer.Name + "   |   " + dispatched;
         }
     }
 }

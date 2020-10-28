@@ -28,6 +28,7 @@ namespace WarehouseProject
         {
             listBoxOfOrders.Items.Clear();
             label1.Text = "All orders";
+            ProcessPendingOrdersButton.Visible = false;
             foreach (var item in OrderKatalog.Orders)
             {
                 listBoxOfOrders.Items.Add(item);
@@ -57,6 +58,7 @@ namespace WarehouseProject
         {
             listBoxOfOrders.Items.Clear();
             label1.Text = "All orders";
+            ProcessPendingOrdersButton.Visible = false;
             foreach (var item in OrderKatalog.Orders)
             {
                 listBoxOfOrders.Items.Add(item);
@@ -107,11 +109,14 @@ namespace WarehouseProject
         private void ProcessPendingOrdersButton_Click(object sender, EventArgs e)
         {
             OrderKatalog.DispatchReadyOrders();
+            showpendingorders();
+            MessageBox.Show(" Pending orders processed");
         }
 
         private void ShowDispatchedOrdersButton_Click(object sender, EventArgs e)
         {
             listBoxOfOrders.Items.Clear();
+            ProcessPendingOrdersButton.Visible = false;
             label1.Text = "Dispatched orders";
             foreach (var item in OrderKatalog.GetDispatchedOrders())
             {
@@ -121,12 +126,7 @@ namespace WarehouseProject
 
         private void ShowPendingOrdersButton_Click(object sender, EventArgs e)
         {
-            listBoxOfOrders.Items.Clear();
-            label1.Text = "Pending orders";
-            foreach (var item in OrderKatalog.GetPendingOrders())
-            {
-                listBoxOfOrders.Items.Add(item);
-            }
+            showpendingorders();
         }
         private void ShowArchivedButton_Click(object sender, EventArgs e)
         {
@@ -168,7 +168,16 @@ namespace WarehouseProject
 
         }
 
-       
+       private void showpendingorders()
+        {
+            listBoxOfOrders.Items.Clear();
+            label1.Text = "Pending orders";
+            ProcessPendingOrdersButton.Visible = true;
+            foreach (var item in OrderKatalog.GetPendingOrders())
+            {
+                listBoxOfOrders.Items.Add(item);
+            }
+        }
     }
 }
 
