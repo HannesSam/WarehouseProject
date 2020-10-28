@@ -21,8 +21,18 @@ namespace WarehouseProject
             this.OrderKatalog = _orderCatalogue;
             InitializeComponent();
             UpdateCustomerList();
-        }
+            showall();
 
+        }
+        private void showall()
+        {
+            listBoxOfOrders.Items.Clear();
+            label1.Text = "All orders";
+            foreach (var item in OrderKatalog.Orders)
+            {
+                listBoxOfOrders.Items.Add(item);
+            }
+        }
         private void UpdateCustomerList()
         {
             foreach (var item in KundKatalog.Customers)
@@ -46,6 +56,7 @@ namespace WarehouseProject
         private void ShowAllOrdersButton_Click(object sender, EventArgs e)
         {
             listBoxOfOrders.Items.Clear();
+            label1.Text = "All orders";
             foreach (var item in OrderKatalog.Orders)
             {
                 listBoxOfOrders.Items.Add(item);
@@ -71,6 +82,17 @@ namespace WarehouseProject
                 string adress = order.DeliveryAdress;
                 string number = order.Number.ToString();
                 string customer = order.Customer.Name;
+                DateTime max = DateTime.Now;
+
+                foreach (var item in order.Items)
+                {
+                    if (item.Count > item.Product.Stock)
+                    {
+                        max = item.Product.FirstAvailable;
+                    }
+                }
+               
+                string firstavailable = max.ToString();
 
                 string items = "";
                 for (int i = 0; i < order.Items.Count; i++)
@@ -78,7 +100,7 @@ namespace WarehouseProject
                     items += "Product: " + order.Items[i].Product + " Quantity : " + order.Items[i].Count + "\n";
                 }
 
-                MessageBox.Show("Ordernumber : " + number + "\n" + "Customer : " + customer + "\nAdress: " + adress + "\n" + "Paid : " + payment + "\nRefunded : " + refunded + "\nDispatched : " + dispatched + "\n" + items);
+                MessageBox.Show("Ordernumber : " + number + "\n" + "Customer : " + customer + "\nAdress: " + adress + "\n" + "Paid : " + payment + "\nRefunded : " + refunded + "\nDispatched : " + dispatched + "\n" + items + "\nFirstAvailable : " + firstavailable);
             }
         }
 
@@ -90,6 +112,7 @@ namespace WarehouseProject
         private void ShowDispatchedOrdersButton_Click(object sender, EventArgs e)
         {
             listBoxOfOrders.Items.Clear();
+            label1.Text = "Dispatched orders";
             foreach (var item in OrderKatalog.GetDispatchedOrders())
             {
                 listBoxOfOrders.Items.Add(item);
@@ -99,6 +122,7 @@ namespace WarehouseProject
         private void ShowPendingOrdersButton_Click(object sender, EventArgs e)
         {
             listBoxOfOrders.Items.Clear();
+            label1.Text = "Pending orders";
             foreach (var item in OrderKatalog.GetPendingOrders())
             {
                 listBoxOfOrders.Items.Add(item);
@@ -137,6 +161,11 @@ namespace WarehouseProject
                     listBoxOfOrders.Items.Add(item);
                 }
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
