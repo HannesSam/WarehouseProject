@@ -32,7 +32,7 @@ namespace WarehouseProject
         public CustomerCatalogue(string filename)
         {
             _filename = filename;
-            _customers = ReadCustomersFromFile();
+            Customers = ReadCustomersFromFile();
             SetID();
         }
 

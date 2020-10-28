@@ -104,14 +104,14 @@ namespace WarehouseProject
 
         public Order(int number, Customer customer, DateTime orderDate, string deliveryAdress, bool paymentCompleted, bool paymentRefunded, bool dispatched, List<OrderLine> items)
         {
-            _number = number;
-            _customer = customer;
-            _orderDate = orderDate;
-            _deliveryAdress = deliveryAdress;
-            _paymentCompleted = paymentCompleted;
-            _paymentRefunded = paymentRefunded;
-            _dispatched = dispatched;
-            _items = items;
+            Number = number;
+            Customer = customer;
+            OrderDate = orderDate;
+            DeliveryAdress = deliveryAdress;
+            PaymentCompleted = paymentCompleted;
+            PaymentRefunded = paymentRefunded;
+            Dispatched = dispatched;
+            Items = items;
         }
 
         /// <summary>

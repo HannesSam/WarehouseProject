@@ -72,12 +72,12 @@ namespace WarehouseProject
         }
         public Product(int code, string name, double price, int stock, DateTime firstAvailable, DateTime nextStocking)
         {
-            _code = code;
-            _name = name;
-            _price = price;
-            _stock = stock;
-            _firstAvailable = firstAvailable;
-            _nextStocking = nextStocking;
+            Code = code;
+            Name = name;
+            Price = price;
+            Stock = stock;
+            FirstAvailable = firstAvailable;
+            NextStocking = nextStocking;
         }
 
         public override string ToString()

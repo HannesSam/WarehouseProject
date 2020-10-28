@@ -29,8 +29,8 @@ namespace WarehouseProject
         }
         public OrderLine(Product product, int count)
         {
-            _product = product;
-            _count = count;
+            Product = product;
+            Count = count;
         }
 
         public override string ToString()

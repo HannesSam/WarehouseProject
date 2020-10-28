@@ -34,7 +34,7 @@ namespace WarehouseProject
             _filename = filename;
             _customerCatalogue = customerCatalogue;
             _productCatalogue = productCatalogue;
-            _orders = ReadOrdersFromFile(filename);
+            Orders = ReadOrdersFromFile(filename);
             SetCount();
             WatchNewOrders();
         }
