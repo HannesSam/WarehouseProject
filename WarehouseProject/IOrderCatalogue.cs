@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace WarehouseProject
 {
+    /// <summary>
+    /// Denna interface innehåller de publika metoder och egenskaper som ska finnas i OrderCatalogue
+    /// </summary>
     public interface IOrderCatalogue
     {
         List<Order> Orders { get; set; }

@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace WarehouseProject
 
-    /// <summary>
-    /// I denna klass kan användaren skapa nya ordrar
-    /// </summary>
+/// <summary>
+/// I denna klass kan användaren skapa nya ordrar
+/// </summary>
 {
     public partial class Create_order : Form
     {
@@ -29,7 +25,7 @@ namespace WarehouseProject
             ProduktLista = new List<OrderLine>();
             InitializeComponent();
             UpdateList();
-            
+
         }
 
         /// <summary>
@@ -44,23 +40,23 @@ namespace WarehouseProject
             {
                 Customer.Items.Add(item);
             }
-             Customer.DisplayMember = "Name";
+            Customer.DisplayMember = "Name";
 
             foreach (var item in ProduktKatalog.AllProducts())
             {
                 checkedListBoxProducts.Items.Add(item);
             }
-            checkedListBoxProducts.DisplayMember = "Name" + " " +  "Stock";
+            checkedListBoxProducts.DisplayMember = "Name" + " " + "Stock";
         }
         /// <summary>
         /// Tickar i alla boxes i checkedListBoxOrderLine
         /// </summary>
         private void checkedlist()
         {
-                for (int i = 0; i < checkedListBoxOrderLine.Items.Count; i++)
-                {
-                    checkedListBoxOrderLine.SetItemChecked(i, true);
-                }
+            for (int i = 0; i < checkedListBoxOrderLine.Items.Count; i++)
+            {
+                checkedListBoxOrderLine.SetItemChecked(i, true);
+            }
         }
         /// <summary>
         /// Homeknapp, tar en tillbaka till startsida
@@ -146,7 +142,7 @@ namespace WarehouseProject
 
             for (int i = checkedListBoxOrderLine.Items.Count - 1; i >= 0; i--)
             {
-                
+
                 if (checkedListBoxOrderLine.GetItemChecked(i))
                 {
                     checkedListBoxOrderLine.Items.Remove(checkedListBoxOrderLine.Items[i]);
@@ -182,7 +178,7 @@ namespace WarehouseProject
                     OrderKatalog.AddOrder(customerreference, adress, produktlista);
                     MessageBox.Show("Order placed successfully!");
                 }
-                catch(ProductNotInCatalogueException ex)
+                catch (ProductNotInCatalogueException ex)
                 {
                     MessageBox.Show(ex.Message);
                 }

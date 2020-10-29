@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace WarehouseProject
@@ -194,7 +190,10 @@ namespace WarehouseProject
 
         }
 
-       private void showpendingorders()
+        /// <summary>
+        /// Visar alla orders som inte än har dispatchats.
+        /// </summary>
+        private void showpendingorders()
         {
             listBoxOfOrders.Items.Clear();
             label1.Text = "Pending orders";

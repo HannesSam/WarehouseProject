@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WarehouseProject
+﻿namespace WarehouseProject
 {
     /// <summary>
     /// Customer klassen innehåller all information som systemet behöver för en kund.
@@ -24,7 +20,7 @@ namespace WarehouseProject
             set
             {
                 if (string.IsNullOrWhiteSpace(value)) { throw new StringEmptyOrNullException("Name cannot be null"); }
-                else { _name = value; } 
+                else { _name = value; }
             }
         }
 

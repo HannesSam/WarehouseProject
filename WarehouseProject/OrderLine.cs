@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WarehouseProject
+﻿namespace WarehouseProject
 {
-    /// <summary>
-    /// Klass för enskilda produktbeställningar (produkt och antal) i varje order 
-    /// </summary>
     public class OrderLine
     {
         private int _count;
         private Product _product;
-
-        /// <value>Vilken produkt som beställs</value>
         public Product Product { get { return _product; } set { _product = value; } }
-        
-        /// <value>Det antal som beställs</value>
         public int Count
         {
             get { return _count; }
@@ -30,7 +19,6 @@ namespace WarehouseProject
             }
         }
 
-        /// <summary>Tom konstruktor för att JSON Deserialization ska fungera.</summary>
         public OrderLine()
         {
 
@@ -39,8 +27,8 @@ namespace WarehouseProject
         /// <summary>Konstruktor för OrderLine-objekt, som tar in vilken produkt och hur många av den som är beställd. Tar emot en produkt och antal</summary>
         public OrderLine(Product _product, int _count)
         {
-            this.Product = _product;
-            this.Count = _count;
+            Product = product;
+            Count = count;
         }
 
         /// <summary>Returnerar ett korrekt format på informationen i OrderLine </summary>

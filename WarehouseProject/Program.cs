@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WarehouseProject
@@ -20,7 +17,7 @@ namespace WarehouseProject
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
- 
+
             Application.Run(new Startsida(warehouse._productCatalogue, warehouse._customerCatalogue, warehouse._orderCatalogue));
             warehouse.EndWarehouse();
         }

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Text.Json;
-using System.Threading;
-
-namespace WarehouseProject
+﻿namespace WarehouseProject
 {
     /// <summary>
     /// Huvudklassen för Warehouse, där de olika katalogerna instansieras
@@ -13,9 +6,9 @@ namespace WarehouseProject
     public class Warehouse
     {
 
-        public CustomerCatalogue _customerCatalogue;
-        public ProductCatalogue _productCatalogue;
-        public OrderCatalogue _orderCatalogue;
+        public ICustomerCatalogue _customerCatalogue;
+        public IProductCatalogue _productCatalogue;
+        public IOrderCatalogue _orderCatalogue;
 
         /// <summary>
         /// Instansierar kataloger för kunder, produkter och ordrar för applikationen, tar emot namnen på JSON-filerna
