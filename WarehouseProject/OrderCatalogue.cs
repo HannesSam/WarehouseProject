@@ -13,11 +13,11 @@ namespace WarehouseProject
     /// Denna klass innehåller en katalog med ordrar. Denna är ständigt uppdaterad och innehåller alla funktioner som 
     /// läser från och lägger till ordrar till databasen. 
     /// </summary>
-    public class OrderCatalogue
+    public class OrderCatalogue : IOrderCatalogue
     {
         private List<Order> _orders;
-        private readonly string _fileName;
-        public int _number;
+        private readonly string _filename;
+        private int _number;
         readonly DateTime _dateToCompare = DateTime.Now - new TimeSpan(24 * 30, 0, 0);
 
         private CustomerCatalogue _customerCatalogue;

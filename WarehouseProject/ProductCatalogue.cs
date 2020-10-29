@@ -10,14 +10,13 @@ namespace WarehouseProject
     /// <summary>
     /// Huvudklassen för produktkatalogen, innehåller alla funktioner för läsa och skriva till datbasen, lägga till och uppdatera produkter
     /// </summary>
-    public class ProductCatalogue
+    public class ProductCatalogue : IProductCatalogue
     {
         private List<Product> _products;
-        private string _fileName;
-        public int _currentCode;
-        private IDatabase database;
-        //denna borde döpas om till Products och resten av variablerna bör följa konventionen med små bokstäver
-        //Om man inte är en prop!!
+        private string _filename;
+        private int _currentCode;
+
+
         public List<Product> Products { get { return _products; } set { _products = value; } }
 
         public delegate void UpdateProductList();
