@@ -64,11 +64,11 @@ namespace WarehouseProject
         /// Metod för att läsa in produktkatalog från textfil.
         /// </summary>
         /// <returns>Lista med produkt-objekt.</returns>
-        private List<Product> ReadProductsFromFile(string _filename)
+        private List<Product> ReadProductsFromFile(string _fileName)
         {
-            if (File.Exists(_filename))
+            if (File.Exists(_fileName))
             {
-                string fileContents = File.ReadAllText(_filename);
+                string fileContents = File.ReadAllText(_fileName);
                 Products = JsonSerializer.Deserialize<List<Product>>(fileContents);
             }
             else Products = new List<Product>();
