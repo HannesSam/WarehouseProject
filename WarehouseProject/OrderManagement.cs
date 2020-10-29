@@ -96,16 +96,16 @@ namespace WarehouseProject
                 string adress = order.DeliveryAdress;
                 string number = order.Number.ToString();
                 string customer = order.Customer.Name;
-                DateTime max = DateTime.Now;
+                DateTime max = new DateTime();
 
                 foreach (var item in order.Items)
                 {
-                    if (item.Count > item.Product.Stock)
+                    if (max < item.Product.FirstAvailable)
                     {
                         max = item.Product.FirstAvailable;
                     }
                 }
-               
+
                 string firstavailable = max.ToString();
 
                 string items = "";

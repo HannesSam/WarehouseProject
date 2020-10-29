@@ -13,9 +13,9 @@ namespace WarehouseProject
     public class ProductCatalogue
     {
         private List<Product> _products;
-        private string _filename;
+        private string _fileName;
         public int _currentCode;
-
+        private IDatabase database;
         //denna borde döpas om till Products och resten av variablerna bör följa konventionen med små bokstäver
         //Om man inte är en prop!!
         public List<Product> Products { get { return _products; } set { _products = value; } }
@@ -30,8 +30,9 @@ namespace WarehouseProject
         /// <param name="_filename">En sträng.</param>
         public ProductCatalogue(string _filename)
         {
-            _filename = filename;
-            Products = ReadProductsFromFile();
+            database = new JSONDatabase();
+            _fileName = filename;
+            Products = ReadProductsFromFile(_fileName);
             SetCount();
         }
 
@@ -56,8 +57,7 @@ namespace WarehouseProject
         /// </summary>
         public void WriteProductsToFile()
         {
-            string contents = JsonSerializer.Serialize(Products);
-            File.WriteAllText(_filename, contents);
+            database.WriteDataToFile(Products, _fileName);
         }
 
         /// <summary>

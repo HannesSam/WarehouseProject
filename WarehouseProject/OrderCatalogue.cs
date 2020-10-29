@@ -16,13 +16,13 @@ namespace WarehouseProject
     public class OrderCatalogue
     {
         private List<Order> _orders;
-        private readonly string _filename;
+        private readonly string _fileName;
         public int _number;
         readonly DateTime _dateToCompare = DateTime.Now - new TimeSpan(24 * 30, 0, 0);
 
         private CustomerCatalogue _customerCatalogue;
         private ProductCatalogue _productCatalogue;
-
+        private IDatabase database;
 
         /// <value>
         /// Orders innehåller den senaste databasen med kunder.
@@ -31,10 +31,11 @@ namespace WarehouseProject
 
         public OrderCatalogue(string filename, CustomerCatalogue customerCatalogue, ProductCatalogue productCatalogue)
         {
-            _filename = filename;
+            database = new JSONDatabase();
+            _fileName = filename;
             _customerCatalogue = customerCatalogue;
             _productCatalogue = productCatalogue;
-            Orders = ReadOrdersFromFile(filename);
+            Orders = ReadOrdersFromFile(_fileName);
             SetCount();
             WatchNewOrders();
         }
@@ -59,8 +60,7 @@ namespace WarehouseProject
         /// </summary>
         public void WriteOrdersToFile()
         {
-            string contents = JsonSerializer.Serialize(_orders);
-            File.WriteAllText(_filename, contents);
+            database.WriteDataToFile(Orders, _fileName);
         }
 
         /// <summary>
@@ -68,16 +68,12 @@ namespace WarehouseProject
         /// alla Customer och OrderList objekt till de andra katalogerna. 
         /// </summary>
         /// <returns> Returnerar en lista med ordrar. </returns>
-        private List<Order> ReadOrdersFromFile(string filename)
+        private List<Order> ReadOrdersFromFile(string fileName)
         {
-            List<Order> tempOrderList = new List<Order>();
-            if (File.Exists(filename))
-            {
-                string fileContents = File.ReadAllText(filename);
-                tempOrderList = JsonSerializer.Deserialize<List<Order>>(fileContents);
-            }
+            var data = database.ReadDataFromFile(fileName);
+            List<Order> returnData = data.ToObject<List<Order>>();
 
-            foreach (Order order in tempOrderList)
+            foreach (Order order in returnData)
             {
                 var custID = order.Customer.ID;
                 order.Customer = _customerCatalogue.Customers.Single(c => c.ID == custID);
@@ -89,7 +85,7 @@ namespace WarehouseProject
                 }
             }
 
-            return tempOrderList;
+            return returnData;
         }
 
         /// <summary>
@@ -178,11 +174,11 @@ namespace WarehouseProject
         }
 
 
-        //Den här metoden tar 
+
         public void DispatchReadyOrders()
         {
-            //Ska inte date vara tvärtom? 
-            List<Order> orderlist = _orders.Where(o => o.Dispatched == false && o.PaymentCompleted == true && o.Items.All(i => i.Product.Stock >= i.Count) && o.Items.All(i => i.Product.FirstAvailable>=DateTime.Now)).ToList();
+
+            List<Order> orderlist = _orders.Where(o => o.Dispatched == false && o.PaymentCompleted == true && o.Items.All(i => i.Product.Stock >= i.Count) && o.Items.All(i => i.Product.FirstAvailable<=DateTime.Now)).ToList();
             orderlist.Sort((o1, o2) => o1.OrderDate.CompareTo(o2.OrderDate));
 
             List<Order> finalList = new List<Order>();

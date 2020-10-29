@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text.Json;
 using System.Windows.Forms;
 
@@ -12,11 +13,12 @@ namespace WarehouseProject
     /// Denna klass innehåller en katalog med kunder. Denna är ständigt uppdaterad och innehåller alla funktioner som 
     /// läser från och lägger till kunder till databasen. 
     /// </summary>
-    public class CustomerCatalogue
+    public class CustomerCatalogue 
     {
-        private readonly string _filename;
+        private readonly string _fileName;
         private int _currentID;
         private List<Customer> _customers;
+        private IDatabase database;
 
         /// <value>
         /// Customers innehåller den senaste databasen med kunder.
@@ -31,8 +33,9 @@ namespace WarehouseProject
 
         public CustomerCatalogue(string filename)
         {
-            _filename = filename;
-            Customers = ReadCustomersFromFile();
+            database = new JSONDatabase();
+            _fileName = filename;
+            Customers = ReadCustomersFromFile(_fileName);
             SetID();
         }
 
@@ -56,24 +59,18 @@ namespace WarehouseProject
         /// </summary>
         public void WriteCustomersToFile()
         {
-            string contents = JsonSerializer.Serialize(Customers);
-            File.WriteAllText(_filename, contents);
+            database.WriteDataToFile(Customers, _fileName);
         }
 
         /// <summary>
         /// Läser från databasen och lägger in alla kunder i listan om databasen existerar. 
         /// </summary>
         /// <returns> Returnerar en lista med kunder. </returns>
-        private List<Customer> ReadCustomersFromFile()
+        private List<Customer> ReadCustomersFromFile(string fileName)
         {
-            if (File.Exists(_filename))
-            {
-                string fileContents = File.ReadAllText(_filename);
-                Customers = JsonSerializer.Deserialize<List<Customer>>(fileContents);
-            }
-            else Customers = new List<Customer>();
-
-            return Customers;
+            var data = database.ReadDataFromFile(fileName);
+            List<Customer> returnData = data.ToObject<List<Customer>>();
+            return returnData;
         }
 
         /// <summary>
