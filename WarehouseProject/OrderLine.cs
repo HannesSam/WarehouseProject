@@ -36,20 +36,14 @@ namespace WarehouseProject
 
         }
 
-        /// <summary>
-        /// Konstruktor för OrderLine-objekt, som tar in vilken produkt och hur många av den som är beställd
-        /// </summary>
-        /// <param name="_product">Product-objekt</param>
-        /// <param name="_count">Heltal</param>
+        /// <summary>Konstruktor för OrderLine-objekt, som tar in vilken produkt och hur många av den som är beställd. Tar emot en produkt och antal</summary>
         public OrderLine(Product _product, int _count)
         {
             this.Product = _product;
             this.Count = _count;
         }
 
-        /// <summary>
-        /// Returnerar ett korrekt format på informationen i OrderLine 
-        /// </summary>
+        /// <summary>Returnerar ett korrekt format på informationen i OrderLine </summary>
         public override string ToString()
         {
             return Product.Name + " Quantity : " + Count;

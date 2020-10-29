@@ -18,11 +18,8 @@ namespace WarehouseProject
         public OrderCatalogue _orderCatalogue;
 
         /// <summary>
-        /// Instansierar kataloger för kunder, produkter och ordrar för applikationen
+        /// Instansierar kataloger för kunder, produkter och ordrar för applikationen, tar emot namnen på JSON-filerna
         /// </summary>
-        /// <param name="customerFileName">En sträng</param>
-        /// <param name="productFileName">En sträng</param>
-        /// <param name="orderFileName">En sträng</param>
         public void StartWarehouse(string customerFileName, string productFileName, string orderFileName)
         {
             _customerCatalogue = new CustomerCatalogue(customerFileName);

@@ -25,9 +25,8 @@ namespace WarehouseProject
         public event UpdateProductList OnProductChange;
 
         /// <summary>
-        /// Konstruktor för att instansiera och skapa ett produkt-objekt i katalogen.
+        /// Konstruktor för att instansiera och skapa ett produkt-objekt i katalogen, tar emot namnet på katalogen
         /// </summary>
-        /// <param name="_filename">En sträng.</param>
         public ProductCatalogue(string _filename)
         {
             database = new JSONDatabase();
@@ -77,9 +76,8 @@ namespace WarehouseProject
         }
 
         /// <summary>
-        /// Metod för att se vilka produkter som är slut i lager.
+        /// Metod för att se vilka produkter som är slut i lager, returnerar alla produkter som är slut i lager
         /// </summary>
-        /// <returns>Lista med produkter.</returns>
         public List<Product> ProductsOutOfStock()
         {
             IEnumerable<Product> outOfStock = Products.Where(p => p.Stock == 0);
@@ -87,13 +85,8 @@ namespace WarehouseProject
         }
 
         /// <summary>
-        /// Metod för att lägga till produkt-objekt i katalogen.
+        /// Metod för att lägga till produkt-objekt i katalogen, tar emot namn, pris, antal produkter som ska läggas till, datumet som produkten finns tillgänglig och när den beräknas fyllas på i lager
         /// </summary>
-        /// <param name="name">Produktens namn</param>
-        /// <param name="price">Produktens pris</param>
-        /// <param name="stock">Antal av produkter som ska läggas till</param>
-        /// <param name="firstavailable">Datumet som produkten finns tillgänglig</param>
-        /// <param name="nextStock">Nästkommande datum som produkten kommer fyllas på</param>
         public void AddProduct(string name, double price, int stock, DateTime firstavailable, DateTime nextStock)
         {
             _currentCode++;
@@ -104,32 +97,24 @@ namespace WarehouseProject
         }
 
         /// <summary>
-        /// Metod för att lista alla produkter i katalogen.
+        /// Metod för att lista alla produkter i katalogen, returnerar en lista med alla produkter
         /// </summary>
-        /// <returns>En lista med produkter.</returns>
         public List<Product> AllProducts()
         {
             return Products;
         }
 
         /// <summary>
-        /// Metod som läser in när en produkt kommer fyllas på.
+        /// Metod som läser in när en produkt kommer fyllas på, returnerar detta datum
         /// </summary>
-        /// <returns>Datum.</returns>
         public DateTime NextRestocking()
         {
             return Products.Min(p => p.NextStocking);
         }
 
         /// <summary>
-        /// Metod för att uppdatera en befintlig produkt i katalogen.
+        /// Metod för att uppdatera en befintlig produkt i katalogen, tar emot produktens ID-kod, namn, pris, antal, när den är tillgänglig, och när den beräknas fyllas på i lager
         /// </summary>
-        /// <param name="code">Produktkod</param>
-        /// <param name="name">Produktens namn</param>
-        /// <param name="price">Produktens pris</param>
-        /// <param name="stock">Antal av produkten som ska läggas in</param>
-        /// <param name="firstavailable">Datum som produkten fylls på</param>
-        /// <param name="nextStock">Nästa datum som produkten ska fyllas på</param>
         public void UpdateInformation(int code, string name, double price, int stock, DateTime firstavailable, DateTime nextStock)
         {
             for (int i = 0; i < Products.Count; i++)
