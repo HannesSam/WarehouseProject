@@ -2,6 +2,9 @@
 
 namespace WarehouseProject
 {
+    /// <summary>
+    /// Denna interface innehåller de publika metoder och egenskaper som ska finnas i CustomerCatalogue
+    /// </summary>
     public delegate void UpdateCustomerList();
     public interface ICustomerCatalogue
     {
