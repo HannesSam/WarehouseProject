@@ -16,7 +16,7 @@ namespace WarehouseProject
     public class OrderCatalogue : IOrderCatalogue
     {
         private List<Order> _orders;
-        private readonly string _filename;
+        private readonly string _fileName;
         private int _number;
         readonly DateTime _dateToCompare = DateTime.Now - new TimeSpan(24 * 30, 0, 0);
 

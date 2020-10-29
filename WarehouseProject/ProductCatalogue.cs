@@ -13,8 +13,9 @@ namespace WarehouseProject
     public class ProductCatalogue : IProductCatalogue
     {
         private List<Product> _products;
-        private string _filename;
+        private string _fileName;
         private int _currentCode;
+        private IDatabase database;
 
 
         public List<Product> Products { get { return _products; } set { _products = value; } }
