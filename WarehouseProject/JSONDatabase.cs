@@ -17,8 +17,14 @@ namespace WarehouseProject
         /// <returns> Returnerar en array med innehållet i JSON filen </returns>
         public dynamic ReadDataFromFile(string fileName)
         {
-            string fileContents = File.ReadAllText(fileName);
-            JArray content = JArray.Parse(fileContents);
+            JArray content;
+            if (File.Exists(fileName))
+            {
+                string fileContents = File.ReadAllText(fileName);
+                content = JArray.Parse(fileContents);
+            }
+            else content = new JArray();
+
             return content;
         }
 
