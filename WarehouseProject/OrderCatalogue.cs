@@ -20,8 +20,8 @@ namespace WarehouseProject
         private int _number;
         readonly DateTime _dateToCompare = DateTime.Now - new TimeSpan(24 * 30, 0, 0);
 
-        private CustomerCatalogue _customerCatalogue;
-        private ProductCatalogue _productCatalogue;
+        private ICustomerCatalogue _customerCatalogue;
+        private IProductCatalogue _productCatalogue;
         private IDatabase database;
 
         /// <value>
@@ -29,7 +29,7 @@ namespace WarehouseProject
         /// </value>
         public List<Order> Orders { get { return _orders; } set { _orders = value; } }
 
-        public OrderCatalogue(string filename, CustomerCatalogue customerCatalogue, ProductCatalogue productCatalogue)
+        public OrderCatalogue(string filename, ICustomerCatalogue customerCatalogue, IProductCatalogue productCatalogue)
         {
             database = new JSONDatabase();
             _fileName = filename;

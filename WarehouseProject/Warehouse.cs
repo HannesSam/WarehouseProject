@@ -13,9 +13,9 @@ namespace WarehouseProject
     public class Warehouse
     {
 
-        public CustomerCatalogue _customerCatalogue;
-        public ProductCatalogue _productCatalogue;
-        public OrderCatalogue _orderCatalogue;
+        public ICustomerCatalogue _customerCatalogue;
+        public IProductCatalogue _productCatalogue;
+        public IOrderCatalogue _orderCatalogue;
 
         /// <summary>
         /// Instansierar kataloger för kunder, produkter och ordrar för applikationen
@@ -23,7 +23,7 @@ namespace WarehouseProject
         /// <param name="customerFileName">En sträng</param>
         /// <param name="productFileName">En sträng</param>
         /// <param name="orderFileName">En sträng</param>
-        public void StartWarehouse(string customerFileName, string productFileName, string orderFileName)
+        public Warehouse(string customerFileName, string productFileName, string orderFileName)
         {
             _customerCatalogue = new CustomerCatalogue(customerFileName);
             _productCatalogue = new ProductCatalogue(productFileName);
