@@ -194,6 +194,9 @@ namespace WarehouseProject
 
         }
 
+        /// <summary>
+        /// Visar alla orders som inte än har dispatchats.
+        /// </summary>
        private void showpendingorders()
         {
             listBoxOfOrders.Items.Clear();
