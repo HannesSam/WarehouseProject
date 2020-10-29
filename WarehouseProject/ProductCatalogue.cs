@@ -10,17 +10,18 @@ namespace WarehouseProject
     public class ProductCatalogue
     {
         private List<Product> _products;
-        private string _filename;
+        private string _fileName;
         public int _currentCode;
-
+        private IDatabase database;
         //denna borde döpas om till Products och resten av variablerna bör följa konventionen med små bokstäver
         //Om man inte är en prop!!
         public List<Product> Products { get { return _products; } set { _products = value; } }
 
         public ProductCatalogue(string filename)
         {
-            _filename = filename;
-            Products = ReadProductsFromFile();
+            database = new JSONDatabase();
+            _fileName = filename;
+            Products = ReadProductsFromFile(_fileName);
             SetCount();
         }
 
@@ -38,20 +39,14 @@ namespace WarehouseProject
         }
         public void WriteProductsToFile()
         {
-            string contents = JsonSerializer.Serialize(Products);
-            File.WriteAllText(_filename, contents);
+            database.WriteDataToFile(Products, _fileName);
         }
 
-        private List<Product> ReadProductsFromFile()
+        private List<Product> ReadProductsFromFile(string fileName)
         {
-            if (File.Exists(_filename))
-            {
-                string fileContents = File.ReadAllText(_filename);
-                Products = JsonSerializer.Deserialize<List<Product>>(fileContents);
-            }
-            else Products = new List<Product>();
-
-            return Products;
+            var data = database.ReadDataFromFile(fileName);
+            List<Product> returnData = data.ToObject<List<Product>>();
+            return returnData;
         }
 
         public List<Product> ProductsOutOfStock()

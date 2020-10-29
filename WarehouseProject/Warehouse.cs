@@ -14,7 +14,7 @@ namespace WarehouseProject
         public ProductCatalogue _productCatalogue;
         public OrderCatalogue _orderCatalogue;
 
-        public void StartWarehouse(string customerFileName, string productFileName, string orderFileName)
+        public Warehouse(string customerFileName, string productFileName, string orderFileName)
         {
             _customerCatalogue = new CustomerCatalogue(customerFileName);
             _productCatalogue = new ProductCatalogue(productFileName);
