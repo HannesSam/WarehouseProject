@@ -37,7 +37,7 @@ namespace WarehouseProject
         {
             _customerCatalogue.WriteCustomersToFile();
             _productCatalogue.WriteProductsToFile();
-            _orderCatalogue.WriteProductsToFile();
+            _orderCatalogue.WriteOrdersToFile();
         }
     }
 }

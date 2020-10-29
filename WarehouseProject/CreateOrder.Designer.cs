@@ -48,9 +48,7 @@
             this.checkedListBoxProducts.Location = new System.Drawing.Point(31, 134);
             this.checkedListBoxProducts.Name = "checkedListBoxProducts";
             this.checkedListBoxProducts.Size = new System.Drawing.Size(238, 166);
-            this.checkedListBoxProducts.TabIndex = 1;
-            this.checkedListBoxProducts.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxProducts_SelectedIndexChanged);
-            // 
+            this.checkedListBoxProducts.TabIndex = 1;            // 
             // checkedListBoxOrderLine
             // 
             this.checkedListBoxOrderLine.FormattingEnabled = true;
@@ -64,9 +62,7 @@
             this.textBoxdelivery.Location = new System.Drawing.Point(371, 93);
             this.textBoxdelivery.Name = "textBoxdelivery";
             this.textBoxdelivery.Size = new System.Drawing.Size(220, 23);
-            this.textBoxdelivery.TabIndex = 3;
-            this.textBoxdelivery.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
-            // 
+            this.textBoxdelivery.TabIndex = 3;            // 
             // AddProductButton
             // 
             this.AddProductButton.Location = new System.Drawing.Point(275, 212);
@@ -94,9 +90,7 @@
             this.Customer.Location = new System.Drawing.Point(371, 23);
             this.Customer.Name = "Customer";
             this.Customer.Size = new System.Drawing.Size(220, 64);
-            this.Customer.TabIndex = 6;
-            this.Customer.SelectedIndexChanged += new System.EventHandler(this.Customer_SelectedIndexChanged);
-            // 
+            this.Customer.TabIndex = 6;            // 
             // textBoxQuantity
             // 
             this.textBoxQuantity.Location = new System.Drawing.Point(275, 183);
@@ -107,9 +101,7 @@
             1,
             0,
             0,
-            0});
-            this.textBoxQuantity.ValueChanged += new System.EventHandler(this.textBoxQuantity_ValueChanged);
-            // 
+            0});            // 
             // HomeButton
             // 
             this.HomeButton.Location = new System.Drawing.Point(12, 12);
@@ -137,9 +129,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 15);
             this.label1.TabIndex = 10;
-            this.label1.Text = "Delivery Adress";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
+            this.label1.Text = "Delivery Adress";            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -167,7 +157,6 @@
             this.Controls.Add(this.checkedListBoxProducts);
             this.Name = "Create_order";
             this.Text = "Create_order";
-            this.Load += new System.EventHandler(this.Create_order_Load);
             ((System.ComponentModel.ISupportInitialize)(this.textBoxQuantity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Windows.Forms;
 
 namespace WarehouseProject
 {
@@ -18,7 +19,7 @@ namespace WarehouseProject
         private List<Customer> _customers;
 
         /// <value>
-        /// Customers returnerar den senaste databasen med kunder.
+        /// Customers innehåller den senaste databasen med kunder.
         /// </value>
         public List<Customer> Customers { get { return _customers; } set { _customers = value; } }
 
@@ -31,7 +32,7 @@ namespace WarehouseProject
         public CustomerCatalogue(string filename)
         {
             _filename = filename;
-            _customers = ReadCustomersFromFile();
+            Customers = ReadCustomersFromFile();
             SetID();
         }
 
@@ -81,10 +82,13 @@ namespace WarehouseProject
         /// </summary>
         public void AddCustomer(string name, string phone, string email)
         {
-            //Ökar på det unika ID:t så att det inte blir att två inlägg har samma ID.
             _currentID++;
-            Customer customer = new Customer(_currentID, name, phone, email);
-            _customers.Add(customer);
+            Customer customer = new Customer();
+            customer.ID = _currentID;
+            customer.Name = name;
+            customer.Phone = phone;
+            customer.EMail = email;
+            Customers.Add(customer);
 
             //Kollar att delegaten inte är null kör annars eventet
             OnCustomerChange?.Invoke();

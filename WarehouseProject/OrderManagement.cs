@@ -8,12 +8,16 @@ using System.Windows.Forms;
 
 namespace WarehouseProject
 {
+    /// <summary>
+    /// I den här klassen kan användaren se olika order
+    /// </summary>
     public partial class Order_management : Form
     {
         //kommentar
         public ProductCatalogue ProduktKatalog;
         public CustomerCatalogue KundKatalog;
         public OrderCatalogue OrderKatalog;
+
         public Order_management(ProductCatalogue _productCatalogue, CustomerCatalogue _costumerCatalogue, OrderCatalogue _orderCatalogue)
         {
             this.ProduktKatalog = _productCatalogue;
@@ -24,15 +28,23 @@ namespace WarehouseProject
             showall();
 
         }
+        /// <summary>
+        /// Visar alla ordrar i listboxoforders
+        /// </summary>
         private void showall()
         {
             listBoxOfOrders.Items.Clear();
             label1.Text = "All orders";
+            ProcessPendingOrdersButton.Visible = false;
             foreach (var item in OrderKatalog.Orders)
             {
                 listBoxOfOrders.Items.Add(item);
             }
         }
+
+        /// <summary>
+        /// Uppdaterar customerListBox och tilldelar den alla kunder i kundkatalogen.
+        /// </summary>
         private void UpdateCustomerList()
         {
             foreach (var item in KundKatalog.Customers)
@@ -40,11 +52,10 @@ namespace WarehouseProject
                 customerListBox.Items.Add(item);
             }
         }
-        private void Order_management_Load(object sender, EventArgs e)
-        {
 
-        }
-
+        /// <summary>
+        /// Tar användaren tillbaka till startsidan.
+        /// </summary>
         private void HomeButton_Click(object sender, EventArgs e)
         {
             var f = new Startsida(ProduktKatalog, KundKatalog, OrderKatalog);
@@ -53,19 +64,22 @@ namespace WarehouseProject
             Close();
         }
 
+        /// <summary>
+        /// Visar alla ordrar i orderkatalogen i listboxen listBoxOfOrders.
+        /// </summary>
         private void ShowAllOrdersButton_Click(object sender, EventArgs e)
         {
             listBoxOfOrders.Items.Clear();
             label1.Text = "All orders";
+            ProcessPendingOrdersButton.Visible = false;
             foreach (var item in OrderKatalog.Orders)
             {
                 listBoxOfOrders.Items.Add(item);
             }
         }
-        private void listBoxOfOrders_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        /// <summary>
+        /// När användaren dubbelklickar på en order i listboxen så dyker en messagebox upp med ytterligare information.
+        /// </summary>
         private void listBoxOfOrders_DoubleClick(object sender, EventArgs e)
         {
 
@@ -104,14 +118,23 @@ namespace WarehouseProject
             }
         }
 
+        /// <summary>
+        /// Här kallas metoden DispatchReadyOrders som dispatchar alla orders som är redo. 
+        /// </summary>
         private void ProcessPendingOrdersButton_Click(object sender, EventArgs e)
         {
             OrderKatalog.DispatchReadyOrders();
+            showpendingorders();
+            MessageBox.Show(" Pending orders processed");
         }
 
+        /// <summary>
+        /// Listboxen fylls med dispatchade orders.
+        /// </summary>
         private void ShowDispatchedOrdersButton_Click(object sender, EventArgs e)
         {
             listBoxOfOrders.Items.Clear();
+            ProcessPendingOrdersButton.Visible = false;
             label1.Text = "Dispatched orders";
             foreach (var item in OrderKatalog.GetDispatchedOrders())
             {
@@ -119,15 +142,16 @@ namespace WarehouseProject
             }
         }
 
+        /// <summary>
+        /// Listboxen fylls med pending orders.
+        /// </summary>
         private void ShowPendingOrdersButton_Click(object sender, EventArgs e)
         {
-            listBoxOfOrders.Items.Clear();
-            label1.Text = "Pending orders";
-            foreach (var item in OrderKatalog.GetPendingOrders())
-            {
-                listBoxOfOrders.Items.Add(item);
-            }
+            showpendingorders();
         }
+        /// <summary>
+        /// Alla arkiverade ordrar från en vald kund visas i listboxOfOrders.
+        /// </summary>
         private void ShowArchivedButton_Click(object sender, EventArgs e)
         {
             Customer kund = (Customer)customerListBox.SelectedItem;
@@ -140,7 +164,9 @@ namespace WarehouseProject
             }
         }
 
-        
+        /// <summary>
+        /// Alla aktiva ordrar från en vald kund visas i listboxOfOrders.
+        /// </summary>
         private void ShowActiveButton_Click(object sender, EventArgs e)
         {
             Customer kund = (Customer)customerListBox.SelectedItem;
@@ -168,7 +194,16 @@ namespace WarehouseProject
 
         }
 
-       
+       private void showpendingorders()
+        {
+            listBoxOfOrders.Items.Clear();
+            label1.Text = "Pending orders";
+            ProcessPendingOrdersButton.Visible = true;
+            foreach (var item in OrderKatalog.GetPendingOrders())
+            {
+                listBoxOfOrders.Items.Add(item);
+            }
+        }
     }
 }
 

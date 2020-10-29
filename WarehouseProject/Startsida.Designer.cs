@@ -108,7 +108,6 @@
             this.Controls.Add(this.NewOrder);
             this.Name = "Startsida";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Startsida_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
