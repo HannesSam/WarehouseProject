@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace WarehouseProject
 {
     public delegate void UpdateCustomerList();
-
-    /// <summary>
-    /// Denna interface innehåller de publika metoder och egenskaper som ska finnas i CustomerCatalogue
-    /// </summary>
     public interface ICustomerCatalogue
     {
 

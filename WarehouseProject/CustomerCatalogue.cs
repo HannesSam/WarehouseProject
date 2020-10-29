@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text.Json;
-using System.Windows.Forms;
 
 namespace WarehouseProject
 {
@@ -54,7 +48,7 @@ namespace WarehouseProject
         }
 
         /// <summary>
-        /// Sparar ner det nuvarande innehållet i listan med kunder till en databas vilket är en JSON fil. 
+        /// Kommunicerar med databasen för att spara alla kunder
         /// </summary>
         public void WriteCustomersToFile()
         {
@@ -62,9 +56,9 @@ namespace WarehouseProject
         }
 
         /// <summary>
-        /// Läser från databasen och lägger in alla kunder i listan om databasen existerar. 
+        /// Kommunicerar med databasen för att läsa in alla kunder och göra om det till Customers objekt. 
         /// </summary>
-        /// <returns> Returnerar en lista med kunder. </returns>
+        /// <returns> Returnerar en lista med Customers. </returns>
         private List<Customer> ReadCustomersFromFile(string fileName)
         {
             var data = database.ReadDataFromFile(fileName);

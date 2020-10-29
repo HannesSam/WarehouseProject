@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace WarehouseProject
 {
@@ -15,18 +13,19 @@ namespace WarehouseProject
         private int _stock;
         private DateTime _firstAvailable;
         private DateTime _nextStocking;
-        
+
         /// <value>En produkts unika kod, för att kunna skilja på de olika produkterna.</value>
         public int Code
         {
             get { return _code; }
-            set 
-            { if (value < 0)
+            set
+            {
+                if (value < 0)
                     throw new IntOrDoubleNegativeException("Code cannot be negative.");
-              else
-              {
+                else
+                {
                     _code = value;
-              }
+                }
             }
         }
 
@@ -34,8 +33,9 @@ namespace WarehouseProject
         public string Name
         {
             get { return _name; }
-            set 
-            {   if (string.IsNullOrWhiteSpace(value))
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new StringEmptyOrNullException("Name cannot be null or empty.");
                 }

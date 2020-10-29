@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using System.Text.Json;
 using System.Linq;
+using System.Text.Json;
 
 namespace WarehouseProject
 {
@@ -53,7 +52,7 @@ namespace WarehouseProject
         }
 
         /// <summary>
-        /// Metod för att skriva befintlig produktkatalog till textfil.
+        ///  Kommunicerar med databasen för att spara alla produkter
         /// </summary>
         public void WriteProductsToFile()
         {
@@ -61,9 +60,9 @@ namespace WarehouseProject
         }
 
         /// <summary>
-        /// Metod för att läsa in produktkatalog från textfil.
+        /// Kommunicerar med databasen för att läsa in alla produkter och göra om det till Products objekt. 
         /// </summary>
-        /// <returns>Lista med produkt-objekt.</returns>
+        /// <returns> Returnerar en lista med Products. </returns>
         private List<Product> ReadProductsFromFile(string _fileName)
         {
             if (File.Exists(_fileName))
@@ -134,7 +133,7 @@ namespace WarehouseProject
         {
             for (int i = 0; i < Products.Count; i++)
             {
-                if (Products[i].Code==code)
+                if (Products[i].Code == code)
                 {
                     Products[i].Name = name;
                     Products[i].Price = price;
@@ -146,5 +145,5 @@ namespace WarehouseProject
             }
         }
     }
-        
+
 }

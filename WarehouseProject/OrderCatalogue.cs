@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using System.Text.Json;
 using System.Linq;
-using System.Diagnostics.PerformanceData;
 using System.Threading;
 
 namespace WarehouseProject
@@ -56,7 +53,7 @@ namespace WarehouseProject
         }
 
         /// <summary>
-        /// Sparar ner det nuvarande innehållet i listan med ordrar till en databas vilket är en JSON fil. 
+        ///  Kommunicerar med databasen för att spara alla ordrar
         /// </summary>
         public void WriteOrdersToFile()
         {
@@ -64,7 +61,7 @@ namespace WarehouseProject
         }
 
         /// <summary>
-        /// Läser från databasen och lägger in alla ordrar i listan om databasen existerar. Den kopplar sedan 
+        /// Kommunicerar med databasen för att läsa in alla produkter och göra om det till Products objekt. Den kopplar sedan 
         /// alla Customer och OrderList objekt till de andra katalogerna. 
         /// </summary>
         /// <returns> Returnerar en lista med ordrar. </returns>
@@ -155,7 +152,7 @@ namespace WarehouseProject
         }
 
         //returns true if the customer has ever placed any orders.
-        public bool HasOrder (Customer c)
+        public bool HasOrder(Customer c)
         {
             foreach (var item in Orders)
             {
@@ -178,7 +175,7 @@ namespace WarehouseProject
         public void DispatchReadyOrders()
         {
 
-            List<Order> orderlist = _orders.Where(o => o.Dispatched == false && o.PaymentCompleted == true && o.Items.All(i => i.Product.Stock >= i.Count) && o.Items.All(i => i.Product.FirstAvailable<=DateTime.Now)).ToList();
+            List<Order> orderlist = _orders.Where(o => o.Dispatched == false && o.PaymentCompleted == true && o.Items.All(i => i.Product.Stock >= i.Count) && o.Items.All(i => i.Product.FirstAvailable <= DateTime.Now)).ToList();
             orderlist.Sort((o1, o2) => o1.OrderDate.CompareTo(o2.OrderDate));
 
             List<Order> finalList = new List<Order>();
@@ -214,7 +211,7 @@ namespace WarehouseProject
             }
         }
 
-        public void UpdateStock (Order o )
+        public void UpdateStock(Order o)
         {
             foreach (var item in o.Items)
             {
