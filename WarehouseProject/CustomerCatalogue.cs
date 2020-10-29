@@ -7,60 +7,67 @@ using System.Text.Json;
 
 namespace WarehouseProject
 {
+    /// <summary>
+    /// Denna klass innehåller en katalog med kunder. Denna är ständigt uppdaterad och innehåller alla funktioner som 
+    /// läser från och lägger till kunder till databasen. 
+    /// </summary>
     public class CustomerCatalogue
     {
-        private string Filename;
-        private int currentID;
-        public List<Customer> Customers { get; set; }
+        private readonly string _filename;
+        private int _currentID;
+        private List<Customer> _customers;
 
+        /// <value>
+        /// Customers returnerar den senaste databasen med kunder.
+        /// </value>
+        public List<Customer> Customers { get { return _customers; } set { _customers = value; } }
+
+        /// <summary>
+        /// Detta event och delegat definerar ett event som körs varje gång en kund uppdateras eller läggs till. 
+        /// </summary>
         public delegate void UpdateCustomerList();
-
         public event UpdateCustomerList OnCustomerChange;
 
-
-        //Read Customer list from json on startup
-        public CustomerCatalogue(string _filename)
+        public CustomerCatalogue(string filename)
         {
-            this.Filename = _filename;
-            Customers = ReadProductsFromFile();
+            _filename = filename;
+            _customers = ReadCustomersFromFile();
             SetID();
         }
 
+        /// <summary>
+        /// SetID letar upp den största ID:t i den nuvarande listan av kunder.
+        /// </summary>
         public void SetID()
         {
-            if (Customers.Count == 0)
+            if (_customers.Count == 0)
             {
-                currentID = 0;
+                _currentID = 0;
             }
             else
             {
-                //Hittar det nuvarande största ID:t i listan över kunder och sparar det. 
-                currentID = Customers.Max(c => c.ID);
+                _currentID = _customers.Max(c => c.ID);
             }
         }
 
-        public void AddTestData()
-        {
-            Customer test1 = new Customer(1, "Hannes", "072-23423523", "Hannes@warehouse.cool");
-            Customer test2 = new Customer(2, "Axel", "072-23423523", "Axel@warehouse.cool");
-            Customer test3 = new Customer(3, "Christoffer", "072-23423523", "Christoffer@warehouse.cool");
-            Customer test4 = new Customer(4, "JeppeBoi", "072-23423523", "JeppeBoi@warehouse.cool");
-            Customers.Add(test1);
-            Customers.Add(test2);
-            Customers.Add(test3);
-            Customers.Add(test4);
-        }
-        public void WriteProductsToFile()
+        /// <summary>
+        /// Sparar ner det nuvarande innehållet i listan med kunder till en databas vilket är en JSON fil. 
+        /// </summary>
+        public void WriteCustomersToFile()
         {
             string contents = JsonSerializer.Serialize(Customers);
-            File.WriteAllText(Filename, contents);
+            File.WriteAllText(_filename, contents);
         }
 
-        private List<Customer> ReadProductsFromFile()
+        /// <summary>
+        /// Läser från databasen och lägger in alla kunder i listan om databasen existerar. 
+        /// </summary>
+        /// <returns> Returnerar en lista med kunder. </returns>
+        private List<Customer> ReadCustomersFromFile()
         {
-            if (File.Exists(Filename))
+            if (File.Exists(_filename))
             {
-                string fileContents = File.ReadAllText(Filename);
+                string fileContents = File.ReadAllText(_filename);
                 Customers = JsonSerializer.Deserialize<List<Customer>>(fileContents);
             }
             else Customers = new List<Customer>();
@@ -68,28 +75,28 @@ namespace WarehouseProject
             return Customers;
         }
 
+        /// <summary>
+        /// Tar in alla nödvändiga varaiabler för att skapa en ny kund och lägger sedan till denna till listan med kunder.
+        /// Kallar även på eventet som visar att listan med kunder har ändrats. 
+        /// </summary>
         public void AddCustomer(string name, string phone, string email)
         {
-            try
-            {
-                currentID++;
-                Customer customer = new Customer(currentID, name, phone, email);
-                Customers.Add(customer);
+            //Ökar på det unika ID:t så att det inte blir att två inlägg har samma ID.
+            _currentID++;
+            Customer customer = new Customer(_currentID, name, phone, email);
+            _customers.Add(customer);
 
-                //Kollar att delegaten inte är null kör annars eventet
-                OnCustomerChange?.Invoke();
-            }
-            catch (Exception ex)
-            {
-                //Här ska ett error returnereas till the gui
-            }
+            //Kollar att delegaten inte är null kör annars eventet
+            OnCustomerChange?.Invoke();
         }
 
+        /// <summary>
+        /// Tar in alla parametrar för att uppdatera en kund och sparar den uppdaterade informationen. 
+        /// Kallar även på ett event för att visa att listan med kunder har ändrats.
+        /// </summary>
         public void UpdateCustomer(int id, string name, string phone, string email)
         {
             Customer customer = Customers.Single(c => c.ID == id);
-            //Här ska customer uppdateras med alla nya värde
-
             customer.Name = name;
             customer.Phone = phone;
             customer.EMail = email;
@@ -97,6 +104,6 @@ namespace WarehouseProject
             //Kollar att delegaten inte är null kör annars eventet
             OnCustomerChange?.Invoke();
         }
-        
+
     }
 }
