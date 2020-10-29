@@ -13,7 +13,7 @@
         /// <summary>
         /// Instansierar kataloger för kunder, produkter och ordrar för applikationen, tar emot namnen på JSON-filerna
         /// </summary>
-        public void StartWarehouse(string customerFileName, string productFileName, string orderFileName)
+        public StartWarehouse(string customerFileName, string productFileName, string orderFileName)
         {
             _customerCatalogue = new CustomerCatalogue(customerFileName);
             _productCatalogue = new ProductCatalogue(productFileName);
