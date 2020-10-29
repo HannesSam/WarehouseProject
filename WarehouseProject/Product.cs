@@ -70,14 +70,14 @@ namespace WarehouseProject
         public DateTime FirstAvailable
         {
             get { return _firstAvailable; }
-            set { if (value < DateTime.Now) throw new DateNotInFutureException("Date must be in the future"); else _firstAvailable = value; }
+            set { _firstAvailable = value; }
         }
 
         /// <value>NextStocking är det datum som ett antal av en produkt fylls på och finns tillgängliga för dispatch</value>
         public DateTime NextStocking
         {
             get { return _nextStocking; }
-            set { if (value < DateTime.Now) throw new DateNotInFutureException("Date must be in the future"); else _nextStocking = value; }
+            set { if (value < DateTime.Now) throw new DateNotInFutureException("Next Stocking must be in the future"); else _nextStocking = value; }
         }
 
         /// <summary>En tom konstruktor för att JSON Deserilazation ska fungera.<</summary>
