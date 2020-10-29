@@ -95,7 +95,7 @@ namespace WarehouseProject
         }
 
         /// <summary>
-        /// En konstruktor utan parametrar för att JSON Deserilazation ska funka.
+        /// En konstruktor utan parametrar för att JSON Deserialization ska funka.
         /// </summary>
         public Order()
         {

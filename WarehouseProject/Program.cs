@@ -15,8 +15,7 @@ namespace WarehouseProject
         static void Main()
         {
 
-            Warehouse warehouse = new Warehouse();
-            warehouse.StartWarehouse("customers.json", "products.json", "orders.json");
+            Warehouse warehouse = new Warehouse("customers.json", "products.json", "orders.json");
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
