@@ -23,12 +23,15 @@
         {
 
         }
-        public OrderLine(Product product, int count)
+
+        /// <summary>Konstruktor för OrderLine-objekt, som tar in vilken produkt och hur många av den som är beställd. Tar emot en produkt och antal</summary>
+        public OrderLine(Product _product, int _count)
         {
             Product = product;
             Count = count;
         }
 
+        /// <summary>Returnerar ett korrekt format på informationen i OrderLine </summary>
         public override string ToString()
         {
             return Product.Name + " Quantity : " + Count;

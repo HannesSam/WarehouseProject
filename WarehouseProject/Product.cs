@@ -86,14 +86,8 @@ namespace WarehouseProject
 
         }
         /// <summary>
-        /// Konstruktor för att skapa ett Product-objekt
+        /// Konstruktor för att skapa ett Product-objekt, tar emot produktens ID-kod, namn, pris, antal i lager, när den är tillgänglig som tidigare, och när den beräknas fyllas på i lager
         /// </summary>
-        /// <param name="_code">Heltal</param>
-        /// <param name="_name">Sträng</param>
-        /// <param name="_price">Double</param>
-        /// <param name="_stock">Heltal</param>
-        /// <param name="_firstAvailable">DateTime</param>
-        /// <param name="_nextStocking">DateTime</param>
         public Product(int _code, string _name, double _price, int _stock, DateTime _firstAvailable, DateTime _nextStocking)
         {
             this.Code = _code;
@@ -105,9 +99,8 @@ namespace WarehouseProject
         }
 
         /// <summary>
-        /// Returnerar korrekt formaterad info om en produkt
+        /// Returnerar korrekt formaterad info om en produkt, returnerar en sträng
         /// </summary>
-        /// <returns>Sträng</returns>
         public override string ToString()
         {
             return Name + " Price: " + Price + " Stock : " + Stock;
