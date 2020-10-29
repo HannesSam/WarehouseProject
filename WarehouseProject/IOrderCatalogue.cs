@@ -4,6 +4,9 @@ using System.Text;
 
 namespace WarehouseProject
 {
+    /// <summary>
+    /// Denna interface innehåller de publika metoder och egenskaper som ska finnas i OrderCatalogue
+    /// </summary>
     public interface IOrderCatalogue
     {
         List<Order> Orders { get; set; }
