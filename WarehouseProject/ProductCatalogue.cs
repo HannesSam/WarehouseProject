@@ -13,8 +13,9 @@ namespace WarehouseProject
     public class ProductCatalogue : IProductCatalogue
     {
         private List<Product> _products;
-        private string _filename;
+        private string _fileName;
         private int _currentCode;
+        private IDatabase database;
 
 
         public List<Product> Products { get { return _products; } set { _products = value; } }
@@ -30,7 +31,7 @@ namespace WarehouseProject
         public ProductCatalogue(string _filename)
         {
             database = new JSONDatabase();
-            _fileName = filename;
+            _fileName = _filename;
             Products = ReadProductsFromFile(_fileName);
             SetCount();
         }
@@ -63,7 +64,7 @@ namespace WarehouseProject
         /// Metod för att läsa in produktkatalog från textfil.
         /// </summary>
         /// <returns>Lista med produkt-objekt.</returns>
-        private List<Product> ReadProductsFromFile()
+        private List<Product> ReadProductsFromFile(string _filename)
         {
             if (File.Exists(_filename))
             {
