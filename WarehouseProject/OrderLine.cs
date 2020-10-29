@@ -25,7 +25,7 @@
         }
 
         /// <summary>Konstruktor för OrderLine-objekt, som tar in vilken produkt och hur många av den som är beställd. Tar emot en produkt och antal</summary>
-        public OrderLine(Product _product, int _count)
+        public OrderLine(Product product, int count)
         {
             Product = product;
             Count = count;
