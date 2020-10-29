@@ -14,11 +14,11 @@ namespace WarehouseProject
     public partial class Order_management : Form
     {
         //kommentar
-        public ProductCatalogue ProduktKatalog;
-        public CustomerCatalogue KundKatalog;
-        public OrderCatalogue OrderKatalog;
+        public IProductCatalogue ProduktKatalog;
+        public ICustomerCatalogue KundKatalog;
+        public IOrderCatalogue OrderKatalog;
 
-        public Order_management(ProductCatalogue _productCatalogue, CustomerCatalogue _costumerCatalogue, OrderCatalogue _orderCatalogue)
+        public Order_management(IProductCatalogue _productCatalogue, ICustomerCatalogue _costumerCatalogue, IOrderCatalogue _orderCatalogue)
         {
             this.ProduktKatalog = _productCatalogue;
             this.KundKatalog = _costumerCatalogue;

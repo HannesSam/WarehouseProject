@@ -15,10 +15,10 @@ namespace WarehouseProject
     /// </summary>
     public partial class Startsida : Form
     {
-        public ProductCatalogue ProduktKatalog;
-        public CustomerCatalogue KundKatalog;
-        public OrderCatalogue OrderKatalog;
-        public Startsida(ProductCatalogue _productCatalogue, CustomerCatalogue _costumerCatalogue, OrderCatalogue _orderCatalogue)
+        public IProductCatalogue ProduktKatalog;
+        public ICustomerCatalogue KundKatalog;
+        public IOrderCatalogue OrderKatalog;
+        public Startsida(IProductCatalogue _productCatalogue, ICustomerCatalogue _costumerCatalogue, IOrderCatalogue _orderCatalogue)
         {
             this.ProduktKatalog = _productCatalogue;
             this.KundKatalog = _costumerCatalogue;

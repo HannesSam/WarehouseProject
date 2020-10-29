@@ -7,11 +7,11 @@ using System.Linq;
 
 namespace WarehouseProject
 {
-    public class ProductCatalogue
+    public class ProductCatalogue : IProductCatalogue
     {
         private List<Product> _products;
         private string _filename;
-        public int _currentCode;
+        private int _currentCode;
 
         //denna borde döpas om till Products och resten av variablerna bör följa konventionen med små bokstäver
         //Om man inte är en prop!!

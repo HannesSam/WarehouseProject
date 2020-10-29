@@ -12,7 +12,7 @@ namespace WarehouseProject
     /// Denna klass innehåller en katalog med kunder. Denna är ständigt uppdaterad och innehåller alla funktioner som 
     /// läser från och lägger till kunder till databasen. 
     /// </summary>
-    public class CustomerCatalogue
+    public class CustomerCatalogue : ICustomerCatalogue
     {
         private readonly string _filename;
         private int _currentID;
@@ -26,7 +26,6 @@ namespace WarehouseProject
         /// <summary>
         /// Detta event och delegat definerar ett event som körs varje gång en kund uppdateras eller läggs till. 
         /// </summary>
-        public delegate void UpdateCustomerList();
         public event UpdateCustomerList OnCustomerChange;
 
         public CustomerCatalogue(string filename)
